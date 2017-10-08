@@ -87,7 +87,9 @@ podpis promotora & \hspace*{100pt} & podpis autora
 \hyphenation{Syl-ves-ter-a}
 \begin{otherlanguage}{british}
 \begin{abstract}
-    streszczenie po angielsku
+Structured radiological reporting system.
+
+Design and implementation of a system that can be used by radiologists to create structured radiological reports. The system uses sets of standardized, frequently used phrases to: describe state of patient's body captured by other medical diagnostics methods, provide set of tools that minimize risk of mistake and increase productivity. 
 \end{abstract}
 \end{otherlanguage}
 
@@ -100,8 +102,15 @@ streszczenie po polsku
 %-----------Początek części zasadniczej-----------
 
 \chapter{Introduction}
-\section{Traditional workflow of a radiologist}
+\section{The need for medical diagnostics}
+Everyday millions of physicians treat injuries and illnesses. Before a doctor can plan an individual treatment for a patient, they have to diagnose which organs are in pathological states\cite{bls}. This sometimes can be achieved by simply glancing at the body, however, there are many illnesses that require specialized set of tools and methods in order to observe which parts of patient's body are in an unwanted state. Through years of research, many different techniques were established and a separate specialization emerged -- radiology. Radiologists focus mainly on analyzing and interpreting diagnostic imagery and as a result of their work they create a document called radiological report which contains description of what can be observed in the image of patient body. Reports may contain description of state of particular organs, measurements (eg. radius, volume, concentration of certain substances in the blood), comparison of medical condition of a patient observed at different times and description of overall state of the patient. \\
+Currently, the research is focused on finding new ways of diagnosing diseases by  the use of more advanced equipment or brilliant algorithms that try to automate image analysis \cite{ai}. \\
+On the other hand, there exist initiatives that try to improve quality of the radiological reports themselves. There are groups consisting of both computer scientists and physicians that try to standardize reports, prepare checklists that require doctors to describe patients' state in particular order and create a set of phrases that will be understood in the same way by all physicians \cite{snomed}. A lot of work has been done to provide common medical nomenclature for medical conditions, to store reports and exchange them between physicians. As there are more and more methods used to diagnose, the amount of information captured increases, so the reporting methodology has to be kept up to date with the state of art. This is why a very specific field -- structural reporting (SR) emerged. The basic idea is to provide a way to create radiological reports that convey as much semantics as possible in an easy to follow way. One can find great ideas implemented in such standards as SNOMED SR \cite{sr} and also HL7 version 3 Clinical Document Architecture (HL7 V3 CDA). By using these standards one can encode relations between organs and diseases (causality) in a very regular format. After encoding structure in the report, one can use algorithms to e.g. highlight what changed since last visit, look for diseases that were are diagnosed in the specified time range etc. This is very difficult to achieve when reports are stored in plain text. In spite of the existence of these standards, it is almost impossible to find software that implements structural reporting techniques. One of the most important reasons is the fact that in order to understand benefits of SR, one has to acquire certain level of understanding of the typical workflow of a radiologist. 
+\\ \\
+In this thesis I present a solution to the problem of not satisfactory productivity of radiologists by implementing a program used to create structured radiological reports. The system uses sets of standardized, frequently used phrases to: describe state of patient's body captured by other medical diagnostics methods, provide set of tools that minimize risk of mistake and allows radiologists to create reports faster.
 
+\section{Typical workflow of a radiologist}
+\section{Basic concepts of structured reporting}
 
 \section{Thesis scope and objectives}
 \section{Description of contents}
@@ -116,10 +125,13 @@ streszczenie po polsku
 %-----------Koniec części zasadniczej-----------
 
 \begin{thebibliography}{11}
-\bibitem[1]{B} Stanisław Białas, \emph{Macierze. Wybrane problemy}, AGH Uczelniane Wydawnictwa Naukowo-Dydaktyczne, Kraków, 2006.
-\bibitem[2]{H} Nicholas J. Higham, \emph{Accuracy and stability of numerical algorithms}, SIAM, Philadelphia 1996.
-\bibitem[3]{H2} Nicholas J. Higham, \emph{Functions of Matrices. Theory and Computation}, SIAM, Philadelphia 2008.
-\bibitem[4]{DJ} Maksymilian Dryja, Janina i Michał Jankowscy, \emph{Przegląd metod i algorytmów numerycznych, część 2}, Wydawnictwa Naukowo-Techiczne, Warszawa 1982.
+\bibitem[1]{bls} https://www.bls.gov/ooh/healthcare/physicians-and-surgeons.htm, accessed 08.10.2017 13:30
+\bibitem[2]{ai} M. Recht, N. Bryan, Artificial Intelligence: Threat or Boon to Radiologists?
+
+N1  - doi: 10.1016/j.jacr.2017.07.007
+\bibitem[3]{snomed} T. Benson, Principles of health interoperability HL7 and SNOMED.
+\bibitem[4]{sr} D. A. Clunie, DICOM Structured Reporting
+\bibitem[5]{hl7cda} http://www.hl7.org/Special/committees/structure/index.cfm 
 \end{thebibliography}
 \tableofcontents
 \clearpage
@@ -130,7 +142,7 @@ streszczenie po polsku
 \begin{center}
 \LARGE{Oświadczenie}
 \end{center}
-Oświadczam, że pracę magisterską pod tytułem: ,,Tytuł pracy'', której promotorem jest prof. dr hab. Jan Wybitny, wykonałem/am samodzielnie, co poświadczam własnoręcznym podpisem.
+Oświadczam, że pracę inżynierską pod tytułem: ,,Tytuł pracy'', której promotorem jest prof. dr hab. Jan Wybitny, wykonałem/am samodzielnie, co poświadczam własnoręcznym podpisem.
 \vspace{2cm}
 \begin{flushright}
 ...........................................
