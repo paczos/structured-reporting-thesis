@@ -1,43 +1,31 @@
 \documentclass[12pt, twoside, openany]{report}
 \usepackage[dvips]{graphicx,color,rotating}
-\usepackage[cp1250]{inputenc}
-\usepackage{t1enc}
 \usepackage{a4wide}
-\usepackage{amsfonts}
-\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
 \usepackage{enumerate}
 \usepackage{verbatim}
 \usepackage[polish,british]{babel}
-\usepackage[MeX]{polski}
 \usepackage[T1]{fontenc}
 \usepackage{geometry}
 \geometry{left=25mm,right=25mm,%
 bindingoffset=10mm, top=25mm, bottom=25mm}
-\usepackage{amssymb, latexsym}
+\usepackage{latexsym}
 \usepackage{amsthm}
 \usepackage{palatino}
 \usepackage{array}
 \usepackage{pstricks}
 \usepackage{textcomp}
 \theoremstyle{definition}
-\newtheorem{theorem}{Twierdzenie}[section]
-\newtheorem{remark}{Uwaga}[section]
-\newtheorem{definition}{Definicja}[section]
-\newtheorem{alg}{Algorytm}[chapter]
-\newtheorem{prz}{Przypadek}[section]
-\newtheorem{np}{Przyk≥ad}[section]
-\newtheorem{lemma}[theorem]{Lemat}
-\linespread{1.5}
 \newcommand*{\norm}[1]{\left\Vert{#1}\right\Vert}
 \newcommand*{\abs}[1]{\left\vert{#1}\right\vert}
 \newcommand*{\om}{\omega}
 
-\author{Pawe≥ Paczuski}
-\title{Tytu≥ pracy}
+\author{Pawe≈Ç Paczuski}
+\title{Tytu≈Ç pracy}
 
 \begin{document}
 
-% ZaøÛ≥Ê gÍúlπ jaüÒ.
+% Za≈º√≥≈Çƒá gƒô≈õlƒÖ ja≈∫≈Ñ.
 \begin{titlepage}
 \pagestyle{empty}
 
@@ -47,7 +35,7 @@ bindingoffset=10mm, top=25mm, bottom=25mm}
 \centering
 \begin{tabular}[t]{lcr}
  \includegraphics[width=70pt,height=70pt]{PW} & POLITECHNIKA WARSZAWSKA & \includegraphics[width=70pt,height=70pt]{ELKA}\\
-& WYDZIA£ ELEKTRONIKI & \\
+& WYDZIA≈Å ELEKTRONIKI & \\
 & I TECHNIK INFORMACYJNYCH &
 \end{tabular}
 \end{table}
@@ -66,17 +54,17 @@ bindingoffset=10mm, top=25mm, bottom=25mm}
 \Large
 Author:\\
 \LARGE
-Pawe≥ Paczuski
+Pawe≈Ç Paczuski
 \end{center}
 \vfill
 \begin{center}
 \Large
-Promotor: prof. dr hab. inø. Jan J. Mulawka
+Promotor: prof. dr hab. in≈º. Jan J. Mulawka
 \end{center}
 \vfill
 \begin{center}
-\large
-Warszawa, miesiπc rok
+\Large
+Warszawa, miesiƒÖc rok
 \end{center}
 \newpage
 \hfill
@@ -97,72 +85,55 @@ podpis promotora & \hspace*{100pt} & podpis autora
 \setcounter{page}{1}
 \hyphenation{Syl-ves-tra}
 \hyphenation{Syl-ves-ter-a}
-
+\begin{otherlanguage}{british}
 \begin{abstract}
     streszczenie po angielsku
 \end{abstract}
+\end{otherlanguage}
 
-\begin{selectlanguage}{polish}
+\begin{otherlanguage}{polish}
 \begin{abstract}
 streszczenie po polsku
 \end{abstract}
-\end{selectlanguage}
+\end{otherlanguage}
 
-%-----------Poczπtek czÍúci zasadniczej-----------
+%-----------PoczƒÖtek czƒô≈õci zasadniczej-----------
 
 \chapter{Introduction}
 \section{Traditional workflow of a radiologist}
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
-\subsection{PodczÍúÊ}
-\begin{definition}[Definicja czegokolwiek]
-  Cokolwiek jest czymkolwiek.
-\end{definition}
 
-\begin{remark}
-  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-\end{remark}
+\section{Thesis scope and objectives}
+\section{Description of contents}
+\chapter{Short review of types of software used in healthcare}
+\chapter{Description of the proposed solution}
+\chapter{Examples of application}
 
-\begin{theorem}[Pietii Gorasa]
-	$a^2+b^2=c^2$
-\end{theorem}
+\chapter{Conclusion}
+\appendix {How to use the program}
 
-\begin{proof}
-  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-\end{proof}
 
-\begin{lemma}[Dy]
-	Dy-lemat
-\end{lemma}
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-%-----------Koniec czÍúci zasadniczej-----------
+%-----------Koniec czƒô≈õci zasadniczej-----------
 
 \begin{thebibliography}{11}
-\bibitem[1]{B} Stanis≥aw Bia≥as, \emph{Macierze. Wybrane problemy}, AGH Uczelniane Wydawnictwa Naukowo-Dydaktyczne, KrakÛw, 2006.
+\bibitem[1]{B} Stanis≈Çaw Bia≈Ças, \emph{Macierze. Wybrane problemy}, AGH Uczelniane Wydawnictwa Naukowo-Dydaktyczne, Krak√≥w, 2006.
 \bibitem[2]{H} Nicholas J. Higham, \emph{Accuracy and stability of numerical algorithms}, SIAM, Philadelphia 1996.
 \bibitem[3]{H2} Nicholas J. Higham, \emph{Functions of Matrices. Theory and Computation}, SIAM, Philadelphia 2008.
-\bibitem[4]{DJ} Maksymilian Dryja, Janina i Micha≥ Jankowscy, \emph{Przeglπd metod i algorytmÛw numerycznych, czÍúÊ 2}, Wydawnictwa Naukowo-Techiczne, Warszawa 1982.
+\bibitem[4]{DJ} Maksymilian Dryja, Janina i Micha≈Ç Jankowscy, \emph{PrzeglƒÖd metod i algorytm√≥w numerycznych, czƒô≈õƒá 2}, Wydawnictwa Naukowo-Techiczne, Warszawa 1982.
 \end{thebibliography}
 \tableofcontents
 \clearpage
+\begin{otherlanguage}{polish}
 \pagestyle{empty}
 \noindent Warszawa, dnia ...............
 \vspace{5cm}
 \begin{center}
-\LARGE{Oúwiadczenie}
+\LARGE{O≈õwiadczenie}
 \end{center}
-Oúwiadczam, øe pracÍ magisterskπ pod tytu≥em: ,,Tytu≥ pracy'', ktÛrej promotorem jest prof. dr hab. Jan Wybitny, wykona≥em/am samodzielnie, co poúwiadczam w≥asnorÍcznym podpisem.
+O≈õwiadczam, ≈ºe pracƒô magisterskƒÖ pod tytu≈Çem: ,,Tytu≈Ç pracy'', kt√≥rej promotorem jest prof. dr hab. Jan Wybitny, wykona≈Çem/am samodzielnie, co po≈õwiadczam w≈Çasnorƒôcznym podpisem.
 \vspace{2cm}
 \begin{flushright}
 ...........................................
 \end{flushright}
-
+\end{otherlanguage}
 \end{document}
