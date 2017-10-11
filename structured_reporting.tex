@@ -59,7 +59,7 @@ Paweł Paczuski
 \vfill
 \begin{center}
 \Large
-Thesis supervisor: prof. dr hab. inż. Jan J. Mulawka
+Thesis supervisor: Jan J. Mulawka PhD, DSc
 \end{center}
 \vfill
 \begin{center}
@@ -155,11 +155,61 @@ Radiologists try to solve the problem of typing on their own by crating template
 In many English-speaking countries the workflow of a radiologist differs in the way the radiological report is generated. A radiologist may record their voice while describing the imagery vocally. The recordings are then transcribed using either speech recognition algorithms or manually by technologists. Having a good skill of typing by a radiologist is not required, only knowledge to interpret imagery is used. This approach, however, has some architectural disadvantages. More personnel is needed -- technologists, who transcribe the recorded voice\cite{speech-impact}. Also, it is difficult to make changes to what has been said. In some cases, a mistake can made while transcribing the text \cite{speech-africa}.
 
 \section{Problem definition}
+
 After analyzing bad parts of the presented workflow and general situation on the market -- demand for radiological services increases but the number of radiologists appears to be constant, the author decided to design and implement a system that would be used by radiologists to encode semantics of diagnostic imagery in a form that can be easily transformed to the human readable form, analyzed by algorithms. 
 
 \chapter{Description of the proposed solution}
 \section{General idea}
-The system that is propsed in this thesis focuses entirely on the part of the typical radiological workflow in which a radiologist focuses on the textual description of what can be seen in the diagnostic imagery.
+\subsection{Area of interest}
+The system that is proposed in this thesis focuses entirely on the part of the typical radiological workflow in which a radiologist focuses on the textual description of what can be seen in the diagnostic imagery.
+\subsection{Contextual suggestions}
+The author analyzed several hundreds of anonymized radiological reports and observed that a lot of time could be saved, if a radiologist would at any time select text fragments from a predefined set of possibilities that are appropriate to the current context. This approach can be seen in the way Integrated Development Environment (IDE) for statically typed languages (e.g. Visual Studio supporting C\#) are suggesting what the programmer can write based on the namespace, class, scope they currently edit.
+
+In the case of programming language the problem is defined in a more strict way. They are very often supported by definitions of formal grammars \cite{csharp-spec}. Radiological reports, however, are creating using  natural language, so there always exist some exceptions.
+
+
+
+\section{Proposed reporting ontology based on ideas from DICOM SR and HL7 CDA}
+In order to provide context for the radiologist at any given moment, it is proposed to split report into the following nested structures:
+\begin{enumerate}
+    \item Examinations -- single report may have many of them
+    \item Organs -- single examination may have many of them
+    \item Properties -- single organ may have many of them
+\end{enumerate}
+Figure \ref{fig:report-semantic} shows how report structures relate by semantic relations.
+\begin{figure}
+    \centering
+    \includegraphics{report-semantic.pdf}
+    \caption{Structure of a radiological report created \label{fig:report-semantic}}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{report-tree.pdf}
+    \caption{Structure of a radiological report created \label{fig:report-tree} using proposed system. For simplicity, only names of nodes are presented (associated metadata were omitted)}
+\end{figure}
+
+By using this ontology, a radiologist can create a report that is similar in structure to a tree (as it is presented in figure \ref{fig:report-tree}). At any given moment, the doctor modifies the tree at a single level, which allows for suggesting what are the items that can be included. The idea was taken from statically typed languages which thanks to their strictness allow for coding with smaller number of mistakes at the lexical level \cite{static-lang}.
+
+
+
+
+
+
+\subsection{Connotation}
+Moreover, each property has a semantical attribute called connotation. Connotation is used to highlight the impact of this property on the result of the organ and examination. This attribute can have one of three values: positive, negative and neutral. 
+\subsection{Metadata}
+Report may also contain some metadata which can be used identify the patient whose body is described in it. Shape of these pieces of information strongly depends on the RIS system used in a clinic. These data have no special influence on the semantics of report so it has no detailed description in this work.
+
+Names for these ontological structures were chosen so it is easier for radiologists to imagine what they describe, however, they can be used not strictly (e.g. in CT scan as an organ one may include details about intracranial hemorrhage which is a kind of bleeding within the skull \cite{ich} but not an organ in its very meaning)
+
+\section{Examination template}
+Examination template (or simply 'template') consists of an ordered list of all organs that could be described with all and some portion of metadata used for filtering like category, discipline. Each organ in a template has an ordered list of all properties that can describe it. Every property can have connotation predefined. 
+
+Examination templates can be prepared by the leader of radiologists team, so the team can use common language to describe diagnostic imagery. Templates prepared by the leader constitute the so called set of public examinations.
+
+If a given template is not sufficient for a particular radiologist, they can  create their own template from scratch or extend the existing one (action similar to forking a repo in git \cite{forking})
+
 
 \section{Assumptions}
 After observation of actions taken by radiologists while working in environments like hospital, medium-sized clinic, independent teleradiological practice the following assumptions are suggested:
@@ -171,7 +221,7 @@ After observation of actions taken by radiologists while working in environments
     \item Text formatting should be based on semantics that is encoded by a radiologist.
     \item The system should favor reports that describe the whole state of body, not only organs in bad condition.
     \item The system should allow to automatically include in the report segments of text that are (almost) always used (sometimes due to some legal regulations).
-    
+
 \end{itemize}
 \section{Goals}
 \begin{itemize}
@@ -181,18 +231,25 @@ After observation of actions taken by radiologists while working in environments
 \item Maximize number of reports that can be generated by a radiologist in a unit of time.
 \item At any time allow to inclu
 \end{itemize}
-\section{Proposed reporting ontology based on ideas from DICOM SR and HL7 CDA}
+
 
 \section{Productivity improvements}
+
 \section{Reporting quality improvements}
+
 \section{Integration with existing systems}
 
+\section{Evolutionary approach to software development}
 
 \chapter{Implementation of structured reporting system}
-\section{Template creation}
-\section{Report generation}
+
+
+\section{Templates}
+\section{New Report}
 \section{Report history}
+\section{Comparing reports}
 \section{Support center}
+
 
 \chapter{Validation of the proposed solution and examples of places where it was used}
 \section{Teleradiologists}
@@ -200,7 +257,9 @@ After observation of actions taken by radiologists while working in environments
 \section{Large network of clinics}
 \chapter{Ideas for the future}
 \chapter{Conclusion}
-\appendix {How to use the program}
+
+\chapter {Appendices}
+\section {How to use the program}
 
 
 %-----------Koniec części zasadniczej-----------
@@ -219,9 +278,14 @@ N1  - doi: 10.1016/j.jacr.2017.07.007
 http://www.osirix-viewer.com/osirix/overview/
 \bibitem{speech-impact}
 S. Langer, Impact of Speech Recognition on Radiologist Productivity
-
 \bibitem{speech-africa} J. du Toit, R. Hattingh and R. Pitcher, The accuracy of radiology speech recognition
 reports in a multilingual South African teaching hospital.
+\bibitem{csharp-spec}
+https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/lexical-structure
+\bibitem{ich} http://emedicine.medscape.com/article/1163977-overview
+\bibitem{static-lang}
+    S. Hanenberg, S. Kleinschmager, R. Robbes, É. Tanter, A. Stefik, An empirical study on the impact of static typing on software maintainability
+\bibitem {forking} https://help.github.com/articles/fork-a-repo/
 \end{thebibliography}
 \clearpage
 \begin{otherlanguage}{polish}
