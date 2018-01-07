@@ -16,6 +16,8 @@ bindingoffset=10mm, top=25mm, bottom=25mm}
 \usepackage{pstricks}
 \usepackage{textcomp}
 \theoremstyle{definition}
+
+\setcounter{tocdepth}{1}
 \newcommand*{\norm}[1]{\left\Vert{#1}\right\Vert}
 \newcommand*{\abs}[1]{\left\vert{#1}\right\vert}
 \newcommand*{\om}{\omega}
@@ -34,15 +36,15 @@ bindingoffset=10mm, top=25mm, bottom=25mm}
 \begin{table}[t]
 \centering
 \begin{tabular}[t]{lcr}
- \includegraphics[width=70pt,height=70pt]{PW} & POLITECHNIKA WARSZAWSKA & \includegraphics[width=70pt,height=70pt]{ELKA}\\
-& WYDZIAŁ ELEKTRONIKI & \\
-& I TECHNIK INFORMACYJNYCH &
+ \includegraphics[width=70pt,height=70pt]{PW} & Warsaw University of Technology & \includegraphics[width=70pt,height=70pt]{ELKA}\\
+& FACULTY OF & \\
+& ELECTRONICS AND INFORMATION TECHNOLOGY &
 \end{tabular}
 \end{table}
 
 % \vfill
-\begin{center}BACHELOR'S THESIS\end{center}
-\begin{center}Computer Science\end{center}\end{Large}
+\begin{center}BACHELOR'S DIPLOMA THESIS\end{center}
+\begin{center}In the field of Computer Science \\ and specialization Computer Systems and Networks \end{center}\end{Large}
 % \vfill
 \begin{center}
 \Huge
@@ -114,7 +116,7 @@ streszczenie po polsku
 Everyday millions of physicians treat injuries and illnesses. Before a doctor can plan an individual treatment for a patient, they have to diagnose which organs are in pathological states\cite{bls}. This sometimes can be achieved by simply glancing at the body, however, there are many illnesses that require specialized set of tools and methods in order to observe which parts of patient's body are in an unwanted state. Through years of research, many different techniques were established and a separate specialization emerged -- radiology. Radiologists focus mainly on analyzing and interpreting diagnostic imagery and as a result of their work they create a document called radiological report which contains description of what can be observed in the image of patient body. Reports may contain description of state of particular organs, measurements (eg. radius, volume, concentration of certain substances in the blood), comparison of medical condition of a patient observed at different times and description of overall state of the patient. \\
 \section{Existing solutions}
 Currently, the research is focused on finding new ways of diagnosing diseases by  the use of more advanced equipment or brilliant algorithms that try to automate image analysis \cite{ai}. \\
-On the other hand, there exist initiatives that try to improve quality of the radiological reports themselves. There are groups consisting of both computer scientists and physicians that try to standardize reports, prepare checklists that require doctors to describe patients' state in particular order and create a set of phrases that will be understood in the same way by all physicians \cite{snomed}. A lot of work has been done to provide common medical nomenclature for medical conditions, provide theoretical framework to describe relations between causes and effects of patients' condition. As there are more and more methods used to diagnose, the amount of information captured increases, so the reporting methodology has to be kept up to date with the state of art. This is why a very specific field -- structural reporting (SR) emerged. The basic idea is to provide a way to create radiological reports that convey as much semantics as possible in an easy to follow way. One can find great ideas implemented in such standards as SNOMED SR \cite{sr} and also HL7 version 3 Clinical Document Architecture (HL7 V3 CDA). By using these standards one can encode relations between organs and diseases (causality) in a very regular format. After encoding structure in the report, one can use algorithms to e.g. highlight what changed since last visit, look for diseases that were are diagnosed in the specified time range etc. This is very difficult to achieve when reports are stored in plain text. Structural reporting focuses on encoding only meaning -- the visual representation of resulting reports is a separate matter to discuss \cite{sr}.
+On the other hand, there exist initiatives that try to improve quality of the radiological reports themselves. There are groups consisting of both computer scientists and physicians that try to standardize reports, prepare checklists that require doctors to describe patients' state in particular order and create a set of phrases that will be understood in the same way by all physicians \cite{snomed}. A lot of work has been done to provide common medical nomenclature for medical conditions, provide theoretical framework to describe relations between causes and effects of patients' condition. As there are more and more methods used to diagnose, the amount of information captured increases, so the reporting methodology has to be kept up to date with the state of art. This is why a very specific field -- Structural Reporting (SR) emerged. The basic idea is to provide a way to create radiological reports that conveys as much semantics as possible in a way that is easy to understand. One can find great ideas implemented in such standards as SNOMED SR \cite{sr} and also HL7 version 3 Clinical Document Architecture (HL7 V3 CDA). By using these standards one can encode relations between organs and diseases (causality) in a very regular format. After encoding structure in the report, one can use algorithms to e.g. highlight what changed since last visit, look for diseases that were diagnosed in the specified time range etc. This is very difficult to achieve when reports are stored in plain text. Structural reporting focuses mainly on encoding meaning -- the visual representation of resulting reports is a separate matter that is treated as an implementation detail \cite{sr}.
 In spite of the existence of these standards, it is almost impossible to find software that implements structural reporting techniques. One of the most important reasons is the fact that in order to understand benefits of SR, one has to acquire certain level of understanding of the typical workflow of a radiologist. 
 \\ \\
 \section{Definition of the engineering problem}
@@ -122,16 +124,16 @@ In this thesis I present a solution to the problem of not satisfactory productiv
 
 \section{Typical workflow of a radiologist in Poland}
 In order to find places where optimization of productivity could be applied, one has to get to know how a radiologist works and what are activities that waste significant amounts of time. \\
-In a medium sized clinic, medical imagery is captured by a radiologic technologist who then uploads the data to the radiological information system (RIS) and attaches identification information to the images. This system distributes imagery to the team of radiologists that work for this clinic. 
+In a medium sized clinic, medical imagery is captured by a radiologic technologist who then uploads the data to the Picture Archiving and Communication System (PACS) and attaches identification information to the images. Next to the PACS system in most cases exists Radiology Information System that is used by radiological staff to keep track of patients treated in the clinic. These systems are used to distribute imagery to the team of radiologists.
 
 Imagery can be distributed in one of the following manners:
 \begin{itemize}
-    \item particular patient is always serviced by the same radiologist or the RIS system 
-    \item RIS system acts as an accumulator of images and radiologist decide which patient they focus on next
+    \item particular patient is always serviced by the same radiologist
+    \item RIS system acts as an accumulator of service requests and radiologist decides which patient they focus on next
     \item certain types of medical examinations are are always assigned to a radiologist that is specialized in describing them
 \end{itemize}
 
-After receiving diagnostic imagery, a radiologist uses special software called viewer\cite{viewer} to navigate through images, make measurements by using visual tools like virtual ruler and examine what is the state of patient's body. In parallel to this, the doctor uses text editor and describes what he or she sees in the images. 
+After receiving diagnostic imagery, a radiologist uses special software called Viewer\cite{viewer} to navigate through images, make measurements by using visual tools like virtual ruler and examine what is the state of patient's body. In parallel to this, the doctor uses text editor and describes what he or she sees in the images. 
 \begin{figure}
     \centering
     \includegraphics[width=0.9\linewidth]{osirix}
@@ -144,14 +146,16 @@ After receiving diagnostic imagery, a radiologist uses special software called v
 \section{Discussion about presented workflow}
 \subsection{The good parts}
 \subsubsection{Viewer software provides expected functionality}
-Viewer software has a very stable position on the market and is perfectly tailored to the needs of a radiologist. It often uses advanced techniques of 3D graphics to present patient's body as accurately as possible.
-\subsubsection{RIS systems make it easy to exchange data between physians}
-There is no need need for the radiologist to deliver the radiological report to the other physician personally as it is done automatically. Also, RIS systems provide good means of distributing diagnostic imagery to radiologists.
+Viewer software has a very stable position on the market and is perfectly tailored to the needs of a radiologist. It often uses advanced techniques of computer graphics to present patient's body as accurately as possible.
+\subsubsection{PACS systems provide centralized place for storing images}
+They implement functionalities that allow for archiving medical imagery. Lifetime of medical images is controlled by the government and these systems must take this into account. PACS also make it easy to distribute images not only withing local networks but also to any doctor who has the remote access granted.  
+\subsubsection{RIS systems make it easy to exchange data between physicians}
+There is no need need for the radiologist to deliver the radiological report to the other physician personally as it is done automatically. Also, RIS systems provide good means of presenting medical records from different medical specializations allowing for interdisciplinary diagnostics. 
 \subsection{The bad parts}
 \subsubsection{Focus on text rather than semantics}
-It is expected that the radiologist will produce a consistent, ordered report by means of text editors. Some RIS systems provide basic text formatting functionality like italicization, underlining but they are very limited to the textual presentation of the report. There are no means to encode relations in this representation.
+It is expected that the radiologist will produce a consistent, ordered report by means of text editors. Some RIS systems provide basic text formatting functionality like italicization, underlining but they are limited to the textual presentation of the report. There are no means to encode relations in this representation.
 \subsubsection{Each radiologist has their own style of writing}
-Usually there are no structural expectations about the resulting report. Each radiologist can have their own style of writing, order of organs and observation. This leads to the waste of time as people who read the report have to make some effort to infer the meaning. 
+Usually there are no structural expectations about the resulting report. Each radiologist can have their own style of writing, order of organs observation. This leads to the waste of time as people who read the report have to make some effort to infer the meaning. 
 \subsubsection{Selective description}
 It is very frequent that radiologists include in the report only things that they consider bad for the patient. This makes the report more goal-oriented but it means that it is useless to get to know the overall state of patient body.
 \subsubsection{Copy-paste}
@@ -215,7 +219,7 @@ By using this ontology, a radiologist can create a report that is similar in str
 \subsection{Connotation}
 Moreover, each property has a semantical attribute called connotation. Connotation is used to highlight the impact of this property on the result of the organ and examination. This attribute can have one of three values: positive, negative and neutral. 
 \subsection{Metadata}
-Report may also contain some metadata which can be used identify the patient whose body is described in it. Shape of these pieces of information strongly depends on the RIS system used in a clinic. These data have no special influence on the semantics of report so it has no detailed description in this work.
+Report may also contain some metadata which can be used identify the patient whose body is described in it. Shape of these pieces of information strongly depends on the RIS system used in a clinic. These pieces of information have no special influence on the semantics of report so it has no detailed description in this work.
 
 Names for these ontological structures were chosen so it is easier for radiologists to imagine what they describe, however, they can be used not strictly (e.g. in CT scan as an organ one may include details about intracranial hemorrhage which is a kind of bleeding within the skull \cite{ich} but not an organ in its very meaning)
 
@@ -304,8 +308,8 @@ There exists practices quite popular among radiologists mostly from smaller clin
 There were also cases when a radiologist was unable to compare current state with descriptions of several images that were taken at different times, only with the last one. The doctor stated that there is a progress in treatment, but in comparison to the second from the last description, the health condition worsened. \cite{risk-management}
 Templates created using the proposed system can favor radiological reports that are more self-contained -- they describe both bad and good properties of patient's state.
 
-\subsection{Possibility of automated comparison}
-
+\subsection{Compare reports}
+Having a previous report, a radiologist can create another one that will be an update to the former. This procedure is often applied during chemotherapy to see whether tumors react to the treatment. A software functionality that allows the radiologist to introduce small changes to the report without rewriting it, would increase the quality of reporting as the resulting report would be still self-contained.
 
 \section{Integration with existing systems}
 As there are many ways to store radiological reports. Many radiologists work remotely for several companies that have different RIS systems. It is very difficult to integrate the system with all of the systems as it requires cooperation of both developer of the proposed system and the developers of the RIS system. 
@@ -315,7 +319,6 @@ After generating the report using the proposed system, it is the radiologist's d
 
 On the other hand, the proposed system was designed in a way that makes it easy to create communication channels that can be used to integrate this system with existing RIS systems. 
 
-\section{Evolutionary approach to software development}
 
 
 
@@ -323,32 +326,125 @@ On the other hand, the proposed system was designed in a way that makes it easy 
 
 
 
-\chapter{Implementation of structured reporting system}
 
+\chapter{Implementation}
+The proposed system was implemented as a web application. It is split into two parts: frontend and backend. Frontend  
 \section{Technological stack}
+
+\subsection{Backend}
+\subsubsection{C\#}
+As a main technology that is used to structurize data that is displayed to the user or received from them, ASP.NET C\# framework was used.
+C\# is an imperative, strongly-typed, object-oriented language that is used on the market to create enterprise software. There exists a lot of high quality tooling that makes development in this language faster and less error-prone.
+
+\subsubsection{ASP.NET}
+The ASP.net application is created using MVC pattern (Model-View-Controller) that is widely known for helping to create applications that consists of loosely coupled, pluggable components. Some interactions with user interface result in HTTP requests that are then mapped by the server to routes that are forwarded to Controllers. Controllers are used to react to user action, instantiate proper classes which implement application logic (they are part of the Model), feed them with sanitized and validated user input and invoke proper methods. When the results of execution are present, Controller finds a View that is expected to be used to present results to the user. View can be treated as a template for the data that is returned from Controller. It can be an ordinary HTML file with placeholders for certain pieces of information (it can also include formatting) or even JSON or XML documents that are only concerned with shape of the data, not the formatting.
+
+\subsubsection{Entity Framework}
+Entity Framework is a set of libraries that is used to create high-level abstract model using C\# that are then converted to sets of relations and attributes of the underlying DBMS. It can also be used to transform LINQ constructions to SQL queries taking into the account vendor-specific features of many DBMS.
+The act of first creating C\# classes that represent Model and then automatically converting it to the database relations and attributes (scaffolding) is called Code First Approach. It can be especially useful when the schema of database changes very often. When changes are introduced to the code representing Model, Entity Framework can be used create a migration  -- set of transformations for DB schema that after applying to the DB will keep code and schema synchronized. 
+\subsection{Authentication}
+TODO
+\subsection{Database}
+MSSQl server is used as a DBMS because it is a battle-tested, well-documented solution that can be easily paired with ASP.NET and Entity Framework's code generation methods are best optimized for this particular DBMS. 
+
+\subsection{Frontend}
+Not all interactions with the application result in HTTP requests sent to the server, many of interactions are about shaping data that has already been received from the server. In order to make use of this fact main part of the application -- tabs: New Report and Templates were developed as a Single Page Applications (SPA) in order to minimize the time that user has to wait between actions they take. Technologies used in these parts are JavaScript and AngularJS framework. 
+
+\subsubsection{JavaScript}
+It is a very popular scripting language that can be executed in any popular web browser. Version of the language used in this project is ECMAScript 5.1 compliant. 
+\subsubsection{AngularJS}
+AngularJS is a JavaScript framework that helps with building MVC SPA aplications. It has several mechanisms like two-way-binding that reduce size of the code needed to implement Create, Read, Update, Delete (CRUD) functionality.
+
+
+\subsubsection{Razor views}
+The remaining frontend subpages are generated using view engine present in ASP.NET called Razor. These views are responsible for interactions like logging in, registering, listing reports, searching for particular report etc. They are generated at the server side and sent to the user as HTMl and rendered by the browser.
+ 
+\subsection{Deployment strategy}
+\section{Internationalization and localization}
+The application was designed to be accessible by radiologists from many countries, so support for many languages is one of its core functionalities. 
+\subsection{User language detection}
+The application automatically detects user preferred language by looking into user browser settings. Each of the most popular Internet browsers allows users to specify list of preferred languages used by webpages. The presented solution scans this list and chooses first language it supports, if there are no languages in the list that are supported, English language is presented to the user by default. Figure \ref{fig:language-preferences} shows how this list can be manipulated in one of most popular web browsers.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\linewidth]{language-preferences.PNG}
+    \caption{Language preferences list present in Firefox 54\label{fig:language-preferences}}
+\end{figure}
+
+At the back-end there are dictionaries for each supported languages that contain mapping name -> value. 
+In Razor views names are used to specify where particular piece of text should be placed. During HTML generation, the application resolves user language and refers to proper resource. Figure \ref{fig:language-dictionary} presents contents of a dictionary for ReportWizard for Polish language. Adding support for another language is simply providing values for existing names in the dictionary.
+
+For SPA parts of the program the situation is slightly different as DOM elements representing most of their content are generated at the user side with the help of AngularJS. In order to have single source of truth about translations, it was decided to serialize contents of dictionaries to JSON format, and send it to the user with page template. At the front-end the translation dictionary entries are deserialized and made available to JavaScript functions. This solution makes it faster to edit and version translations as they are kept in a single place. One of drawbacks can be the performance of this solution, but it was measured that for number of dictionary entries used in this application, the decrease in performance is negligible.
+ 
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{language-dictionary.PNG}
+    \caption{Dictionary for Report creator for Polish language\label{fig:language-dictionary}}
+\end{figure}
 \section{Templates}
-\section{New Report}
+Templates can be manipulated by the user at the examination level. Users can create them, edit, remove. In order to keep things simple and less error-prone, they are treated as immutable in the database. If user edits a template, the previous version of the template is deleted and template version with edits is inserted into database. The only thing that is not changed in this process is its primary key. This makes reasoning about database queries much easier and has satisfactory performance for templates used by most radiologists. Thanks to the use of database transactions, one can be sure that removing contents of an existing template and inserting contents of a template with modifications is performed atomically.
+
+\subsection{Feeding front-end with data from database}\label{templates-immutable}
+After browser finishes loading static files (scripts, fonts, etc.), an additional HTTP request is created to download report templates attached to the current account. Server handles the request by querying database, instantiating model classes that correspond to the data received from database. Finally, server serializes reports data to the JSON format and sends it to the front-end. When front-end receives JSON data, a success callback is invoked and sets the data as current view model. 
+From now on user can edit any existing template: add properties, organs, remove them, change connotations, reorder elements. Thanks to the two-way-binding mechanism, user interface can be directly connected with references to the fields of an object so the developer can focus on the visual representation of the editor. In order to make editor more robus, lenght of text contained in it is measured on each onChange event and its height is adjusted, so all its contents are visible to the user.
+\subsection{New Examination}
+User can create new template by clicking on New examination button. Then they are asked to input title of new examination. One of requested features was the ability to copy contents of existing examinations what is similar to forking in git. In order to achieve this, when modal with new examination's title is opened, front-end loads from server list of user-owned examinations concatenated with list of publicly-available examinations. The latter allows users to quickly customize templates prepared by the administrator.
+
+\subsection{Edit examinations}
+On page load all templates that are owned by the user are downloaded, so editing template is setting is as a current template of the editor. Any modification can be applied: renaming, reordering of elements, setting connotation, etc. When user clicks Save button, actions related to the immutability of templates described in section \ref{templates-immutable} are performed.
+
+
+\section{Report creator}
+
+\subsection{Data loaded lazily}
+Report creator is the most optimized part of the application. It is the place where user spends most of their time and it has to respond to any action immediately. It is not easy to predict which examinations will be used in a particular reports, so all of available examinations must be ready to be loaded. At the page load, only list of available examinations (user owned and public examinations) is loaded from the server. When user clicks on examination's title, the rest of its contents is loaded and ready to be modified and included in the report.  
+\subsection{Caching at the user side}
+If a radiologist is specialized in a particular field, they have subset of examinations that they describe most often. Loading them separately each time they create a report would be a waste of time. In order to solve this issue, a caching mechanism at the user side was designed. After loading, JSON data describing examination elements are saved to the storage managed by the browser called localStorage. It is a dictionary-like storage that can be used from JavaScript to save string values. When user tries to open an examination, the localStorage cache is checked whether this examination is present. If the examination is in the cache, it is immediately shown to the user. Otherwise, an HTTP request to the API is issued to download data.
+\subsubsection{Cache invalidation}
+As templates contain no sensitive information, they can be stored in localStorage without restrictions regarding synchronization of cache invalidation with session expiry time. However, the invalidation has to happen when user updates an examination in the Templates tab. In order to keep things simple, the whole cache gets purged anytime user navigates to this tab. 
+
+\subsection{Editing functionality}
+As user moves on in the levels of structure, the program signifies this by opening modals one on top of another. This result in the following behavior: when user makes decisions that have global impact: edits report meta-data, selects examinations that will be used -- the program is at the 1 st level of depth, no modals are present.
+When user decides to include an examination, a modal is opened hiding all information that is not necessary at the moment and the user is shown list of organs with preview of the report.
+
+Workflow is designed to favor selecting Examinations/Organs/Properties from predefined sets. It was measured that with suggested use of the templates on average 82\% of report's content can be generated from template contents. As most of the content can be added to the report by simply clicking on a check-boxes, a lot of thought went into designing interaction model that allows radiologists to look at sequence of suggested elements and make a binary decision 'yes' or 'no' whether an element should be included in the report or not. 
+As the program can be used on any device, it can be interacted using mouse or using touch. When the program is executed on a device with mouse, the font-size and check-boxes are smaller as user uses mouse to precisely click on them. When the program is executed on a smaller device like tablet or smartphone, some elements are shrunk but check-boxes become bigger, so it is easier to tap them. 
+
+\subsection{Predefined but modifiable}
+In some situations edits must be made to the predefined pieces of text. This was solved by putting any report text in a slightly customized textarea that is attached to AngularJS context. The textarea is aware of the length of text it contains and automatically fits its height to show the whole text to the user at any time.
+
+
+\subsection{Live preview}
+It is crucial for the user to always be aware of the impact of edits they make to the report contents. Live preview was designed specifically to solve this. Any significant change of context or report contents send an event to the function that filters elements that were selected and generates report's textual representation. As this function has computational complexity $O(n^3)$, it cannot be left to AngularJS to decide when it should be called (infamous \$digest cycle \cite{angular-digest}) as it would have a severe impact on performance. AngularJS internally observes arrays of data that are attached to its scope to look for changes, so it was decided to call this function only in several situations, e.g. when report-context is switched, a property is checked etc. but not on every single text-change of the report. This allows the radiologists to have a close-to-live preview of resulting report while focusing on selecting predefined pieces of text.
+
+
 \section{Report history}
-\section{Comparing reports}
+Report history is a part of the program that is used to list saved reports, search for particular ones, request pdf version of reports, sending report content via email. users can invoke on existing reports such important actions as editing them, deleting them, comparing them. As one user may have created thousands of reports using this program, this section paginates reports, so not all of them are listed at a time. There are 10 reports per page and user can increment index of the page they are currently viewing or decrement it. 
+One useful feature is grouping reports by title. This is useful when user has the convention of naming that report's title is always name of the patient (most of the current users of the program do it in this way) as they can see and count reports for any user organized in groups. 
+
+\section{Compare reports}
+This feature strongly depends on the mechanisms included in the Report creator. It copies metadata of an existing report and creates a new report using it. Content of the existing report is 
 
 
+\chapter{Testing and verification}
 
 
 
 
 \chapter{Validation of the proposed solution and examples of places where it was used}
 \section{Teleradiologists}
+Structured reporting system is being used by several independent teleradiologists in Poland as their main text editing tool. They receive reporting requests with images they are asked to describe. They use several different RIS systems to store reports they generate. Most of them simply copy and paste reports from the System to the RIS systems they use.
 
 \section{Hospital}
+Proposed system was used in hospital in Wieliszew by a group of radiologists who specialize in oncological reporting. They provided me with precious feedback and many of their suggestions were included in the system. 
 
 \section{Large network of clinics}
-
+Structured reporting system is used by a large network of private clinics in Łódź. Integration with their RIS system is being developed, so the systems will cooperate to provide 
 \chapter{Ideas for the future}
 \chapter{Conclusion}
 
-\chapter {Appendices}
-\section{How to setup the program}
-\section {How to use the program}
+\appendix
+\chapter {How to setup the program}
+\chapter{How to use the program}
 
 
 %-----------Koniec części zasadniczej-----------
@@ -378,6 +474,7 @@ https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-speci
 \bibitem{wiki-recist} 
 https://en.wikipedia.org/wiki/Response\_Evaluation\_Criteria\_in\_Solid\_Tumors
 \bibitem{risk-management} https://www.ncbi.nlm.nih.gov/pubmed/3497558
+\bibitem{angular-digest} https://www.sitepoint.com/understanding-angulars-apply-digest/
 \end{thebibliography}
 \clearpage
 \begin{otherlanguage}{polish}
