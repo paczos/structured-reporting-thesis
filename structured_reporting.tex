@@ -363,6 +363,14 @@ The remaining frontend subpages are generated using view engine present in ASP.N
  
 \subsection{Deployment strategy}
 
+Figure \ref{fig:continuous-deployment} presents the sequence of actions that are 
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{continuous-deployment}
+	\caption{Sequence of actions that are executed to maintain good quality of the codebase.
+		\label{fig:continuous-deployment}
+	}
+\end{figure}
 
 \section{Internationalization and localization}
 The application was designed to be accessible by radiologists from many countries, so support for many languages is one of its core functionalities. 
@@ -400,7 +408,7 @@ On page load all templates that are owned by the user are downloaded, so editing
 \section{Report creator}
 
 \subsection{Data loaded lazily}
-Report creator is the most optimized part of the application. It is the place where user spends most of their time and it has to respond to any action immediately. It is not easy to predict which examinations will be used in a particular reports, so all of available examinations must be ready to be loaded. At the page load, only list of available examinations (user owned and public examinations) is loaded from the server. When user clicks on examination's title, the rest of its contents is loaded and ready to be modified and included in the report.  
+Report creator is the most optimized part of the application. It is the place where user spends most of their time and it has to respond to any action immediately. It is not easy to predict which examinations will be used in a particular report, so all of available examinations must be ready to be loaded. At the page load, only list of available examinations' titles (user owned and public examinations) is loaded from the server. When the user clicks on examination's title, the rest of template's content is loaded via HTTP call and ready to be modified and included in the report.  
 \subsection{Caching at the user side}
 If a radiologist is specialized in a particular field, they have subset of examinations that they describe most often. Loading them separately each time they create a report would be a waste of time. In order to solve this issue, a caching mechanism at the user side was designed. After loading, JSON data describing examination elements are saved to the storage managed by the browser called localStorage. It is a dictionary-like storage that can be used from JavaScript to save string values. When user tries to open an examination, the localStorage cache is checked whether this examination is present. If the examination is in the cache, it is immediately shown to the user. Otherwise, an HTTP request to the API is issued to download data.
 \subsubsection{Cache invalidation}
@@ -438,12 +446,7 @@ This feature strongly depends on the mechanisms included in the Report creator. 
 
 \chapter{Validation of the proposed solution and examples of places where it was used}
 \section{Teleradiologists}
-Structured reporting system is being used by several independent teleradiologists in Poland as their main text editing tool. They receive reporting requests with images they are asked to describe. They use several different RIS systems to store reports they generate. Most of them simply copy and paste reports from the System to the RIS systems they use. The following paragraph is a
-
-
-
-
-
+Structured reporting system is being used by several independent teleradiologists in Poland as their main text editing tool. They receive reporting requests with images they are asked to describe. They use several different RIS systems to store reports they generate. Most of them simply copy and paste reports from the System to the RIS systems they use.
 
 \section{Hospital}
 Proposed system was used in hospital in Wieliszew by a group of radiologists who specialize in oncological reporting. They provided me with precious feedback and many of their suggestions were included in the system. 
