@@ -344,13 +344,12 @@ The ASP.net application is created using MVC pattern (Model-View-Controller) tha
 \subsubsection{Entity Framework}
 Entity Framework is a set of libraries that is used to create high-level abstract model using C\# that are then converted to sets of relations and attributes of the underlying DBMS. It can also be used to transform LINQ constructions to SQL queries taking into the account vendor-specific features of many DBMS.
 The act of first creating C\# classes that represent Model and then automatically converting it to the database relations and attributes (scaffolding) is called Code First Approach. It can be especially useful when the schema of database changes very often. When changes are introduced to the code representing Model, Entity Framework can be used create a migration  -- set of transformations for DB schema that after applying to the DB will keep code and schema synchronized. 
-\subsection{Authentication}
-TODO
+
 \subsection{Database}
 MSSQl server is used as a DBMS because it is a battle-tested, well-documented solution that can be easily paired with ASP.NET and Entity Framework's code generation methods are best optimized for this particular DBMS. 
 
 \subsection{Frontend}
-Not all interactions with the application result in HTTP requests sent to the server, many of interactions are about shaping data that has already been received from the server. In order to make use of this fact main part of the application -- tabs: New Report and Templates were developed as a Single Page Applications (SPA) in order to minimize the time that user has to wait between actions they take. Technologies used in these parts are JavaScript and AngularJS framework. 
+Not all interactions with the application result in HTTP requests sent to the server, many of them are about shaping data that has already been received from the server. In order to make use of this fact main part of the application -- tabs: New Report and Templates were developed as a Single Page Applications (SPA) in order to minimize the time that user has to wait between actions they take. Technologies used in these parts are JavaScript and AngularJS framework. 
 
 \subsubsection{JavaScript}
 It is a very popular scripting language that can be executed in any popular web browser. Version of the language used in this project is ECMAScript 5.1 compliant. 
@@ -359,23 +358,12 @@ AngularJS is a JavaScript framework that helps with building MVC SPA aplications
 
 
 \subsubsection{Razor views}
-The remaining frontend subpages are generated using view engine present in ASP.NET called Razor. These views are responsible for interactions like logging in, registering, listing reports, searching for particular report etc. They are generated at the server side and sent to the user as HTMl and rendered by the browser.
+The remaining frontend subpages are generated using view engine present in ASP.NET called Razor. These views are responsible for interactions like logging in , registration (backed with ASP.NET identity mechanism), listing reports, searching for particular report etc. They are generated on the server side and sent to the user as HTML and rendered by the browser.
  
-\subsection{Deployment strategy}
 
-Figure \ref{fig:continuous-deployment} presents the sequence of actions that are 
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{continuous-deployment}
-	\caption{Sequence of actions that are executed to maintain good quality of the codebase.
-		\label{fig:continuous-deployment}
-	}
-\end{figure}
 
 \section{Internationalization and localization}
-The application was designed to be accessible by radiologists from many countries, so support for many languages is one of its core functionalities. 
-\subsection{User language detection}
-The application automatically detects user preferred language by looking into user browser settings. Each of the most popular Internet browsers allows users to specify list of preferred languages used by webpages. The presented solution scans this list and chooses first language it supports, if there are no languages in the list that are supported, English language is presented to the user by default. Figure \ref{fig:language-preferences} shows how this list can be manipulated in one of most popular web browsers.
+The application was designed to be accessible by radiologists from many countries, so support for many languages is one of its core functionalities. The application automatically detects user preferred language by looking into user browser settings. Each of the most popular Internet browsers allows users to specify list of preferred languages used by webpages. The presented solution scans this list and chooses first language it supports, if there are no languages in the list that are supported, English language is presented to the user by default. Figure \ref{fig:language-preferences} shows how this list can be manipulated in one of most popular web browsers.
 \begin{figure}
     \centering
     \includegraphics[width=0.6\linewidth]{language-preferences}
@@ -438,6 +426,16 @@ One useful feature is grouping reports by title. This is useful when user has th
 \section{Compare reports}
 This feature strongly depends on the mechanisms included in the Report creator. It copies metadata of an existing report and creates a new report using it. Content of the old report is presented to the radiologist as a reference and it is also copied as a basis of a new report. When the doctor makes some changes to the contents of the report, only the new version is modified. This allows for fast creation of a report that has only small portion of fragments modified when compared to the previous one.
 
+\section{Deployment strategy}
+
+Figure \ref{fig:continuous-deployment} presents the sequence of actions and set of subjects that are required to deploy the application.
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{continuous-deployment}
+	\caption{Sequence of actions that are executed to maintain good quality of the codebase.
+		\label{fig:continuous-deployment}
+	}
+\end{figure}
 
 \chapter{Testing and verification}
 
@@ -446,30 +444,29 @@ This feature strongly depends on the mechanisms included in the Report creator. 
 
 \chapter{Validation of the proposed solution and examples of places where it was used}
 \section{Teleradiologists}
-Structured reporting system is being used by several independent teleradiologists in Poland as their main text editing tool. They receive reporting requests with images they are asked to describe. They use several different RIS systems to store reports they generate. Most of them simply copy and paste reports from the System to the RIS systems they use.
+Structured reporting system is being used by several independent teleradiologists in Poland as their main text editing tool. They receive reporting requests with images they are asked to describe. They use several RIS systems from different vendors to store reports they generate. Most of them simply copy and paste reports from the System to the RIS systems they use.
 
 \section{Hospital}
 Proposed system was used in hospital in Wieliszew by a group of radiologists who specialize in oncological reporting. They provided me with precious feedback and many of their suggestions were included in the system. 
 The following paragraph is an opinion about the proposed system authored by Ms. Maria Uliasz, MD–PhD, Director of Radiology at Dziekanów Leśny hospital:
 \blockquote{
-Health informatics is currently present in almost every activity carried out when examining state of patient’s body as techniques used in modern medicine generate a lot of data that must be presented to a proper person at proper time.
-On the other hand, medical diagnostics forms a basis for all medical specializations and has been rapidly advancing for more than 100 years thanks to the interdisciplinary cooperation between professionals. Numerous breakthroughs in the fields of computer imaging and medical diagnostics dated back to the end of 20th and the beginning of 21st century allowed for dynamic development of such imaging techniques as computed tomography scan, magnetic resonance imaging, positron-emission tomography and nuclear medicine. 
+Health informatics supports almost every activity carried out when examining state of patient’s body as techniques used in modern medicine generate a lot of data that must be presented to a proper person at proper time.
+On the other hand, medical diagnostics forms a basis for all medical specializations and has been rapidly advancing for more than 100 years thanks to the interdisciplinary cooperation between professionals. Numerous breakthroughs in the fields of computer imaging and medical diagnostics dated back to the end of 20th and the beginning of 21st century allowed for dynamic development of such imaging techniques as: computed tomography scan, magnetic resonance imaging, positron-emission tomography and nuclear medicine. 
 Speed and diagnostic accuracy are crucial factors in the process of diagnosing patients. The process consists of actions like capturing data from patient’s body, creating radiological report and delivering it to the recipient – physician.
-Reporting system presented by Paweł Paczuski was designed to improve productivity and quality of reports created by radiologists. The program simplified significantly workflow of  radiologists and, by the use of customizable templates, allowed to save a lot of time. This piece of software is especially useful for creating reports for examinations that require a lot of attention from a radiologist, such as: ultrasonography, magnetic resonance imaging, computed tomography scan. 
-The user interface of the program is intuitive and guides user through set of activities required to create a report of a very good quality. Thanks to context-based phrase suggestions, most of the text can be generated semi-automatically but still allowing for modifications at any time while creating a report. Another useful functionality is RECIST 1.1 calculator that automatically extracts measurement from the report’s text and allows for fast and objective assessment of patient’s reaction to the ongoing oncological therapy. The ability to compare reports makes doctors more productive while creating reports that should present how patient’s state changed between two points in time. This greatly shortened report turnaround time for cancer patients who require numerous control exams reports. In the future, I hope for having access to more software tooling that helps doctors, especially radiologists and teleradiologists, be more productive.
-The Structured Reporting System could be used as a supplement for Viewer software as a text-generation tool to create coherent, easy to read, well-formatted and typo-free text. Template based approach could be applied not only to diagnostic imaging, but I can see a market for this piece of software in paramedical, educational and juridical applications.}
-
+Reporting system presented by Paweł Paczuski was designed to improve productivity and quality of reports created by radiologists. The program simplified significantly typical workflow of radiologists and, by the use of customizable templates, allowed to save a lot of time. This piece of software is especially useful for creating reports for examinations that require a lot of attention from a radiologist, such as: ultrasonography, magnetic resonance imaging, computed tomography scan. 
+The user interface of the program is intuitive and guides user through set of activities required to create a report of a very good quality. Thanks to context-aware phrase suggestions, most of the text can be generated semi-automatically but still allowing for modifications at any time while creating a report. Another useful functionality is RECIST 1.1 calculator that automatically extracts measurement from the report’s text and allows for fast and objective assessment of patient’s reaction to the ongoing oncological therapy. The ability to compare reports makes doctors more productive while creating reports that should present how patient’s state changed between two points in time. This greatly shortened report turnaround time for cancer patients who require numerous control exams reports. In the future, I hope for having access to more software tooling that helps doctors, especially radiologists and teleradiologists, be more productive.
+The Structured Reporting System could be used as a supplement for Viewer software as a text-generation tool to create coherent, easy to read, well-formatted and typo-free text. Template based approach could be applied not only to diagnostic imaging, but I can see the existence of market for this piece of software in paramedical, educational and juridical applications.}
 
 
 \section{Large network of clinics}
-Structured reporting system is used by a large network of private clinics in Łódź. Integration with their RIS system is being developed, so the systems will cooperate with exising systems to optimize workflow of radiologists.
+Structured reporting system is used by a large network of private clinics in Łódź. Integration with their RIS system is being developed, so the systems will cooperate with existing systems to optimize workflow of radiologists.
 
 
 \chapter{Conclusion and ideas for future}
-Ideas implemented in this structured reporting system are very simple from the theoretical point of view. In facts, template-based text generation existed for years and can be found in most of the programs developed by humans. However, even such simple methods, supported with well-thought user-experience design can give satisfying results. The proposed system was designed as a program that can be easily deployed in local networks and executed on any computer with a modern web browser. 
+Ideas implemented in this structured reporting system are very simple from the theoretical point of view. In fact, template-based text generation existed for years and can be found in most of the programs developed by humans. However, even such simple methods, supported with well-thought user experience design can give satisfying results. 
+In the future one could think about a way to generalize the reporting ontology or implement a mechanism to create custom ontologies to provide tools that would allow to encode a hierarchy of an arbitrary depth. After obtaining a well-formed tree representing relations between causes and effects, one could experiment with applying recurrent neural networks (RNNs) to automatically generate report's text from structured data \cite{recurrent-neural-networks}.
 
-As the program was developed during my first year of studies at Warsaw University of Technology, I had a lot of time to think about pros and cons of the ideas implemented in this solution. Some of the improvements were implemented in a commercial product based on some ideas presented in this thesis available at upmedic.pl
-
+As the program was developed during my first year of studies at Warsaw University of Technology, I had a lot of time to think about pros and cons of the ideas presented in this solution. Some of the improvements were implemented in a commercial product based on some ideas presented in this thesis available at upmedic.pl
 
 
 
@@ -502,6 +499,8 @@ https://en.wikipedia.org/wiki/Response\_Evaluation\_Criteria\_in\_Solid\_Tumors
 \bibitem{risk-management} https://www.ncbi.nlm.nih.gov/pubmed/3497558
 \bibitem{angular-digest} https://www.sitepoint.com/understanding-angulars-apply-digest/
 \bibitem{microsoft-json-suppoert} https://blogs.msdn.microsoft.com/jocapc/2015/05/16/json-support-in-sql-server-2016/
+\bibitem{recurrent-neural-networks}
+http://www2.fiit.stuba.sk/~kvasnicka/NeuralNetworks/6.prednaska/Kvasnicka\_RNN\_exten\_transp.pdf
 \end{thebibliography}
 \clearpage
 \begin{otherlanguage}{polish}
