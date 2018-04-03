@@ -441,7 +441,6 @@ Figure \ref{fig:continuous-deployment} presents the sequence of actions and set 
 
 
 
-
 \chapter{Validation of the proposed solution and examples of places where it was used}
 \section{Teleradiologists}
 Structured reporting system is being used by several independent teleradiologists in Poland as their main text editing tool. They receive reporting requests with images they are asked to describe. They use several RIS systems from different vendors to store reports they generate. Most of them simply copy and paste reports from the System to the RIS systems they use.
@@ -464,7 +463,7 @@ Structured reporting system is used by a large network of private clinics in ≈Å√
 
 \chapter{Conclusion and ideas for future}
 Ideas implemented in this structured reporting system are very simple from the theoretical point of view. In fact, template-based text generation existed for years and can be found in most of the programs developed by humans. However, even such simple methods, supported with well-thought user experience design can give satisfying results. 
-In the future one could think about a way to generalize the reporting ontology or implement a mechanism to create custom ontologies to provide tools that would allow to encode a hierarchy of an arbitrary depth. After obtaining a well-formed tree representing relations between causes and effects, one could experiment with applying recurrent neural networks (RNNs) to automatically generate report's text from structured data \cite{recurrent-neural-networks}.
+In the future one could think about a way to generalize the reporting ontology or implement a mechanism to create custom ontologies to provide tools that would allow to encode a hierarchy of an arbitrary depth. After obtaining a well-formed tree representing relations between causes and effects, one could experiment with applying recurrent neural networks (RNNs) to automatically generate report's text from structured data source \cite{recurrent-neural-networks}. Another direction for improvement would be a natural language processing mechanism that would learn typical co-occurrences of report items and would ask the radiologist whether an unusual report content is caused by a mistake made while creating the report or a truly unusual pathology. 
 
 As the program was developed during my first year of studies at Warsaw University of Technology, I had a lot of time to think about pros and cons of the ideas presented in this solution. Some of the improvements were implemented in a commercial product based on some ideas presented in this thesis available at upmedic.pl
 
