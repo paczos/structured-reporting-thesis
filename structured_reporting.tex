@@ -239,11 +239,26 @@ In figure \ref{fig:report-workflow} a typical workflow of a radiologist is repre
 
 
 \subsection{Connotation}
-Moreover, each property has a semantical attribute called connotation. Connotation is used to highlight the impact of this property on the result of the organ and examination. This attribute can have one of three values: positive, negative and neutral. 
+Moreover, each property has a semantical attribute called connotation. Connotation is used to highlight the impact of this property on the result of the organ and examination. This attribute can have one of three values: positive, negative and neutral. Figure \ref{fig:property-connotation} presents connotation selection box that is present next to the property text editor.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{property-connotation}
+	\caption{Connotation can have one of three values: positive, negative and neutral.
+		\label{fig:property-connotation}
+	}
+\end{figure}
+
 \subsection{Metadata}
 Report may also contain some metadata which can be used identify the patient whose body is described in it. Shape of these pieces of information strongly depends on the RIS system used in a clinic. These pieces of information have no special influence on the semantics of report so it has no detailed description in this work.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\linewidth]{report-metadata}
+	\caption{Report metadata allows user to specify general information about new report.
+		\label{fig:report-metadata}
+	}
+\end{figure}
 
-Names for these ontological structures were chosen so it is easier for radiologists to imagine what they describe, however, they can be used not strictly (e.g. in CT scan as an organ one may include details about intracranial hemorrhage which is a kind of bleeding within the skull \cite{ich} but not an organ in its very meaning)
+Names for these ontological structures were chosen so it is easier for radiologists to imagine what they describe, however, they can be used not strictly (e.g. in CT scan as an organ may contain details about intracranial hemorrhage which is a kind of bleeding within the skull \cite{ich} but not an organ in its very meaning)
 
 \section{Examination template}
 Examination template (or simply 'template') consists of an ordered list of all organs that could be described with all and some portion of metadata used for filtering like category, discipline. Each organ in a template has an ordered list of all properties that can describe it. Every property can have connotation predefined. 
@@ -294,7 +309,26 @@ BMI is one example of hundreds techniques used by doctors. It is not integrated,
 
 \subsubsection{RECIST 1.1}
 During the design of the proposed systems several radiologists who specialize in oncological medicine reporting suggested that a method called  Response Evaluation Criteria In Solid Tumors (RECIST 1.1) is of special importance to them. This method is used to assess whether tumors in cancer patients improve, stay the same, or worsen during treatment \cite{wiki-recist}. As there are hundreds of similar methods used by radiologists, it would be impossible to implement them in the proposed system all at once, so it was decided to use RECIST 1.1 as a proof of the concept of calculators that can be used in structured reports.
-A radiologist, while creating a report, can measure size of lesions and write down the results of measurement in the report. Proposed program should recognize that the numerical value represents a measurement and should suggest whether it should be included in the calculation of RECIST 1.1 or not.
+A radiologist, while creating a report, can measure size of lesions and write down the results of measurement in the report. Proposed program should recognize that the numerical value represents a measurement (as shown in figure \ref{fig:recist-parsing}) and should suggest whether it should be included in the calculation of RECIST 1.1 or not (as shown in figure \ref{fig:recist-config}).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{recist-parsing}
+	\caption{Measurements data are automatically parsed when user types text into the property textbox.
+		\label{fig:recist-parsing}
+	}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{recist-config}
+	\caption{Just before confirming the completeness of the report the user is asked to decide which measurements should be included into RECIST 1.1 calculation (there is a limit of 5 values defined in the algorithm specification)
+		\label{fig:recist-config}
+	}
+\end{figure}
+
+
+
 
 \section{Reporting quality improvements}
 \subsection{Standardized nomenclature}
@@ -304,14 +338,22 @@ Templates can be interpreted as TODO-lists containing tasks which have to be don
 \subsection{Reports have ordered list of elements}
 Reports created using the proposed system can be represented as trees, nested lists of items, so it is easy to spot relationships between properties and organs and also differences between two reports describing one patient.
 \subsection{Highlighting the most important pieces of information}
-The most important pieces of information can be highlighted using proper value of connotation. When one of properties of an organ should be interpreted as a main cause of health problems it is marked as a pathology. When the report is then rendered as a document, this property can have e.g. different font color, some text-decoration element or different background color.
+The most important pieces of information can be highlighted using proper value of connotation. When one of properties of an organ should be interpreted as a main cause of health problems it is marked as a pathology. When the report is then rendered as a document, this property can have e.g. different font color, some text-decoration element or different background color ()Figure \ref{property-connotation-rendered}).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.3\linewidth]{property-connotation-rendered}
+	\caption{Exemplary representation of connotation in the rendered version of the report: positive connotation is represented as green background of the text, negative --- red, neutral --- transparent.
+		\label{property-connotation-rendered}
+	}
+\end{figure}
 \subsection{Shift from difference reporting to the current state reporting}
 There exists practices quite popular among radiologists mostly from smaller clinics that are considered as bad among professionals. One is to include in the radiological report only properties of body which they consider as bad for patient's health. Due to the subjective nature of the report there were cases when a radiologist skipped a finding that was important stating the patient was healthy leading to more difficult and expensive treatment later.
 There were also cases when a radiologist was unable to compare current state with descriptions of several images that were taken at different times, only with the last one. The doctor stated that there is a progress in treatment, but in comparison to the second from the last description, the health condition worsened. \cite{risk-management}
 Templates created using the proposed system can favor radiological reports that are more self-contained -- they describe both bad and good properties of patient's state.
 
 \subsection{Compare reports}
-Having a previous report, a radiologist can create another one that will be an update to the former. This procedure is often applied during chemotherapy to see whether tumors react to the treatment. A software functionality that allows the radiologist to introduce small changes to the report without rewriting it, would increase the quality of reporting as the resulting report would be still self-contained.
+Having a previous report, a radiologist can create another one that will be an update to the former. This procedure is often applied during chemotherapy to see whether tumors react to the treatment. A software functionality that allows the radiologist to introduce small changes to the report without rewriting it, would increase the quality of reporting as the resulting report would be still self-contained. 
 
 \section{Integration with existing systems}
 As there are many ways to store radiological reports. Many radiologists work remotely for several companies that have different RIS systems. It is very difficult to integrate the system with all of the systems as it requires cooperation of both developer of the proposed system and the developers of the RIS system. 
@@ -396,7 +438,16 @@ On page load all templates that are owned by the user are downloaded, so editing
 \section{Report creator}
 
 \subsection{Data loaded lazily}
-Report creator is the most optimized part of the application. It is the place where user spends most of their time and it has to respond to any action immediately. It is not easy to predict which examinations will be used in a particular report, so all of available examinations must be ready to be loaded. At the page load, only list of available examinations' titles (user owned and public examinations) is loaded from the server. When the user clicks on examination's title, the rest of template's content is loaded via HTTP call and ready to be modified and included in the report.  
+Report creator is the most optimized part of the application. It is the place where user spends most of their time and it has to respond to any action immediately. It is not easy to predict which examinations will be used in a particular report, so all of available examinations must be ready to be loaded. At the page load, only list of available examinations' titles (user owned and public examinations) is loaded from the server. When the user clicks on examination's title, the rest of template's content is loaded via HTTP call and ready to be modified and included in the report.  Figure \ref{fig:compare-report} presents interface that makes if easier for the radiologist to compare two reports.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{examination-list}
+	\caption{Initially only a list of names of available templates is presented to the user. Contents of the template are downloaded after clicking on the pill representing a template.
+		\label{fig:examination-list}
+	}
+\end{figure}
+
 \subsection{Caching at the user side}
 If a radiologist is specialized in a particular field, they have subset of examinations that they describe most often. Loading them separately each time they create a report would be a waste of time. In order to solve this issue, a caching mechanism at the user side was designed. After loading, JSON data describing examination elements are saved to the storage managed by the browser called localStorage. It is a dictionary-like storage that can be used from JavaScript to save string values. When user tries to open an examination, the localStorage cache is checked whether this examination is present. If the examination is in the cache, it is immediately shown to the user. Otherwise, an HTTP request to the API is issued to download data.
 \subsubsection{Cache invalidation}
@@ -404,8 +455,14 @@ As templates contain no sensitive information, they can be stored in localStorag
 
 \subsection{Editing functionality}
 As user moves on in the levels of structure, the program signifies this by opening modals one on top of another. This results in the following behavior: when user makes decisions that have the biggest impact on the shape of the report -- edits report meta-data, selects examinations that will be used -- the program is at the 1 st level of depth, no modals are present.
-When user decides to include an examination, a modal is opened hiding all information that is not necessary at the moment and the user is shown list of organs with preview of the report.
-
+When user decides to include an examination, a modal is opened hiding all information that is not necessary at the moment and the user is shown list of organs with preview of the report (As shown in figure \ref{organ-list}).
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{organs-modal}
+	\caption{List of organs defined in a CT Brain examination template.
+		\label{fig:organ-list}
+	}
+\end{figure}
 Workflow is designed to favor selecting Examinations/Organs/Properties from predefined sets. It was measured that with suggested use of the templates on average 82\% of report's content can be generated from template contents. As most of the content can be added to the report by simply clicking on a check-boxes, a lot of thought went into designing interaction model that allows radiologists to look at sequence of suggested elements and make a binary decision 'yes' or 'no' whether an element should be included in the report or not. 
 As the program can be used on any device, it can be interacted using mouse or using touch. When the program is executed on a device with mouse, the font-size and check-boxes are smaller as user uses mouse to precisely click on them. When the program is executed on a smaller device like tablet or smartphone, some elements are shrunk but check-boxes become bigger, so it is easier to tap them. 
 
@@ -425,6 +482,15 @@ One useful feature is grouping reports by title. This is useful when user has th
 
 \section{Compare reports}
 This feature strongly depends on the mechanisms included in the Report creator. It copies metadata of an existing report and creates a new report using it. Content of the old report is presented to the radiologist as a reference and it is also copied as a basis of a new report. When the doctor makes some changes to the contents of the report, only the new version is modified. This allows for fast creation of a report that has only small portion of fragments modified when compared to the previous one.
+Figure \ref{fig:compare-report} presents interface that makes if easier for the radiologist to compare two reports.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{compare-reports}
+	\caption{Compare reports mode presents simultaneously contents of the currently edited report and the old one.
+		\label{fig:compare-report}
+	}
+\end{figure}
 
 \section{Deployment strategy}
 
