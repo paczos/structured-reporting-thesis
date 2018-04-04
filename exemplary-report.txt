@@ -1,0 +1,26 @@
+PATIENT:
+JOHN SMITH
+DOB:5/5/1955
+FILE #:12345
+REFERRINGEXAM:MRI ABDOMEN WITH CONTRAST
+DATE:
+1/1/2011
+
+Aarterial phase (series 15 image 35) may reflect a renal compromise. Stable mild pelviectasis is again noted in the 
+left kidney. No mass is identified in the kidneys. No masses seen along the right ureter.
+Postoperative changes are seen from a distal pancreatectomy and cholecystectomy representing previous Whipple
+procedure. There is dilatation of the pancreatic duct in the body and tail (series 6 images 23 No recurrent mass is seen in the pancreas or anastomosis.
+
+There is mild prominence of the biliary ducts in the left hepatic lobe (series 7 image 20). No filling defect is seen withinthe common duct. 
+Spleen and adrenal glands are unremarkable. No free fluid or lymph adenopathy seen. 
+No bowel obstruction is identified. Anterior abdominal hernia is again noted containing small bowel without evidence of strangulation (series 7 image 33).
+ There is marked S - shaped scoliosis of the thoracolumbar spine. No met astatic bone lesions are identified.
+
+IMPRESSION1. Interval development of marked hydronephrosis hydroureter in the right kidney. No discrete stone or mass in the visualized portions of the right ureter. 
+Recommend CT scan of the abdomen and pelvis with and without contrast for further evaluation. 
+2. Stable mild pelviectasis in the left kidney. 
+3. Postoperative change from previous Whipple procedure. No recurrent mass in the pancreas or anastomosis. 
+4. Mild prominence of the biliary ducts  in the left he patic lobe. 
+5. Nolymphadenopathy or metastatic bony lesions. 
+6. Anterior abdominal wall hernia contains small bowel without evidence  of strangulation or obstruction.
+7. Marked S - shaped scoliosis of the thoracolumbar spine. [NationalRad Radiologist]
