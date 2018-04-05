@@ -72,23 +72,42 @@
 
 \begin{frame}
 \frametitle{Areas of optimization}
+What can be improved:
 \begin{itemize}
 	\item radiologists are \alert{very BAD} at typing on keyboard
 	\item speech recognition has problems with capturing medical language
-	\
+	\item reporting quality  
+\end{itemize}
+
+How:
+\begin{itemize}
+	\item typing on keyboard replaced by checking boxes with predefined phrases
+	\item reports represented as trees that have relations between causes and effects
+	\item workflow organized around set of checklists and \alert{templates}
 \end{itemize}
 \end{frame}
+
 
 \section{Design and implementation of Structured reporting system}
 \subsection{Radiological report as a tree}
 
 \begin{frame}
+\frametitle{Modified workflow}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\linewidth]{../report-workflow}
+	\label{fig:report-workflow}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
 \frametitle{Reporting ontology}
 \begin{figure}
 	\centering
-\includegraphics[width=0.2\linewidth]{../report-semantic}
-\caption{Types of entities and relations between them}
-\label{fig:report-ontology}
+	\includegraphics[width=0.2\linewidth]{../report-semantic}
+	\caption{Types of entities and relations between them}
+	\label{fig:report-ontology}
 \end{figure}
 \end{frame}
 
@@ -96,18 +115,18 @@
 \begin{frame}
 \frametitle{Radiological report as a tree}
 \begin{figure}
-	\centering
-	\includegraphics[width=1\linewidth]{../report-tree}
-	\label{fig:report-tree}
+\centering
+\includegraphics[width=1\linewidth]{../report-tree}
+\label{fig:report-tree}
 \end{figure}
 \end{frame}
 
 \begin{frame}
 \frametitle{Textual representation}
 \begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{../rendered-report}
-	\label{fig:rendered-report}
+\centering
+\includegraphics[width=\linewidth]{../rendered-report}
+\label{fig:rendered-report}
 \end{figure}
 \end{frame}
 
@@ -131,6 +150,15 @@
 
 \subsection{User interface}
 \begin{frame}
+\frametitle{Report metadata}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\linewidth]{../report-metadata}
+	\label{fig:report-metadata}
+\end{figure}
+\end{frame}
+
+\begin{frame}
 \frametitle{Report editor interface}
 \begin{figure}
 	\centering
@@ -152,7 +180,7 @@
 \frametitle{Properties}
 \begin{figure}
 	\centering
-	\includegraphics[width=1\linewidth]{../properties-modal}
+	\includegraphics[width=0.8\linewidth]{../properties-modal}
 	\label{fig:properties-list}
 \end{figure}
 \end{frame}
@@ -207,14 +235,7 @@
 \end{figure}
 \end{frame}
 
-\begin{frame}
-\frametitle{Workfllow}
-\begin{figure}
-	\centering
-	\includegraphics[width=0.5\linewidth]{../report-workflow}
-	\label{fig:report-workflow}
-\end{figure}
-\end{frame}
+
 
 \begin{frame}
 \frametitle{Template editor}
@@ -239,8 +260,8 @@
 Places where the software was used:
 \begin{itemize}
 	\item Several independent teleradiologists
-	\item Small clinic in Wieliszew
-	\item Large network of clinics
+	\item Small hospital in Wieliszew
+	\item Large network of clinics in Łódź
 \end{itemize}
 
 Conclusions:
@@ -260,4 +281,24 @@ Conclusions:
 \end{itemize}
 \end{frame}
 
+\begin{frame}
+\frametitle{Q\&A}
+\end{frame}
+\begin{frame}
+
+\frametitle{Bibliography}
+\begin{thebibliography}{11}
+	\bibitem{bls} https://www.bls.gov/ooh/healthcare/physicians-and-surgeons.htm, accessed 08.10.2017 13:30
+	\bibitem{ai} M. Recht, N. Bryan, Artificial Intelligence: Threat or Boon to Radiologists?
+	N1  - doi: 10.1016/j.jacr.2017.07.007
+	\bibitem{snomed} T. Benson, Principles of health interoperability HL7 and SNOMED.
+	\bibitem{sr} D. A. Clunie, DICOM Structured Reporting
+	\bibitem{hl7cda} http://www.hl7.org/Special/committees/structure/index.cfm 
+	\bibitem{csharp-spec}
+	https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/lexical-structure
+	\bibitem{static-lang}
+	S. Hanenberg, S. Kleinschmager, R. Robbes, É. Tanter, A. Stefik, An empirical study on the impact of static typing on software maintainability
+
+\end{thebibliography}
+\end{frame}
 \end{document}
