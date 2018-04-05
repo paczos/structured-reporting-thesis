@@ -504,6 +504,14 @@ Figure \ref{fig:continuous-deployment} presents the sequence of actions and set 
 \end{figure}
 
 \chapter{Testing and verification}
+Most of the testing and verification was performed as user-acceptance testing as the program is heavily focused on interaction with user, however, security-critical parts of the program are unit-tested.
+The following scenarios were taken into account while testing:
+\begin{itemize}
+	\item entity ownership test:
+	\begin{itemize}
+		\item sd
+	\end{itemize}
+\end{itemize}
 
 
 
@@ -527,9 +535,9 @@ The Structured Reporting System could be used as a supplement for Viewer softwar
 Structured reporting system is used by a large network of private clinics in Łódź. Integration with their RIS system is being developed, so the systems will cooperate with existing systems to optimize workflow of radiologists.
 
 
-\chapter{Conclusion and ideas for future}
+\chapter{Conclusion and ideas for the future}
 Ideas implemented in this structured reporting system are very simple from the theoretical point of view. In fact, template-based text generation existed for years and can be found in most of the programs developed by humans. However, even such simple methods, supported with well-thought user experience design can give satisfying results. 
-In the future one could think about a way to generalize the reporting ontology or implement a mechanism to create custom ontologies to provide tools that would allow to encode a hierarchy of an arbitrary depth. After obtaining a well-formed tree representing relations between causes and effects, one could experiment with applying recurrent neural networks (RNNs) to automatically generate report's text from structured data source \cite{recurrent-neural-networks}. Another direction for improvement would be a natural language processing mechanism that would learn typical co-occurrences of report items and would ask the radiologist whether an unusual report content is caused by a mistake made while creating the report or a truly unusual pathology. 
+In the future, one could think about a way to generalize the reporting ontology or implement a mechanism to create custom ontologies to provide tools that would allow to encode a hierarchy of an arbitrary depth. After obtaining a well-formed tree representing relations between causes and effects, one could experiment with applying recurrent neural networks (RNNs) to automatically generate report's text from structured data source \cite{recurrent-neural-networks}. Another direction for improvement would be a natural language processing mechanism that would learn typical co-occurrences of report items and would ask the radiologist whether an unusual report content is caused by a mistake made while creating the report or a truly unusual pathology. 
 
 As the program was developed during my first year of studies at Warsaw University of Technology, I had a lot of time to think about pros and cons of the ideas presented in this solution. Some of the improvements were implemented in a commercial product based on some ideas presented in this thesis available at upmedic.pl
 

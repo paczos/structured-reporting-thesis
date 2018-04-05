@@ -2,8 +2,11 @@
 \usepackage[polish,british]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{enumerate}
+\usepackage{tabu}
+\setbeamertemplate{itemize item}[square]
+\setbeamertemplate{itemize subitem}[circle]
 
-\author{Paweł Paczuski\\ \texttt{p.paczuski@stud.elka.pw.edu.pl}}
+\author{Paweł Paczuski \\ \texttt{p.paczuski@stud.elka.pw.edu.pl}}
 \title{Structured reporting system}
 \date{06.04.2018}
 \begin{document}
@@ -31,6 +34,13 @@
 
 \begin{frame}
 \frametitle{Healthcare Informatics vs Computer Science}
+\begin{tabu}{XX}
+	\rowfont{\bfseries\itshape\large} Computer Science & Healthcare Informatics\\
+	\hline
+	general field & information engineering applied to the health care \\ \hline
+	data structures, algorithms & flow of information\\ \hline
+	ways of persistently storing data        & ways of presenting data at proper time to proper person\\ \hline
+\end{tabu}
 \end{frame}
 
 \subsection{Standards}
@@ -40,6 +50,13 @@
 	\item medical nomenclature SNOMED CT, LOINC
 	\item exchange protocols and formats HL7, DICOM
 \end{itemize}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{../snomed}
+	\caption{Drug product example in SNOMED CT}
+	\label{fig:snomed}
+\end{figure}
+
 \end{frame}
 
 \subsection{Typical workflow of a radiologist}
@@ -62,11 +79,7 @@
 \end{itemize}
 \end{frame}
 
-\section{Structured reporting system}
-
-
-
-\section{}
+\section{Design and implementation of Structured reporting system}
 \subsection{Radiological report as a tree}
 
 \begin{frame}
@@ -93,19 +106,158 @@
 \frametitle{Textual representation}
 \begin{figure}
 	\centering
-	\includegraphics[width=1\linewidth]{../rendered-report}
+	\includegraphics[width=\linewidth]{../rendered-report}
 	\label{fig:rendered-report}
 \end{figure}
 \end{frame}
 
+\subsection{Technological stack}
+\begin{frame}
+\frametitle{Technological stack}
+\begin{itemize}
+	\item backend 
+	\begin{itemize}
+		\item C\#
+		\item ASP.NET
+		\item MS SQL 
+	\end{itemize}
+	\item frontend (hybrid approach)
+	\begin{itemize}
+		\item AngularJS, ES5 
+	\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\subsection{User interface}
 \begin{frame}
 \frametitle{Report editor interface}
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{../examination-list}
+	\label{fig:examination-list}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Organ list}
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{../report-organs}
+	\label{fig:organ-list}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Properties}
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{../properties-modal}
+	\label{fig:properties-list}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Connotations}
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{../property-connotation}
+	\label{fig:property-connotation}
+\end{figure}
 \end{frame}
 
 
+\begin{frame}
+\frametitle{def. RECIST 1.1}
+\begin{figure}
+\begin{itemize}
+	\item response evaluation criteria in solid tumours
+	\item calculates changes in sizes of solid tumors
+	\item results based on several factors: change, nodes, selection of measurements
+	\end{itemize}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Parsing values for RECIST 1.1}
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{../recist-parsing}
+	\label{fig:recist-parsing}
+\end{figure}
+\end{frame}
 
 
+\begin{frame}
+\frametitle{Configuring RECIST 1.1}
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{../recist-config}
+	\label{fig:recist-config}
+\end{figure}
+\end{frame}
 
 
+\begin{frame}
+\frametitle{Generated report}
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{../report-copy-to-clipboard}
+	\label{fig:report-copy-to-clipboard}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Workfllow}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\linewidth]{../report-workflow}
+	\label{fig:report-workflow}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Template editor}
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{../templates-list}
+	\label{fig:templates-list}
+\end{figure}
+
+\end{frame}
+\begin{frame}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\linewidth]{../template-organs-list}
+	\label{fig:template-organ-list}
+\end{figure}
+\end{frame}
+
+\section {Validation}
+\begin{frame}
+\frametitle{Validation}
+Places where the software was used:
+\begin{itemize}
+	\item Several independent teleradiologists
+	\item Small clinic in Wieliszew
+	\item Large network of clinics
+\end{itemize}
+
+Conclusions:
+\begin{itemize}
+	\item Tens of thousands reports generated
+	\item Reports generated 3 times faster
+\end{itemize}
+\end{frame}
+
+\section {Plans for the future}
+\begin{frame}
+\frametitle{Plans for the future}
+\begin{itemize}
+	\item develop independent commercial version of the software based on some ideas from this system
+	\item support for more general ontologies
+	\item conform to standards, integrations with existing RIS systems
+\end{itemize}
+\end{frame}
 
 \end{document}
