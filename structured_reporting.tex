@@ -7,8 +7,7 @@
 \usepackage[polish,british]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{geometry}
-\geometry{left=25mm,right=25mm,%
-bindingoffset=10mm, top=25mm, bottom=25mm}
+\geometry{left=25mm,right=25mm, top=25mm, bottom=25mm}
 \usepackage{latexsym}
 \usepackage{amsthm}
 \usepackage{palatino}
@@ -23,6 +22,8 @@ bindingoffset=10mm, top=25mm, bottom=25mm}
 \newcommand*{\abs}[1]{\left\vert{#1}\right\vert}
 \newcommand*{\om}{\omega}
 
+
+
 \author{Paweł Paczuski}
 \title{Structured radiological reporting system}
 
@@ -33,51 +34,44 @@ bindingoffset=10mm, top=25mm, bottom=25mm}
 \pagestyle{empty}
 
 \noindent
-\begin{Large}
-\begin{table}[t]
-\centering
-\begin{tabular}[t]{lcr}
- \includegraphics[width=70pt,height=70pt]{pw} & Warsaw University of Technology & \includegraphics[width=70pt,height=70pt]{elka}\\
-& FACULTY OF & \\
-& ELECTRONICS AND INFORMATION TECHNOLOGY &
-\end{tabular}
-\end{table}
+\includegraphics{title}
+\begin{center}
+Institute of Computer Science
+\end{center}
 
-% \vfill
-\begin{center}BACHELOR'S DIPLOMA THESIS\end{center}
-\begin{center}In the field of Computer Science \\ and specialization Computer Systems and Networks \end{center}\end{Large}
-% \vfill
+
+\includegraphics{bachelor}
 \begin{center}
-\Huge
-\textbf{!!!DRAFT!!! Structured reporting system}
+	In the field of study Computer Science  \\
+
+	and specialization Computer Systems and Networks \\
 \end{center}
-% \vfill\vfill
-\vfill
+
 \begin{center}
-\Large
-Author:\\
+\large
+Structured radiological reporting system\\
+\normalsize
+\end{center}
+\vskip 36pt
+\begin{center}
 \LARGE
-Paweł Paczuski
+Paweł Paczuski\\
+\normalsize
+student record book number 271082
+\end{center}
+\vskip 60pt
+\begin{center}
+thesis supervisor \\
+ Jan J. Mulawka PhD, DSc
 \end{center}
 \vfill
 \begin{center}
-\Large
-Thesis supervisor: Jan J. Mulawka PhD, DSc
-\end{center}
-\vfill
-\begin{center}
-\Large
-Warsaw, June 2018
+\normalsize
+WARSAW 2018
 \end{center}
 \newpage
 \hfill
-\begin{table}[b]
-\centering
-\begin{tabular}[t]{ccc}
-............................................. & \hspace*{100pt} & .............................................\\
-podpis promotora & \hspace*{100pt} & podpis autora
-\end{tabular}
-\end{table}
+
 
 
 % \maketitle
@@ -95,7 +89,6 @@ Structured radiological reporting system.
 Design and implementation of a system that can be used by radiologists to create structured radiological reports. The system uses sets of standardized, frequently used phrases to: describe state of patient's body captured by other medical diagnostics methods, provide set of tools that minimize risk of mistake and increase productivity. 
 \end{abstract}
 \end{otherlanguage}
-
 \begin{otherlanguage}{polish}
 \begin{abstract}
 streszczenie po polsku
@@ -114,13 +107,11 @@ streszczenie po polsku
 
 \chapter{Introduction}
 \section{The need for medical diagnostics}
-Everyday millions of physicians treat injuries and illnesses of different kids. Before a doctor can plan an individual treatment for a patient, they have to diagnose which organs are in pathological states \cite{bls}. This sometimes can be achieved by simply glancing at the body, however, there are many illnesses that require specialized set of tools and methods in order to observe which parts of patient's body are in an unwanted state. Through years of research, many different techniques were established and a separate specialization emerged -- radiology. Radiologists focus mainly on analyzing and interpreting diagnostic imagery and as a result of their work they create a document called radiological report which contains description of what can be observed in the image of patient body. Reports may contain description of state of particular organs, measurements (eg. radius, volume, concentration of certain substances in the blood), comparison of medical condition of a patient observed at different times and description of overall state of the patient. \\
+Everyday millions of physicians treat injuries and illnesses of different kids. Before a doctor can plan an individual treatment for a patient, they have to diagnose which organs are in pathological states \cite{bls}. This sometimes can be achieved by simply glancing at the body, however, there are many illnesses that require specialized set of tools and methods in order to observe which parts of patient's body are in an unwanted state. Through years of research, many different techniques were established and a separate specialization emerged -- radiology. Radiologists focus mainly on analyzing and interpreting diagnostic imagery and as a result of their work they create a document called radiological report which contains description of what can be observed in the image of patient body. Reports may contain description of state of particular organs, measurements (e.g. radius, volume, concentration of certain substances in the blood), comparison of medical condition of a patient observed at different times and description of overall state of the patient. \\
 \section{Existing solutions}
 Currently, the research is focused on finding new ways of diagnosing diseases by  the use of more advanced equipment or brilliant algorithms that try to automate image analysis \cite{ai}. \\
-On the other hand, there exist initiatives that try to improve quality of the radiological reports themselves. There are groups consisting of both computer scientists and physicians that try to standardize reports, prepare checklists that require doctors to describe patients' state in particular order and create a set of phrases that will be understood in the same way by all physicians \cite{snomed}. A lot of work has been done to provide both common medical nomenclature for medical conditions and theoretical framework to describe relations between causes and effects of patients' condition. As there are more and more methods used to diagnose, the amount of information captured increases, so the reporting methodology has to be kept up to date with the state of art. This is why a very specific field -- Structural Reporting (SR) emerged. The basic idea is to provide a way to create radiological reports that conveys as much semantics as possible in a way that is easy to understand. One can find great ideas implemented in such standards as SNOMED SR \cite{sr} and also HL7 version 3 Clinical Document Architecture (HL7 V3 CDA). By using these standards one can encode relations between organs and diseases (causality) in a very regular format. After encoding structure in the report, one can use algorithms to e.g. highlight what changed since last visit, look for diseases that were diagnosed in the specified time range etc. This is very difficult to achieve when reports are stored in plain text. Structural reporting focuses mainly on encoding meaning -- the visual representation of resulting reports is a separate matter that is treated as an implementation detail \cite{sr}.
+On the other hand, there exist initiatives that try to improve quality of the radiological reports themselves. There are groups consisting of both computer scientists and physicians that try to standardize reports, prepare checklists that require doctors to describe patients' state in particular order and create a set of phrases that will be understood in the same way by all physicians \cite{snomed}. A lot of work has been done to provide both common medical nomenclature for medical conditions and theoretical framework to describe relations between causes and effects of patients' condition. As there are more and more methods used to diagnose, the amount of information captured increases, so the reporting methodology has to be kept up to date with the state of art. This is why a very specific field -- Structural Reporting (SR) emerged. The basic idea is to provide a way to create radiological reports that conveys as much semantics as possible in a way that is easy to understand. One can find great ideas implemented in such standards as SNOMED SR \cite{sr} and also HL7 version 3 Clinical Document Architecture (HL7 V3 CDA). By using these standards, one can encode relations between organs and diseases (causality) in a very regular format. After encoding structure in the report, one can use algorithms to e.g. highlight what changed since last visit, look for diseases that were diagnosed in the specified time range etc. This is very difficult to achieve when reports are stored in plain text. Structural reporting focuses mainly on encoding meaning -- the visual representation of resulting reports is a separate matter that is treated as an implementation detail \cite{sr}.
 In spite of the existence of these standards, it is almost impossible to find software that implements structural reporting techniques. One of the most important reasons is the fact that in order to understand benefits of SR, one has to acquire certain level of understanding of the typical work-flow of a radiologist. As there is huge demand for software that is much easier to understand (e.g. RIS and HIS software), most of the effort is made to implement simpler concepts.
-\\ \\
-
 
 \section{Typical work-flow of a radiologist in Poland}
 In order to find places where optimization of productivity could be applied, one has to get to know how a radiologist works and what are activities that waste significant amounts of time. \\
@@ -128,9 +119,9 @@ In a medium-sized clinic, medical imagery is captured by a radiologic technologi
 
 Imagery can be distributed in one of the following manners:
 \begin{itemize}
-    \item particular patient is always serviced by the same radiologist
-    \item RIS system acts as an accumulator of service requests and radiologist decides which patient they should focus on now
-    \item certain types of medical examinations are are always assigned to a radiologist that is specialized in describing them
+    \item Particular patient is always serviced by the same radiologist.
+    \item RIS system acts as an accumulator of service requests and radiologist decides which patient they should focus on now.
+    \item Certain types of medical examinations are always assigned to a radiologist that is specialized in describing them.
 \end{itemize}
 
 After receiving diagnostic imagery, a radiologist uses special software called Viewer\cite{viewer} to navigate through images, make measurements by using visual tools like virtual ruler and examine what is the state of patient's body. Figure \ref{fig:osirix} shows an example of the Viewer software. In parallel to this, the doctor uses text editor and describes what he or she sees in the images. Some RIS systems are equipped with a simple text editors that allow doctors to write the report inside the system without using external editors. 
@@ -141,8 +132,6 @@ After receiving diagnostic imagery, a radiologist uses special software called V
     \caption{OsiriX is one of the most popular image viewers used by the radiologists}
     \label{fig:osirix}
 \end{figure}
-
-
 
 \section{Discussion about presented work-flow}
 \subsection{The good parts}
@@ -160,16 +149,16 @@ Usually there are no structural expectations about the resulting report. Each ra
 \subsubsection{Selective description}
 It is very frequent that radiologists include in the report only things that they consider bad for the patient. This makes the report more goal-oriented but it means that it is useless to get to know the overall state of patient body.
 \subsubsection{Copy-paste}
-Radiologists try to solve the problem of typing on their own by crating templates that contain certain pathologies listed and what they do is execution of the commonly called 'copy-paste' method to create report content. Sometimes they do not notice parts of copied text that are different from the actual state of the body, so the reports may contain observations that are false. 
+Radiologists try to solve the problem of typing on their own by creating templates that contain certain pathologies listed and what they do is execution of the commonly called 'copy-paste' method to create report content. Sometimes they do not notice parts of copied text that are different from the actual state of the body, so the reports may contain observations that are false. 
 
 \section{Other ways to create radiological reports}
-In many English-speaking countries the work-flow of a radiologist differs in the way the radiological report is generated. A radiologist may record their voice while describing the imagery vocally. The recordings are then transcribed using either speech recognition algorithms or manually by technologists. Having a good skill of typing by a radiologist is not required, only knowledge to interpret imagery is used. This approach, however, has some architectural disadvantages. More personnel is needed -- technologists, who transcribe the recorded voice \cite{speech-impact}. Also, it is difficult to make changes to what has been said. In some cases, a mistake can be made while transcribing the text \cite{speech-africa}.
+In many English-speaking countries the work-flow of a radiologist differs in the way the radiological report is generated. A radiologist may record their voice while describing the imagery vocally. The recordings are then transcribed using either speech recognition algorithms or manually by technologists. Having a good skill of typing by a radiologist is not required, only knowledge to interpret imagery is used. This approach, however, has some architectural disadvantages. More personnel are needed -- technologists, who transcribe the recorded voice \cite{speech-impact}. Also, it is difficult to make changes to what has been said. In some cases, a mistake can be made while transcribing the text \cite{speech-africa}.
 
 \section{Problem definition}
 
 After analyzing bad parts of the presented work-flow and general situation on the market -- demand for radiological services increases but the number of radiologists appears to be constant, the author decided to design and implement a system that would be used by radiologists to encode semantics of diagnostic imagery in a form that can be easily transformed to the human readable form, analyzed by algorithms. 
 
-\section{Incentives of the thesis}
+\section{Incentives for the thesis}
 A primary goal is to find a solution to the problem of not satisfactory productivity of radiologists by implementing a program used to create structured radiological reports. The system should apply sets of standardized, frequently used phrases to: describe state of patient's body captured by other medical diagnostics methods and should also provide set of tools that minimize risk of mistake and allows radiologists to create reports faster. 
 
 
@@ -181,7 +170,7 @@ The system that is proposed in this thesis focuses entirely on the part of the t
 \subsection{Contextual suggestions}
 The author has analyzed several hundreds of anonymized radiological reports and observed that a lot of time could be saved, if a radiologist would at any time select text fragments from a predefined set of possibilities that are appropriate to the current context. This approach can be similar to the way Integrated Development Environment (IDE) for statically typed languages (e.g. Visual Studio supporting C\#) are suggesting what the programmer can write based on the namespace, class, scope they currently edit.
 
-In the case of programming language the problem is defined in a more strict way as languages are formally defined using grammars \cite{csharp-spec}. Radiological reports, however, are written using  natural language, so there always exist some exceptions. Ideally, a radiologist would always use phrases that are well-defined in the standards, but the the act of scanning long list of possibilities by a radiologist could take a lot of time making it less appealing to the practitioners.
+In the case of programming languages, the problem is defined in a stricter way as languages are formally defined using grammars \cite{csharp-spec}. Radiological reports, however, are written using  natural language, so there always exist some exceptions. Ideally, a radiologist would always use phrases that are well-defined in the standards, but the the act of scanning long list of possibilities by a radiologist could take a lot of time making it less appealing to the practitioners.
 
 
 \section{Assumptions}
@@ -357,12 +346,10 @@ Having a previous report, a radiologist can create another one that will be an u
 \section{Integration with existing systems}
 As there are many ways to store radiological reports. Many radiologists work remotely for several companies that have different RIS systems. From the practical point of view, it is very difficult to integrate the system with all of the systems as it requires cooperation of both developer of the proposed system and the developers of the RIS system. 
 
-The approach taken by the author is very robust, works for all of the systems used nowadays but is not very elegant from the point of view of software engineering. 
+Current approach to integration is very robust, works for all of the systems used nowadays but is not very elegant from the point of view of software engineering. 
 After generating the report using the proposed system, it is the radiologist's duty to manually copy the resulting report to the RIS system. It is simplified in a way that the report is automatically copied to the clipboard after clicking on its content.
 
 On the other hand, the proposed system was designed in a way that, at least theoretically, makes it easy to create communication channels that can be used to integrate this system with existing RIS systems. 
-
-
 
 
 \chapter{Implementation}
@@ -555,32 +542,31 @@ Structured reporting system is used by a large network of private clinics in Ł�
 
 
 \chapter{Conclusion and ideas for the future}
-Ideas implemented in this structured reporting system are very simple from the theoretical point of view. In fact, template-based text generation existed for years and can be found in most of the programs developed by humans. However, even such simple methods, supported with well-thought user experience design can give satisfying results. 
+Ideas implemented in this structured reporting system are very simple from the theoretical point of view. In fact, template-based text generation existed for years and can be found in most of the programs developed hitherto. However, even such simple methods, supported with well-thought user experience design can give satisfying results. 
 In the future, one could think about a way to generalize the reporting ontology or implement a mechanism to create custom ontologies to provide tools that would allow to encode a hierarchy of an arbitrary depth. After obtaining a well-formed tree representing relations between causes and effects, one could experiment with applying recurrent neural networks (RNNs) to automatically generate report's text from structured data source \cite{recurrent-neural-networks}. Another direction for improvement would be a natural language processing mechanism that would learn typical co-occurrences of report items and would ask the radiologist whether an unusual report content is caused by a mistake made while creating the report or a truly unusual pathology. 
 
 
 %-----------Koniec części zasadniczej-----------
 
 \begin{thebibliography}{11}
-\bibitem{bls} https://www.bls.gov/ooh/healthcare/physicians-and-surgeons.htm, accessed 08.10.2017 13:30
-\bibitem{ai} M. Recht, N. Bryan, Artificial Intelligence: Threat or Boon to Radiologists?
-N1  - doi: 10.1016/j.jacr.2017.07.007
+\bibitem{bls} https://www.bls.gov/ooh/healthcare/physicians-and-surgeons.htm, [08.10.2017]
+\bibitem{ai} Artificial Intelligence: Threat or Boon to Radiologists?, Recht, Michael et al, Journal of the American College of Radiology, Volume 14 , Issue 11 , 1476 - 1480
 \bibitem{snomed} T. Benson, Principles of health interoperability HL7 and SNOMED.
-\bibitem{sr} D. A. Clunie, DICOM Structured Reporting
+\bibitem{sr} D. A. Clunie, DICOM Structured Reporting.
 \bibitem{hl7cda} http://www.hl7.org/Special/committees/structure/index.cfm 
 \bibitem{techonologist} https://www.asrt.org/main/careers/careers-in-radiologic-technology/who-are-radiologic-technologists
 \bibitem{workflow} https://radiologystories.com/2013/10/31/the-typical-radiologist-work-day/
 \bibitem{viewer}
 http://www.osirix-viewer.com/osirix/overview/
 \bibitem{speech-impact}
-S. Langer, Impact of Speech Recognition on Radiologist Productivity
+S. Langer, Impact of Speech Recognition on Radiologist Productivity.
 \bibitem{speech-africa} J. du Toit, R. Hattingh and R. Pitcher, The accuracy of radiology speech recognition
 reports in a multilingual South African teaching hospital.
 \bibitem{csharp-spec}
 https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/lexical-structure
 \bibitem{ich} http://emedicine.medscape.com/article/1163977-overview
 \bibitem{static-lang}
-    S. Hanenberg, S. Kleinschmager, R. Robbes, É. Tanter, A. Stefik, An empirical study on the impact of static typing on software maintainability
+    S. Hanenberg, S. Kleinschmager, R. Robbes, É. Tanter, A. Stefik, An empirical study on the impact of static typing on software maintainability.
 \bibitem {forking} https://help.github.com/articles/fork-a-repo/
 \bibitem{wiki-recist} 
 https://en.wikipedia.org/wiki/Response\_Evaluation\_Criteria\_in\_Solid\_Tumors
