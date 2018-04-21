@@ -499,7 +499,7 @@ The following scenarios were taken into account while testing:
 
 	\item database consistency tests
 	\begin{itemize}
-		\item deleting a user removes from the database all their reports, templates
+		\item deleting a user causes removal of all their reports, templates from the database 
 		\item proper handling of many-to-one relationships between examinations, organs and properties
 		\item report json representation received from front-end
 	\end{itemize}
@@ -507,7 +507,7 @@ The following scenarios were taken into account while testing:
 	\item report structure tests
 	\begin{itemize}
 		\item report tree should be correctly transformed into plain text
-		\item report tree should be correctly transformed into JSON
+		\item report tree should be correctly transformed into JSON format
 	\end{itemize}
 
 	\item report editor functionality
@@ -522,27 +522,33 @@ The following scenarios were taken into account while testing:
 
 
 \chapter{Validation of the proposed solution and examples of places where it was used}
+
+
+\section{Time savings}
+
+
+\section{User satisfaction surveys}
+Over the time of first few months after the release of the software to the  users, several surveys were conducted. The users were asked open-ended questions such as: "What is the most important feature that you would like to use everyday?", "What is your overall experience you have when you are interacting with the program?", with addition to scale questions like "How likely would you recommend the software to your colleague? 1 – very unlikely, 5 – very likely", "Using the software as my main text-editing tool makes me more productive. 1 – strongly disagree, 5 – strongly agree".
+
+It could be observed that users who initially assigned good marks to user experience, were keener to suggest further improvements. Moreover, quick reactions to the suggestions, tended to result in better marks in the subsequent surveys. On the other hand, users that were not interested in using additional tools to be more productive, were very difficult to encourage to try using the software for a longer period of time. The best results were achieved when a director of radiology observed benefits of using the program and taught their team how to use the system.
+
+
 \section{Teleradiologists}
-Structured reporting system is being used by several independent teleradiologists in Poland as their main text editing tool. They receive reporting requests with images they are asked to describe. They use several RIS systems from different vendors to store reports they generate. Most of them simply copy and paste reports from the Structured Reporting System to the RIS systems they use. As majority of the teleradiologists who have used this sofware are paid on the per-report basis and the average time to create a report using this program is on average three times smaller, most of the users observed significant increases in their salary. 
+Structured reporting system is being used by several independent teleradiologists in Poland as their main text editing tool. They receive reporting requests with images they are asked to describe. They use several RIS systems from different vendors to store reports they generate. Most of them simply copy and paste reports from the system to the RIS systems they use. As majority of the teleradiologists who have used this software are paid on the per-report basis and the average time to create a report using this program is on average three times shorter, most of the users observed significant increases in their salary. 
 
 \section{Hospital}
-Proposed system was used in hospital in Wieliszew by a group of radiologists who specialize in oncological reporting. They provided me with precious feedback and many of their suggestions were included in the system. 
-The following paragraph is an opinion about the proposed system authored by Ms. Maria Uliasz, MD–PhD, Director of Radiology at Dziekanów Leśny hospital:
-\blockquote{
-Health informatics supports almost every activity carried out when examining state of patient’s body as techniques used in modern medicine generate a lot of data that must be presented to a proper person at proper time.
-On the other hand, medical diagnostics forms a basis for all medical specializations and has been rapidly advancing for more than 100 years thanks to the interdisciplinary cooperation between professionals. Numerous breakthroughs in the fields of computer imaging and medical diagnostics dated back to the end of 20th and the beginning of 21st century allowed for dynamic development of such imaging techniques as: computed tomography scan, magnetic resonance imaging, positron-emission tomography and nuclear medicine. 
-Speed and diagnostic accuracy are crucial factors in the process of diagnosing patients. The process consists of actions like capturing data from patient’s body, creating radiological report and delivering it to the recipient – physician.
-Reporting system presented by Paweł Paczuski was designed to improve productivity and quality of reports created by radiologists. The program simplified significantly typical work-flow of radiologists and, by the use of customizable templates, allowed to save a lot of time. This piece of software is especially useful for creating reports for examinations that require a lot of attention from a radiologist, such as: ultrasonography, magnetic resonance imaging, computed tomography scan. 
-The user interface of the program is intuitive and guides user through set of activities required to create a report of a very good quality. Thanks to context-aware phrase suggestions, most of the text can be generated semi-automatically but still allowing for modifications at any time while creating a report. Another useful functionality is RECIST 1.1 calculator that automatically extracts measurement from the report’s text and allows for fast and objective assessment of patient’s reaction to the ongoing oncological therapy. The ability to compare reports makes doctors more productive while creating reports that should present how patient’s state changed between two points in time. This greatly shortened report turnaround time for cancer patients who require numerous control exams reports. In the future, I hope for having access to more software tooling that helps doctors, especially radiologists and teleradiologists, be more productive.
-The Structured Reporting System could be used as a supplement for Viewer software as a text-generation tool to create coherent, easy to read, well-formatted and typo-free text. Template based approach could be applied not only to diagnostic imaging, but I can see the existence of market for this piece of software in paramedical, educational and juridical applications.}
-
+Proposed system was used in hospital in Wieliszew by a group of radiologists who specialize in oncological reporting. They provided  precious feedback and many of their suggestions were included in the system. 
 
 \section{Large network of clinics}
 Structured reporting system is used by a large network of private clinics in Łódź. Integration with their RIS system is being developed, so the systems will cooperate with existing systems to optimize the work-flow of radiologists.
 
 
 \chapter{Conclusion and ideas for the future}
+\subsection{Realization of the thesis objectives}
+As follows from the previous chapters, the main goals of this work have been achieved.
 Ideas implemented in this structured reporting system are very simple from the theoretical point of view. In fact, template-based text generation existed for years and can be found in most of the programs developed hitherto. However, even such simple methods, supported with well-thought user experience design can give satisfying results. 
+Although the software is not designed for wide spectrum of types of users, several dozens of radiologists from different working environments have used the software as their main tool to create radiological reports. The overall satisfaction 
+\subsection{Possible further extensions}
 In the future, one could think about a way to generalize the reporting ontology or implement a mechanism to create custom ontologies to provide tools that would allow to encode a hierarchy of an arbitrary depth. After obtaining a well-formed tree representing relations between causes and effects, one could experiment with applying recurrent neural networks (RNNs) to automatically generate report's text from structured data source \cite{recurrent-neural-networks}. Another direction for improvement would be a natural language processing mechanism that would learn typical co-occurrences of report items and would ask the radiologist whether an unusual report content is caused by a mistake made while creating the report or a truly unusual pathology. 
 
 
@@ -550,9 +556,9 @@ In the future, one could think about a way to generalize the reporting ontology 
 
 \begin{thebibliography}{11}
 \bibitem{bls} https://www.bls.gov/ooh/healthcare/physicians-and-surgeons.htm, [08.10.2017]
-\bibitem{ai} Artificial Intelligence: Threat or Boon to Radiologists?, Recht, Michael et al, Journal of the American College of Radiology, Volume 14 , Issue 11 , 1476 - 1480
-\bibitem{snomed} T. Benson, Principles of health interoperability HL7 and SNOMED.
-\bibitem{sr} D. A. Clunie, DICOM Structured Reporting.
+\bibitem{ai} Artificial Intelligence: Threat or Boon to Radiologists?, Recht, Michael et al, Journal of the American College of Radiology, Volume 14 , Issue 11 , 1476 - 1480.
+\bibitem{snomed} T. Benson, Principles of health interoperability HL7 and SNOMED,  Springer-Verlag, London, 2010.
+\bibitem{sr} DICOM Structured Reporting, D. A. Clunie, 1st Edition, 2000, .
 \bibitem{hl7cda} http://www.hl7.org/Special/committees/structure/index.cfm 
 \bibitem{techonologist} https://www.asrt.org/main/careers/careers-in-radiologic-technology/who-are-radiologic-technologists
 \bibitem{workflow} https://radiologystories.com/2013/10/31/the-typical-radiologist-work-day/
@@ -566,7 +572,7 @@ reports in a multilingual South African teaching hospital.
 https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/lexical-structure
 \bibitem{ich} http://emedicine.medscape.com/article/1163977-overview
 \bibitem{static-lang}
-    S. Hanenberg, S. Kleinschmager, R. Robbes, É. Tanter, A. Stefik, An empirical study on the impact of static typing on software maintainability.
+    S. Hanenberg, et. al., An empirical study on the impact of static typing on software maintainability.
 \bibitem {forking} https://help.github.com/articles/fork-a-repo/
 \bibitem{wiki-recist} 
 https://en.wikipedia.org/wiki/Response\_Evaluation\_Criteria\_in\_Solid\_Tumors
