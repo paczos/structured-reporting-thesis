@@ -13,6 +13,8 @@
 \usepackage{palatino}
 \usepackage{array}
 \usepackage{csquotes}
+\usepackage{times}
+\usepackage{helvet}
 \usepackage{textcomp}
 \theoremstyle{definition}
 \usepackage{perpage} %the perpage package
@@ -28,6 +30,8 @@
 \title{Structured radiological reporting system}
 
 \begin{document}
+\fontfamily{phv}\selectfont
+
 
 % Zażółć gęślą jaźń.
 \begin{titlepage}
@@ -73,9 +77,11 @@ WARSAW 2018
 \hfill
 
 
-
 % \maketitle
 \end{titlepage}
+
+\fontfamily{ptm}\selectfont
+
 \thispagestyle{empty}
 \newpage
 \pagestyle{headings}
@@ -393,8 +399,8 @@ The application was designed to be accessible by radiologists from many countrie
     \caption{Language preferences list present in Firefox 54\label{fig:language-preferences}}
 \end{figure}
 
-At the back-end there are dictionaries for each supported languages that contain mapping name -> value. 
-In Razor views names are used to specify where particular piece of text should be placed. During HTML generation, the application resolves user language and refers to proper resource. Figure \ref{fig:language-dictionary} presents contents of a dictionary for ReportWizard for Polish language. Adding support for another language is simply providing values for existing names in the dictionary.
+At the back-end there are dictionaries for each supported languages that contain mapping $name \to value$. 
+In Razor views names are used to specify where particular piece of text should be placed. During HTML generation, the application resolves user language and refers to proper resource file. Figure \ref{fig:language-dictionary} presents contents of a dictionary for ReportWizard for Polish language. Adding support for another language is simply providing values for existing names in the dictionary.
 
 For SPA parts of the program the situation is slightly different as DOM elements representing most of their content are generated at the user side with the help of AngularJS. In order to have single source of truth about translations, it was decided to serialize contents of dictionaries to JSON format, and send it to the user with page template. At the front-end the translation dictionary entries are deserialized and made available to JavaScript functions. This solution makes it faster to edit and version translations as they are kept in a single place. One of drawbacks can be the performance of this solution, but it was measured that for number of dictionary entries used in this application, the decrease in performance is negligible.
  
@@ -487,9 +493,10 @@ Figure \ref{fig:continuous-deployment} presents the sequence of actions and set 
 
 \chapter{Testing and verification}
 Most of the testing and verification was performed as user-acceptance testing as the program is heavily focused on interaction with user, however, security-critical parts of the program were unit-tested.
-The following scenarios were taken into account while testing:
-\begin{itemize}
-	\item entity ownership tests
+The tests were split into several classes that are described in the following sections. 
+
+\section{Entity ownership tests}
+Any piece of software that is  used to support health care requires special measures to be taken to create a product that ensures that patients' privacy is respected and no information is shown to a third party. Entity ownership tests are used in the system to verify mechanisms that filter data, so they see only public and their patients' data. 
 	\begin{itemize}
 		\item user sees only their reports
 		\item user can edit only their reports
@@ -497,35 +504,30 @@ The following scenarios were taken into account while testing:
 		\item user can download contents of public and custom templates
 	\end{itemize}
 
-	\item database consistency tests
+\section{Database consistency tests}
 	\begin{itemize}
 		\item deleting a user causes removal of all their reports, templates from the database 
 		\item proper handling of many-to-one relationships between examinations, organs and properties
 		\item report json representation received from front-end
 	\end{itemize}
 	
-	\item report structure tests
+\section{Report structure tests}
 	\begin{itemize}
 		\item report tree should be correctly transformed into plain text
 		\item report tree should be correctly transformed into JSON format
 	\end{itemize}
 
-	\item report editor functionality
+\section{Report editor functionality}
 	\begin{itemize}
 		\item live preview refreshes on proper stimuli
 		\item connotation changes in properties should propagate up the tree to organs and examinations
 		\item customization of template phrases
 	\end{itemize}
 
-\end{itemize}
-
-
-
-\chapter{Validation of the proposed solution and examples of places where it was used}
-
+\chapter{Validation}
 
 \section{Time savings}
-
+The easiest way to validate the proposed productivity improvements is to measure the difference in report turnaround time. Prior to using the software, a group of radiologists was observed to measure the time it takes to create a report. The time was measured for each of the most popular examinations e.g, Abdomen Ultrasonography, Brain Computed Tomography, etc. for reports that were created using traditional methods. Then, the radiologist was allowed to use the software for several months, create their own templates. After some time for adjustments and getting accustomed to the proposed work-flow, the time to create a report was measured one again. The biggest time savings were observed for patients that were healthy or their symptoms were frequently observed. However, significant increase in productivity was also measured for reports containing unusual and complex observations. Overall, doctors who used the program with battle-tested templates and figured out what the strengths of the solution are, benefited from using the system by decreasing report turnaround time to a third of the time required to create a report without the use of the  proposed system. 
 
 \section{User satisfaction surveys}
 Over the time of first few months after the release of the software to the  users, several surveys were conducted. The users were asked open-ended questions such as: "What is the most important feature that you would like to use everyday?", "What is your overall experience you have when you are interacting with the program?", with addition to scale questions like "How likely would you recommend the software to your colleague? 1 – very unlikely, 5 – very likely", "Using the software as my main text-editing tool makes me more productive. 1 – strongly disagree, 5 – strongly agree".
@@ -534,22 +536,66 @@ It could be observed that users who initially assigned good marks to user experi
 
 
 \section{Teleradiologists}
-Structured reporting system is being used by several independent teleradiologists in Poland as their main text editing tool. They receive reporting requests with images they are asked to describe. They use several RIS systems from different vendors to store reports they generate. Most of them simply copy and paste reports from the system to the RIS systems they use. As majority of the teleradiologists who have used this software are paid on the per-report basis and the average time to create a report using this program is on average three times shorter, most of the users observed significant increases in their salary. 
+Structured reporting system is being used by several independent teleradiologists in Poland as their main text editing tool. They receive reporting requests with images they are asked to describe. They use several RIS systems from different vendors to store reports they generate. Most of them simply copy and paste reports from the system to the RIS systems they are obliged to use. As majority of the teleradiologists who have used this software are paid on the per-report basis and the average time to create a report using this program is on average three times shorter, most of the users observed significant increases in their salary. 
+
+The system is deployed to Microsoft Azure IIS server and is globally accessible, which makes the updates easier to install and new users do not face problems with execution policies. However, it is forbidden to enter as report meta-data any piece of information that could be used to identify the user because of privacy policies in European Union. 
 
 \section{Hospital}
-Proposed system was used in hospital in Wieliszew by a group of radiologists who specialize in oncological reporting. They provided  precious feedback and many of their suggestions were included in the system. 
+Proposed system was used in hospital in Wieliszew by a group of radiologists who specialize in oncological reporting. Reports created there were lengthy, as this specialization requires very often comparisons between many points in time to asses reaction to chemotherapy. The workflow was organized in a way that a radiologist had a group of patients they are assigned to, so it was easier to remember the treatment history of a patient. Radiologists who worked in Wieliszew provided precious feedback and many of their suggestions were included in the system. Several extensions were developed to make state comparison easier, e.g., grouping reports by title, so the radiologists can see history of a single patient easily. 
+Report templates were shared between radiologists, so each new user could start getting to know the software without the tedious step of creating their own templates. Changes to templates were propagated to all users automatically, so the team could discuss what the best phrasing of symptoms are. A lot of effort has already been made to create standardized terminology by the nosologists who worked on LOINC and SNOMED, but unfortunately these systems have no translations for Polish language, so they were not applicable to this working environment. Instead of using existing controlled vocabularies, templates were based on reporting history of the most experienced members of the team.
 
-\section{Large network of clinics}
-Structured reporting system is used by a large network of private clinics in Łódź. Integration with their RIS system is being developed, so the systems will cooperate with existing systems to optimize the work-flow of radiologists.
+\section{Network of clinics}
+Structured reporting system is used by a large network of private clinics in Łódź. The system is deployed in the local network, limiting access to not authorized users and providing better security and privacy. Integration using HL7 protocol with their RIS system is being developed, so the systems will cooperate with existing systems to optimize the work-flow of radiologists. Proposed system is used as an extension to the RIS system, focusing on the contents of the report and then exporting the report in HTML format and storing it in the RIS, which holds all administrative and billing data, e.g. SSN, detailed address.
+
+Moreover, it is planned to use several concepts from the proposed system to develop a program that could be a more generic tool to create different types of medical documents. This would require changes not to the proposed ontology, but also to all the parts of the program that contain radiology specific terminology and meta-data.
 
 
 \chapter{Conclusion and ideas for the future}
-\subsection{Realization of the thesis objectives}
-As follows from the previous chapters, the main goals of this work have been achieved.
+\section{Realization of the thesis objectives}
+The main objective of the thesis was to increase overall productivity of radiologists as the demand for their services seems to unsatisfiable. This objective was achieved by means of:
+\begin{itemize}
+	\item Proposing a modified work-flow that maximizes time spent on using field knowledge.
+	\item Designing and implementing a system that backs the modified work-flow and minimizes risk of making a mistake by providing predefined sets contextual suggestions to the doctor.
+\end{itemize}
+In order to gain satisfactory level of understanding of the problem, observations of real-world working environments were necessary. Although it is a time consuming task, it allowed for tailoring the software to the end-user needs. Moreover, it required patience from the radiologists cooperating, as many questions were asked (possibly disturbing work) and several prototypes of the solutions were presented. 
+
+Existing solutions to the problem are not very well described in the literature. Productivity of radiologists is often treated as an emergent property of a system that has knowledge base as their back-end. It has been observed that it does not have to be always true. Tools for knowledge structurization can be very complex as they are not focusing on time spent to encode knowledge but on completeness of the resulting knowledge graphs. 
+Eventually, a solution that achieves the primary goal was formed by separating the creation of knowledge base (template creation) from the usage of the knowledge (report creation). Due to limited workforce, knowledge encoding functionalities are very simple, however, it makes the software more accessible to the radiologists. The report creation part of the program was optimized to use the stored knowledge in 
+
 Ideas implemented in this structured reporting system are very simple from the theoretical point of view. In fact, template-based text generation existed for years and can be found in most of the programs developed hitherto. However, even such simple methods, supported with well-thought user experience design can give satisfying results. 
-Although the software is not designed for wide spectrum of types of users, several dozens of radiologists from different working environments have used the software as their main tool to create radiological reports. The overall satisfaction 
-\subsection{Possible further extensions}
-In the future, one could think about a way to generalize the reporting ontology or implement a mechanism to create custom ontologies to provide tools that would allow to encode a hierarchy of an arbitrary depth. After obtaining a well-formed tree representing relations between causes and effects, one could experiment with applying recurrent neural networks (RNNs) to automatically generate report's text from structured data source \cite{recurrent-neural-networks}. Another direction for improvement would be a natural language processing mechanism that would learn typical co-occurrences of report items and would ask the radiologist whether an unusual report content is caused by a mistake made while creating the report or a truly unusual pathology. 
+Although the software is not designed for wide spectrum of types of users, several dozens of radiologists from different working environments have used the software as their main tool to create radiological reports. 
+
+\subsection{Achievements}
+The system has been used by nearly a hundred radiologists in Poland. The opinions about the program are indicating that everyday users like the overall user-experience and they are more productive while using the software. 
+By creating tens of thousands reports using the program, radiologists and their employers saved a lot of time what allowed to treat more patients in the same period of time.
+
+The system was among the best 30 innovative ideas at Microsoft Imagine Cup 2015 in Poland by jury consisting of representatives from private sector. 
+
+
+\subsection{Adaptation of medical innovations in Poland}
+It has been observed that, at least in Poland, even huge productivity improvements may not be encouraging enough to introduce new type software to the health-care at big scale. This observation may be considered as counter-intuitive as the very mission of doctors is to help as many patients as possible. One can try to point out the reasons of this state of the medical market. 	
+In theory Polish public health-care system is designed to be free for all. The word 'free' in this context is actually a misuse because in order to have medical insurance in Poland one has to pay relatively high (with respect to the minimal salary) medical insurance fee. Over the years many attempts were made to impose the medical insurance fee on every person in  productive age, by forcefully including this fee in almost all types of employment agreements, making it resemble more a classic method of taxation than a voluntary service agreement. Due to this, most of the money on the health-care market is governed by the state giving it a monopoly to decide how money is spent, not bothering about competition. As almost everyone is already paying for public health-care, only 10\% of population has private health insurance. This makes it difficult for private companies to compete with an involuntary public system \cite{nfz}. However, a lot of progress has been made in the recent years, as more and more people become aware of the inefficiencies connected with the administration of public money \cite{inefficient}. As it is nearly impossible for private companies to compete with public system using prices, they want to be regarded as subjects promising better quality of the treatment, better personnel, being hassle-free in comparison to their public competitor \cite{private-better}. 
+While developing the proposed system, many representatives from both public and private sectors were met to demonstrate benefits of using the solution. Only private clinics were interested in validating presented features such as:
+\begin{itemize}
+\item Increased productivity.
+\item Better quality of reports.
+\item Controlled vocabularies.
+\item Seamless integration with existing systems.
+\end{itemize}
+In some cases, discussions about these features resulted in long-lasting partnerships.
+
+On the other hand, representatives from public health-care units were not open for discussion about possibilities of deploying the program, mentioning such difficulties as:
+\begin{itemize}
+\item IT staff does not understand how the program could be deployed in local network.
+\item Medical staff has computer skills of so poor a quality, that they would not benefit from using the program.
+\item There is no interest in increasing the quality of reports.
+\item There is no interest in deploying any other pieces of software than those that are mandatory by existing law.
+\end{itemize}
+
+
+
+\section{Possible further extensions}
+In the future, one could think about a way to generalize the reporting ontology or implement a mechanism to create custom ontologies to provide tools that would allow to encode a hierarchy of an arbitrary depth. After obtaining a well-formed tree representing relations between causes and effects, one could experiment with applying recurrent neural networks (RNNs) to automatically generate report's text from structured data source \cite{recurrent-neural-networks}. Another direction for improvements would be a natural language processing mechanism that would learn typical co-occurrences of report items and would ask the radiologist whether an unusual report content is caused by a mistake made while creating the report or by a truly unusual pathology. 
 
 
 %-----------Koniec części zasadniczej-----------
@@ -581,20 +627,14 @@ https://en.wikipedia.org/wiki/Response\_Evaluation\_Criteria\_in\_Solid\_Tumors
 \bibitem{microsoft-json-suppoert} https://blogs.msdn.microsoft.com/jocapc/2015/05/16/json-support-in-sql-server-2016/
 \bibitem{recurrent-neural-networks}
 http://www2.fiit.stuba.sk/~kvasnicka/NeuralNetworks/
-
+%\bibitem{structurad}
+%http://www.structuredreporting.com/structurad-presentation.pdf
+\bibitem{nfz} https://www.polskieradio.pl/42/4393/Artykul/1535315,Prywatna-sluzba-zdrowia-jest-w-Polsce-niezbedna-A-sektor-niepubliczny-ochrony-zdrowia-ma-szanse-na-blyskawiczny-rozwoj
+\bibitem{inefficient}
+http://www.news.com.au/lifestyle/health/inefficient-public-hospitals-wasting-1-billion-finds-grattan-institute-report/news-story/7aed1d890868572790cdc2a2a04c7868
+\bibitem{private-better}
+https://www.klinikiwpolsce.pl/aktualnosci/prywatna\_sluzba\_zdrowia\_\_czy\_to\_sie\_oplaca/
 \end{thebibliography}
-\clearpage
-\begin{otherlanguage}{polish}
-\pagestyle{empty}
-\noindent Warszawa, dnia ...............
-\vspace{5cm}
-\begin{center}
-\LARGE{Oświadczenie}
-\end{center}
-Oświadczam, że pracę inżynierską pod tytułem: ,,Structured radiological reporting system'', której promotorem jest prof. dr hab. Jan Mulawka, wykonałem samodzielnie, co poświadczam własnoręcznym podpisem.
-\vspace{2cm}
-\begin{flushright}
-...........................................
-\end{flushright}
-\end{otherlanguage}
+
+
 \end{document}
