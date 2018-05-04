@@ -201,7 +201,7 @@ After observation of actions taken by radiologists while working in environments
 \end{itemize}
 
 
-\section{Proposed reporting ontology based on ideas from DICOM SR and HL7 CDA}
+\section{Proposed reporting ontology based on ideas from DICOM SR and HL7 CDA} \label{proposed-ontology}
 In order to provide context for the radiologist at any given moment, it is proposed to split report into the following nested structures:
 \begin{enumerate}
     \item Examinations 
@@ -349,13 +349,8 @@ Templates created using the proposed system can favor radiological reports that 
 \subsection{Update of the report}
 Having a previous report, a radiologist can create another one that will be an update to the former. This procedure is often applied during chemotherapy to see whether tumors react to the treatment. A software functionality that allows the radiologist to introduce small changes to the report without rewriting it, would increase the quality of reporting as the resulting report would be still self-contained. 
 
-\section{Integration with existing systems}
-As there are many ways to store radiological reports. Many radiologists work remotely for several companies that have different RIS systems. From the practical point of view, it is very difficult to integrate the system with all of the systems as it requires cooperation of both developer of the proposed system and the developers of the RIS system. 
+ 
 
-Current approach to integration is very robust, works for all of the systems used nowadays but is not very elegant from the point of view of software engineering. 
-After generating the report using the proposed system, it is the radiologist's duty to manually copy the resulting report to the RIS system. It is simplified in a way that the report is automatically copied to the clipboard after clicking on its content.
-
-On the other hand, the proposed system was designed in a way that, at least theoretically, makes it easy to create communication channels that can be used to integrate this system with existing RIS systems. 
 
 
 \chapter{Implementation}
@@ -439,6 +434,7 @@ Report creator is the most optimized part of the application. It is the place wh
 
 \subsection{Caching at the user side}
 When radiologists are specialized in a particular field, they have subset of examinations that they describe most often. Loading examination templates separately each time they create a report, would be a waste of time. In order to solve this issue, a caching mechanism at the user side was designed. After loading, JSON data describing examination elements are saved to the storage managed by the browser called localStorage. It is a dictionary-like storage that can be used from JavaScript to save string values. When user tries to open an examination, the localStorage cache is checked whether this examination is present. If the examination is in the cache, it is immediately shown to the user. Otherwise, an HTTP request to the API is issued to download data.
+
 \subsubsection{Cache invalidation}
 As templates contain no sensitive information, they can be stored in localStorage without restrictions regarding synchronization of cache invalidation with session expiry time. However, the invalidation has to happen when user updates an examination in the Templates tab. In order to keep things simple, the whole cache gets purged anytime user navigates to the Templates tab. 
 
@@ -459,11 +455,15 @@ As the program can be used on any device, it can be interacted using mouse or us
 In some situations edits must be made to the predefined pieces of text. This was solved by putting any report text in a slightly customized text-area that is attached to AngularJS context. The text-area is aware of the length of text it contains and automatically fits its height to show the whole text to the user at any time.
 
 
-\subsection{Live preview}
-It is crucial for the user to always be aware of the impact of edits they make to the report contents. Live preview mechanism was designed specifically to solve this. Any significant change of context or report contents sends an event to the function that filters elements that were selected and generates report's textual representation. As this function can take a lot of time to execute, it cannot be left to AngularJS to decide when it should be called (infamous \$digest cycle \cite{angular-digest}) as it would have a severe impact on performance. AngularJS internally observes arrays of data that are attached to its scope to look for changes, so it was decided to call this function only in several situations, e.g. when report-context is switched, a property is checked etc. but not on every single text-change of the report. This allows the radiologists to have a close-to-live preview of resulting report while focusing on selecting predefined pieces of text.
+\subsection{Live preview}\label{live-preview}
+It is crucial for the user to always be aware of the impact of edits they make to the report contents. Live preview mechanism was designed specifically to solve this. Any significant change of context or report contents sends an event to the function that filters elements that were selected and generates report's textual representation. As this function can take a lot of time to execute, it cannot be left to AngularJS to decide when it should be called (infamous \$digest cycle \cite{angular-digest}) as it would have a severe impact on performance. AngularJS internally observes arrays of data that are attached to its scope to look for changes, so it was decided to call this function only in several situations, e.g. when report-context is switched, a property is checked etc. but not on every single text-change of the report. This allows the user to have a seemingly live preview of the resulting report while focusing on selecting predefined pieces of text.
+\subsection{Changes propagation}
+Connotation it attached to each property, however, it is also useful to see its effect on the organ. This way, it is easier to see which organs are in pathological condition, which examinations contain unhealthy organs. Status of an organ is calculated by accumulating connotation of all its properties: if one or more properties have negative connotations, the whole organ is marked as in unwanted condition. On the other hand, the organ is marked as healthy if all properties have neutral or positive connotation.
+The same holds for examinations, but states of all its organs are taken into account. Propagation of the effects of connotation is done when an organ is closed. Then the accumulated connotation is calculated at the organ and examination level.
 
 \subsection{Storing a report in the database}
 This is a very important decision from the architectural perspective. Format of the saved report can impact the performance of retrieving saved report, interoperability with other systems, etc. The format of stored report could be a topic for a very broad discussion. In order to maintain the simplicity of the whole project, it was decided to store JSON representing the report in the database. Many of the DMBS have special functionalities that are based on ideas used in NoSQL databases, especially document databases to allow for storing JSON objects, validating and querying them as if they ware part of the relational data. This makes it easy to store data that can have numerous optional fields. Unfortunately, MSSQL Server does not support storing JSON objects natively (Microsoft calls their limited way of supporting this format as \textit{built-in JSON support}\cite{microsoft-json-support}), however, it is possible to store JSON string representation in a column of type NVARCHAR and then validate it on SQL INSERT by the use of ISJSON function.
+
 \section{Report history}
 Report history is a part of the program that is used to list saved reports, search for particular ones, request pdf version of reports, sending report content via email. Users can invoke on existing reports such important actions as editing them, deleting them, comparing them. As one user may have created thousands of reports using this program, this part of the program paginates reports. There are 10 reports per page and user can increment index of the page they are currently viewing or decrement it. 
 One useful feature is grouping reports by title. This is useful when user has the convention of naming that report's title is always name of the patient (most of the current users of the program do it in this way) as they can see and count reports for any user organized in groups. 
@@ -479,6 +479,14 @@ Figure \ref{fig:compare-report} presents interface that makes if easier for the 
 		\label{fig:compare-report}
 	}
 \end{figure}
+
+\section{Integration with existing systems}
+As there are many ways to store radiological reports. Many radiologists work remotely for several companies that have different RIS systems. From the practical point of view, it is very difficult to integrate the system with all of the systems as it often requires cooperation of both developer of the proposed system and the developers of the RIS system. 
+
+Current approach to integration is very robust, works for all of the systems used nowadays but is not very elegant from the point of view of software engineering. 
+After generating the report using the proposed system, it is the radiologist's duty to manually copy the resulting report to the RIS system. It is simplified in a way that the report is automatically copied to the clipboard after clicking on its content.
+
+On the other hand, the proposed system was designed in a way that, at least theoretically, makes it easy to create communication channels that can be used to integrate this system with existing RIS systems. 
 
 \section{Deployment strategy}
 
@@ -496,33 +504,55 @@ Most of the testing and verification was performed as user-acceptance testing as
 The tests were split into several classes that are described in the following sections. 
 
 \section{Entity ownership tests}
-Any piece of software that is  used to support health care requires special measures to be taken to create a product that ensures that patients' privacy is respected and no information is shown to a third party. Entity ownership tests are used in the system to verify mechanisms that filter data, so they see only public and their patients' data. 
-	\begin{itemize}
-		\item user sees only their reports
-		\item user can edit only their reports
-		\item while creating a report, user sees public and custom templates names
-		\item user can download contents of public and custom templates
-	\end{itemize}
+Any piece of software that is  used to support health care requires special measures to be taken to create a product that ensures that patients' privacy is respected and no information is shown to a third party. Entity ownership tests are used in the system to verify mechanisms that filter data, so they see only data that is public or related to their patients. 
+
+\subsection{User sees only their reports}\label{report-owner}
+When user navigates to the Report history subpage, they should only see reports created by them. Moreover, manual manipulation of web browser address should also forbid accessing reports that belong to other users -- HTTP error 403 (forbidden) is thrown.
+\subsection{User can edit only their reports}
+Very similar to the scenario described in \ref{report-owner} but relates to the report editing functionality.
+
+\subsection{User can access contents of public and custom templates}
+When the user navigates to the ReportWizard subpage, they see a list of reports that contains both public and custom templates. They are not allowed do download other user's custom report.
+
 
 \section{Database consistency tests}
-	\begin{itemize}
-		\item deleting a user causes removal of all their reports, templates from the database 
-		\item proper handling of many-to-one relationships between examinations, organs and properties
-		\item report json representation received from front-end
-	\end{itemize}
+Database consistency tests are used to check whether all possible mechanisms provided by DBMS are applied to ensure that related data are properly treated when an entity is removed, relationships between entities are properly split into relations, etc.
+
+\subsection{Cascade removal}
+	Deleting a user causes removal of all their reports, templates from the database. This way the system allows the user to be forgotten when it is no longer used.
+	The same should hold for almost all one-to-many relations – removal of the entity that is being pointed to should result in deletion of all entities that point to is, but not the other way round!
+
+\subsection{Code First schema generation}
+	Schema of the database is automatically generated using Entity Framework Code First approach, so it requires verification whether actual schema is the same as expected. 
+	Relations are created with respect to convention of naming fields of C\# classes.
+
+\subsection{Validate JSON} \label{valid-json}
+	In general, any user input should be treated as a potentially harmful. In case of reports, they are represented using JSON format. Any inserts of reports should check whether the data has all properties of a valid JSON format.
 	
 \section{Report structure tests}
-	\begin{itemize}
-		\item report tree should be correctly transformed into plain text
-		\item report tree should be correctly transformed into JSON format
-	\end{itemize}
+	Thanks to tests in \ref{valid-json} it is known, that the shape of data is a valid JSON, but it not clear whether the JSON representation has all required fields, data types, etc.
+
+	\subsection{Validate JSON representation of the report}
+		In this step, JSON representation is validated whether all fields have proper names, values of fields have expected data type, types of nodes are nested as presented in the proposed ontology in \ref{proposed-ontology}.
+	\subsection{Report rendering}
+		The report can be easily transformed from JSON representation to HTML that can be stored in RIS systems. However, if a JSON field has content that is valid HTMl, or even worse, JavaScript script the rendered report content could be harmful to the user because it would execute unwanted code in the browser. In order to make sure, the user is not harmed while using the system, contents of all JSON fields are HTML-escaped.
 
 \section{Report editor functionality}
-	\begin{itemize}
-		\item live preview refreshes on proper stimuli
-		\item connotation changes in properties should propagate up the tree to organs and examinations
-		\item customization of template phrases
-	\end{itemize}
+	This class of tests is difficult to automate as they mostly verify user interface. All of them were performed manually as user-acceptance tests.
+	\subsection{Live preview refresh rate}
+	The reason for not refreshing report contents on each pressed key was described in \ref{live-preview}. These tests are performed to check, if the performance of the program is satisfactory – they are performed using a report that is considered to be unrealistically large and latency is observed. 
+	\subsection{Tree changes propagation}
+	connotation changes in properties should propagate up the tree to organs and examinations TODO
+	
+
+
+\section{Internationalization tests}
+Currently the program has no users that do not speak Polish, so there was no special motivation to automate testing of the internationalization functionality. It was verified manually by user-acceptance tests using web browsers with different locale-settings.
+\subsection{Language specific templates}
+User that has the web browser language preference to English should see report templates in English, report items and meta-data entries should also be rendered in English. This should work analogically for any other language supported.
+
+
+
 
 \chapter{Validation}
 
@@ -538,7 +568,7 @@ It could be observed that users who initially assigned good marks to user experi
 \section{Teleradiologists}
 Structured reporting system is being used by several independent teleradiologists in Poland as their main text editing tool. They receive reporting requests with images they are asked to describe. They use several RIS systems from different vendors to store reports they generate. Most of them simply copy and paste reports from the system to the RIS systems they are obliged to use. As majority of the teleradiologists who have used this software are paid on the per-report basis and the average time to create a report using this program is on average three times shorter, most of the users observed significant increases in their salary. 
 
-The system is deployed to Microsoft Azure IIS server and is globally accessible, which makes the updates easier to install and new users do not face problems with execution policies. However, it is forbidden to enter as report meta-data any piece of information that could be used to identify the user because of privacy policies in European Union. 
+The system is deployed to Microsoft Azure IIS server and is globally accessible, which makes the updates easier to install and new users do not face problems with execution policies. However, it is forbidden to enter as report meta-data any piece of information that could be used to identify the user because of privacy policies in the European Union. 
 
 \section{Hospital}
 Proposed system was used in hospital in Wieliszew by a group of radiologists who specialize in oncological reporting. Reports created there were lengthy, as this specialization requires very often comparisons between many points in time to asses reaction to chemotherapy. The workflow was organized in a way that a radiologist had a group of patients they are assigned to, so it was easier to remember the treatment history of a patient. Radiologists who worked in Wieliszew provided precious feedback and many of their suggestions were included in the system. Several extensions were developed to make state comparison easier, e.g., grouping reports by title, so the radiologists can see history of a single patient easily. 
@@ -557,19 +587,21 @@ The main objective of the thesis was to increase overall productivity of radiolo
 	\item Proposing a modified work-flow that maximizes time spent on using field knowledge.
 	\item Designing and implementing a system that backs the modified work-flow and minimizes risk of making a mistake by providing predefined sets contextual suggestions to the doctor.
 \end{itemize}
-In order to gain satisfactory level of understanding of the problem, observations of real-world working environments were necessary. Although it is a time consuming task, it allowed for tailoring the software to the end-user needs. Moreover, it required patience from the radiologists cooperating, as many questions were asked (possibly disturbing work) and several prototypes of the solutions were presented. 
+In order to gain satisfactory level of understanding of the problem, observations of real-world working environments were necessary. Although it is a time consuming task, it allowed for tailoring the software to the end-user needs. Moreover, it required patience from the radiologists who were cooperating, as many questions were asked and several prototypes of the solutions were presented. 
 
-Existing solutions to the problem are not very well described in the literature. Productivity of radiologists is often treated as an emergent property of a system that has knowledge base as their back-end. It has been observed that it does not have to be always true. Tools for knowledge structurization can be very complex as they are not focusing on time spent to encode knowledge but on completeness of the resulting knowledge graphs. 
-Eventually, a solution that achieves the primary goal was formed by separating the creation of knowledge base (template creation) from the usage of the knowledge (report creation). Due to limited workforce, knowledge encoding functionalities are very simple, however, it makes the software more accessible to the radiologists. The report creation part of the program was optimized to use the stored knowledge in 
+Existing solutions to the problem are not very well described in the literature. Productivity of radiologists is often treated as an emergent property of a system that has knowledge base as their back-end. It has been observed that it does not have to be always true. Tools for knowledge structurization can be very complex as they are not focusing on minimizing time spent to encode knowledge but on completeness of the resulting knowledge graphs. 
+Eventually, a solution that achieves the primary goal was formed by separating the creation of knowledge base (template creation) from the usage of the knowledge (report creation). Due to limited workforce, knowledge encoding functionalities are very limited, however, it makes the software more accessible to the radiologists as there is no steep learning curve. The report creation part of the program was optimized to use the stored knowledge in a way that only the currently important pieces of information are shown to the user.
+ 
+One similar solution has been found after the design and implementation of the proposed system – StructuRad. The program used to be deployed at Midway Hospital. It was a .NET application and its development started in 1996 \cite{structurad}. Unfortunately, only an overview presentation and two screenshots of the program can be found on the Internet as the company was  acquired by another entity. What can be inferred from the available materials are the similarities in the productivity-first approach. The radiologists used to create reports based on predefined templates by selecting check-boxes next to suitable phrases. The report was also represented as a tree that would then reorganize nodes in order to create text that is linguistically correct. American style of creating reports has some differences caused by the fact that very often reports are dictated, that allowed the software to create reports with different information granularity and not worry about details of the language grammar.
 
 Ideas implemented in this structured reporting system are very simple from the theoretical point of view. In fact, template-based text generation existed for years and can be found in most of the programs developed hitherto. However, even such simple methods, supported with well-thought user experience design can give satisfying results. 
 Although the software is not designed for wide spectrum of types of users, several dozens of radiologists from different working environments have used the software as their main tool to create radiological reports. 
 
+
 \subsection{Achievements}
 The system has been used by nearly a hundred radiologists in Poland. The opinions about the program are indicating that everyday users like the overall user-experience and they are more productive while using the software. 
-By creating tens of thousands reports using the program, radiologists and their employers saved a lot of time what allowed to treat more patients in the same period of time.
-
-The system was among the best 30 innovative ideas at Microsoft Imagine Cup 2015 in Poland by jury consisting of representatives from private sector. 
+By generating nearly 20 000 reports using the program, radiologists and their employers saved a lot of time what allowed to treat more patients in the same period of time.
+The system was among the best 30 innovative ideas at Microsoft Imagine Cup 2015 in Poland by jury consisting of representatives from business world. 
 
 
 \subsection{Adaptation of medical innovations in Poland}
@@ -595,7 +627,15 @@ On the other hand, representatives from public health-care units were not open f
 
 
 \section{Possible further extensions}
-In the future, one could think about a way to generalize the reporting ontology or implement a mechanism to create custom ontologies to provide tools that would allow to encode a hierarchy of an arbitrary depth. After obtaining a well-formed tree representing relations between causes and effects, one could experiment with applying recurrent neural networks (RNNs) to automatically generate report's text from structured data source \cite{recurrent-neural-networks}. Another direction for improvements would be a natural language processing mechanism that would learn typical co-occurrences of report items and would ask the radiologist whether an unusual report content is caused by a mistake made while creating the report or by a truly unusual pathology. 
+One should look at the proposed system as a battle-tested idea that can be used to create bigger system focused on optimizing work-flow of not only radiologists but also other medical specializations. There are several paths that can be taken to make the reports created using the system more specific and language holistic and decrease the report turnaround time. Some ideas, as well as may they sound from Computer Scientist's point of view, would require radical changes in the way doctors work. Revolution in reporting is not very likely to happen as there are many existing systems on the market that are being used continuously. Radical change to the reporting philosophy would make them irrelevant as they would not be able to store complex data of different shapes like trees or graphs in comparison to the normalized relations in relational databases that do not make it easy to store information encoded in these structures \cite{coelko-trees}. 
+
+\subsection{Complex ontologies support}
+One could generalize the ontology that is backing the system or use existing, well-designed ones like SNOMED CT. This approach would allow for better interoperability with other systems as publicly available ontologies leave no space for ambiguity and provide global identifiers that can be used to infer exact meaning from text phrases. One could try to map free text to the SNOMED CT ontology and ask the radiologist for more information in case of need for additional data to get rid of ambiguities. This, however, would make the solution not applicable to Polish market as the ontology does not support Polish language. 
+
+\subsection{Recurrent neural networks}
+In the future, one could think about a way to generalize the reporting ontology or implement a mechanism to create custom ontologies to provide tools that would allow to encode a hierarchy of an arbitrary depth. After obtaining a well-formed tree representing relations between causes and effects, one could experiment with applying recurrent neural networks (RNNs) to automatically generate report's text from structured data source \cite{recurrent-neural-networks}. This approach is already used at Google  to generate natural language phrases from structured data, e.g. user-friendly weather forecast descriptions based on numerical data \cite{recurrent-neural-networks-google}.
+\subsection{Linguistic engine}
+Another direction for improvements would be a natural language processing mechanism that would learn typical co-occurrences of report items and would ask the radiologist whether an unusual report content is caused by a mistake made while creating the report or by a truly unusual pathology. 
 
 
 %-----------Koniec części zasadniczej-----------
@@ -627,13 +667,16 @@ https://en.wikipedia.org/wiki/Response\_Evaluation\_Criteria\_in\_Solid\_Tumors
 \bibitem{microsoft-json-suppoert} https://blogs.msdn.microsoft.com/jocapc/2015/05/16/json-support-in-sql-server-2016/
 \bibitem{recurrent-neural-networks}
 http://www2.fiit.stuba.sk/~kvasnicka/NeuralNetworks/
-%\bibitem{structurad}
-%http://www.structuredreporting.com/structurad-presentation.pdf
+\bibitem{structurad}
+http://www.structuredreporting.com/structurad-presentation.pdf
 \bibitem{nfz} https://www.polskieradio.pl/42/4393/Artykul/1535315,Prywatna-sluzba-zdrowia-jest-w-Polsce-niezbedna-A-sektor-niepubliczny-ochrony-zdrowia-ma-szanse-na-blyskawiczny-rozwoj
 \bibitem{inefficient}
 http://www.news.com.au/lifestyle/health/inefficient-public-hospitals-wasting-1-billion-finds-grattan-institute-report/news-story/7aed1d890868572790cdc2a2a04c7868
 \bibitem{private-better}
 https://www.klinikiwpolsce.pl/aktualnosci/prywatna\_sluzba\_zdrowia\_\_czy\_to\_sie\_oplaca/
+\bibitem{coelko-trees}J. Celko, Joe Celko's SQL for Smarties (Third edition), Morgan Kaufmann, San Francisco 2005.
+\bibitem{recurrent-neural-networks-google} NLG at Google Research [video]
+ https://www.youtube.com/watch?v=MNvT5JekDpg
 \end{thebibliography}
 
 
