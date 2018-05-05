@@ -162,7 +162,7 @@ In many English-speaking countries the work-flow of a radiologist differs in the
 
 \section{Problem definition}
 
-After analyzing bad parts of the presented work-flow and general situation on the market -- demand for radiological services increases but the number of radiologists appears to be constant, the author decided to design and implement a system that would be used by radiologists to encode semantics of diagnostic imagery in a form that can be easily transformed to the human readable form, analyzed by algorithms. 
+After analyzing bad parts of the presented work-flow and general situation on the market -- demand for radiological services increases but the number of radiologists appears to be constant, it was decided to design and implement a system that would be used by radiologists to encode semantics of diagnostic imagery in a form that can be easily transformed to the human readable form, analyzed by algorithms. 
 
 \section{Incentives for the thesis}
 A primary goal is to find a solution to the problem of not satisfactory productivity of radiologists by implementing a program used to create structured radiological reports. The system should apply sets of standardized, frequently used phrases to: describe state of patient's body captured by other medical diagnostics methods and should also provide set of tools that minimize risk of mistake and allows radiologists to create reports faster. 
@@ -174,7 +174,7 @@ A primary goal is to find a solution to the problem of not satisfactory producti
 \subsection{Area of interest}
 The system that is proposed in this thesis focuses entirely on the part of the typical radiological work-flow in which a radiologist focuses on the textual description of what can be seen in the diagnostic imagery.
 \subsection{Contextual suggestions}
-The author has analyzed several hundreds of anonymized radiological reports and observed that a lot of time could be saved, if a radiologist would at any time select text fragments from a predefined set of possibilities that are appropriate to the current context. This approach can be similar to the way Integrated Development Environment (IDE) for statically typed languages (e.g. Visual Studio supporting C\#) are suggesting what the programmer can write based on the namespace, class, scope they currently edit.
+Several hundreds of anonymized radiological reports have been analyzed and it was observed that a lot of time could be saved, if a radiologist would at any time select text fragments from a predefined set of possibilities that are appropriate to the current context. This approach can be similar to the way Integrated Development Environment (IDE) for statically typed languages (e.g. Visual Studio supporting C\#) are suggesting what the programmer can type based on the namespace, class, scope they currently edit.
 
 In the case of programming languages, the problem is defined in a stricter way as languages are formally defined using grammars \cite{csharp-spec}. Radiological reports, however, are written using  natural language, so there always exist some exceptions. Ideally, a radiologist would always use phrases that are well-defined in the standards, but the the act of scanning long list of possibilities by a radiologist could take a lot of time making it less appealing to the practitioners.
 
@@ -457,7 +457,7 @@ In some situations edits must be made to the predefined pieces of text. This was
 
 \subsection{Live preview}\label{live-preview}
 It is crucial for the user to always be aware of the impact of edits they make to the report contents. Live preview mechanism was designed specifically to solve this. Any significant change of context or report contents sends an event to the function that filters elements that were selected and generates report's textual representation. As this function can take a lot of time to execute, it cannot be left to AngularJS to decide when it should be called (infamous \$digest cycle \cite{angular-digest}) as it would have a severe impact on performance. AngularJS internally observes arrays of data that are attached to its scope to look for changes, so it was decided to call this function only in several situations, e.g. when report-context is switched, a property is checked etc. but not on every single text-change of the report. This allows the user to have a seemingly live preview of the resulting report while focusing on selecting predefined pieces of text.
-\subsection{Changes propagation}
+\subsection{Changes propagation}\label{changes-propagation}
 Connotation it attached to each property, however, it is also useful to see its effect on the organ. This way, it is easier to see which organs are in pathological condition, which examinations contain unhealthy organs. Status of an organ is calculated by accumulating connotation of all its properties: if one or more properties have negative connotations, the whole organ is marked as in unwanted condition. On the other hand, the organ is marked as healthy if all properties have neutral or positive connotation.
 The same holds for examinations, but states of all its organs are taken into account. Propagation of the effects of connotation is done when an organ is closed. Then the accumulated connotation is calculated at the organ and examination level.
 
@@ -470,7 +470,11 @@ One useful feature is grouping reports by title. This is useful when user has th
 
 \section{Compare reports}
 This feature strongly depends on the mechanisms included in the Report creator. It copies meta-data of an existing report and creates a new report using it. Content of the old report is presented to the radiologist as a reference and it is also copied as a basis of a new report. When the doctor makes some changes to the contents of the report, only the new version is modified. This allows for fast creation of a report that has only small portion of fragments modified when compared to the previous one.
+TODO: describe changes propagation
+
 Figure \ref{fig:compare-report} presents interface that makes if easier for the radiologist to compare two reports.
+
+
 
 \begin{figure}
 	\centering
@@ -486,7 +490,12 @@ As there are many ways to store radiological reports. Many radiologists work rem
 Current approach to integration is very robust, works for all of the systems used nowadays but is not very elegant from the point of view of software engineering. 
 After generating the report using the proposed system, it is the radiologist's duty to manually copy the resulting report to the RIS system. It is simplified in a way that the report is automatically copied to the clipboard after clicking on its content.
 
-On the other hand, the proposed system was designed in a way that, at least theoretically, makes it easy to create communication channels that can be used to integrate this system with existing RIS systems. 
+On the other hand, the proposed system was designed in a way that, at least theoretically, makes it easy to create communication channels that can be used to integrate this system with existing RIS systems. This could be achieved by using Razor templating to generate messages that would be HL7-compliant. 
+
+\section{Utility modules}
+The system was designed as a solution that could be used remotely without personal help of the creator. Because of this, several modules that would make it easier to start working with the program were implemented. 
+\subsection{Technical support module}
+This part of the program is used to communicate between radiologists and people responsible for correct operation of the system. 
 
 \section{Deployment strategy}
 
@@ -542,7 +551,7 @@ Database consistency tests are used to check whether all possible mechanisms pro
 	\subsection{Live preview refresh rate}
 	The reason for not refreshing report contents on each pressed key was described in \ref{live-preview}. These tests are performed to check, if the performance of the program is satisfactory – they are performed using a report that is considered to be unrealistically large and latency is observed. 
 	\subsection{Tree changes propagation}
-	connotation changes in properties should propagate up the tree to organs and examinations TODO
+	Verify whether change of connotation of a property propagates into the organ and examination.
 	
 
 
@@ -589,19 +598,23 @@ The main objective of the thesis was to increase overall productivity of radiolo
 \end{itemize}
 In order to gain satisfactory level of understanding of the problem, observations of real-world working environments were necessary. Although it is a time consuming task, it allowed for tailoring the software to the end-user needs. Moreover, it required patience from the radiologists who were cooperating, as many questions were asked and several prototypes of the solutions were presented. 
 
+\subsection{Knowledge engineering  vs. template approach}
 Existing solutions to the problem are not very well described in the literature. Productivity of radiologists is often treated as an emergent property of a system that has knowledge base as their back-end. It has been observed that it does not have to be always true. Tools for knowledge structurization can be very complex as they are not focusing on minimizing time spent to encode knowledge but on completeness of the resulting knowledge graphs. 
-Eventually, a solution that achieves the primary goal was formed by separating the creation of knowledge base (template creation) from the usage of the knowledge (report creation). Due to limited workforce, knowledge encoding functionalities are very limited, however, it makes the software more accessible to the radiologists as there is no steep learning curve. The report creation part of the program was optimized to use the stored knowledge in a way that only the currently important pieces of information are shown to the user.
- 
-One similar solution has been found after the design and implementation of the proposed system – StructuRad. The program used to be deployed at Midway Hospital. It was a .NET application and its development started in 1996 \cite{structurad}. Unfortunately, only an overview presentation and two screenshots of the program can be found on the Internet as the company was  acquired by another entity. What can be inferred from the available materials are the similarities in the productivity-first approach. The radiologists used to create reports based on predefined templates by selecting check-boxes next to suitable phrases. The report was also represented as a tree that would then reorganize nodes in order to create text that is linguistically correct. American style of creating reports has some differences caused by the fact that very often reports are dictated, that allowed the software to create reports with different information granularity and not worry about details of the language grammar.
+Eventually, a solution that achieves the primary goal was formed by separating the creation of knowledge base (template creation) from the usage of the knowledge (report creation). Due to limited workforce, knowledge engineering functionalities are very limited, however, it makes the software more accessible to the radiologists as there is no steep learning curve. The report creation part of the program was optimized to use the stored knowledge in a way that only the currently important pieces of information are shown to the user.
+\subsection{StructuRad – similar idea} 
+One similar solution has been found after the design and implementation of the proposed system – StructuRad. The program used to operate in Midway Hospital. It was a .NET application and its development started in 1996 \cite{structurad}. Unfortunately, only an overview presentation and two screenshots of the program can be found on the Internet, as the company was  acquired by another entity. What can be inferred from the available materials are the similarities in the productivity-first approach. The radiologists used to create reports based on predefined templates by selecting check-boxes next to suitable phrases. The report was also represented as a tree that would then reorganize nodes in order to create text that is linguistically correct. American style of creating reports has some differences caused by the fact that very often reports are dictated, that allowed the software to create reports with different information granularity and not worry about details of the language grammar.
 
 Ideas implemented in this structured reporting system are very simple from the theoretical point of view. In fact, template-based text generation existed for years and can be found in most of the programs developed hitherto. However, even such simple methods, supported with well-thought user experience design can give satisfying results. 
 Although the software is not designed for wide spectrum of types of users, several dozens of radiologists from different working environments have used the software as their main tool to create radiological reports. 
+
+\subsection{Balace between structure and customizability}
+In a perfectly structured world, any phrase used in the report could be explained using some existing ontology, what would allow for automated reasoning about the causes of pathology. Context of a phrase would allow for additional questions that would help including more detailed information, e.g. after stating "pain in the leg", the system could ask "Which leg, left or right?". In the extreme case, one could translate all relations and entities in the ontology, allowing for automatic translation of the whole report content without any external linguistic help. However, reports are created using natural languages that have their own nuances, irregularities that make it difficult to analyze custom phrases automatically. One of the biggest challenges is to find a point on the structure--customizability axis that allows for automated information extraction and allows for level of customization that makes the users of the system satisfied. In the case of this structured reporting system, more attention was paid to the customization of report content, as radiology was a new field to the designer of the system and even the end-users were not aware of the state of the art in this field. Rich customization functionality allowed for observation of commonly occurring patterns. This knowledge could be used to structurize the parts that are occurring frequently thus making them standardized and increasing the overall productivity of the user.
 
 
 \subsection{Achievements}
 The system has been used by nearly a hundred radiologists in Poland. The opinions about the program are indicating that everyday users like the overall user-experience and they are more productive while using the software. 
 By generating nearly 20 000 reports using the program, radiologists and their employers saved a lot of time what allowed to treat more patients in the same period of time.
-The system was among the best 30 innovative ideas at Microsoft Imagine Cup 2015 in Poland by jury consisting of representatives from business world. 
+The system was among the best 30 innovative ideas at Microsoft Imagine Cup 2015 in Poland by jury consisting of representatives from the world of business. 
 
 
 \subsection{Adaptation of medical innovations in Poland}
