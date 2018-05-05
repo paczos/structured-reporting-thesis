@@ -224,20 +224,20 @@ Figure \ref{fig:report-semantic} shows how report structures are related by sema
 \end{figure}
 \footnotetext{For simplicity, only names of nodes are presented (associated meta-data were omitted)}
 
-By using this ontology, a radiologist can create a report that is similar in structure to a tree (as it is presented in figure \ref{fig:report-tree}). At any given moment, the doctor modifies the tree at a single level, which allows for suggesting what are the items that can be included. The idea was taken from statically typed languages which, thanks to their strictness, allow for coding with smaller number of mistakes at the lexical level \cite{static-lang}.
+By using this ontology, a radiologist can create a report that is similar in structure to a tree (as it is presented in figure \ref{fig:report-tree}). At any given moment, the doctor modifies the tree at a single level, which allows for suggesting what are the items that can be included. The idea was taken from statically typed languages which, thanks to their strictness, allow for coding with smaller number of mistakes at the lexical level \cite{static-lang}. This ontology was derived after analysis of large portion of real-world radiological report. It mirrors the way a radiologist thinks when creating a report. Because of this, it should be easier to understand the idea behind the proposed system by practitioners.
 
 \section{Work-flow of a radiologist who uses the proposed system}
 In figure \ref{fig:report-workflow} a typical work-flow of a radiologist is represented in the form of a flowchart. 
 \begin{figure}
 	\centering
-	\includegraphics[width=\linewidth]{report-workflow.pdf}
+	\includegraphics[width=0.9\linewidth]{report-workflow.pdf}
 	\caption{Work-flow of a radiologist who uses the proposed system to create contents of a radiological report
 		\label{fig:report-workflow}
 	}
 \end{figure}
 
 \subsection{Connotation}
-Besides having text, each property can have a semantical attribute called connotation. Connotation is used to highlight the impact of this property on the result of the organ and examination. This attribute can have one of three values: positive, negative and neutral. Figure \ref{fig:property-connotation} presents connotation selection box that is present next to the property text editor.
+Besides having text, each property can have a semantical attribute called connotation. Connotation is used to highlight the impact of this property on the result of the organ and examination. This attribute can have one of three values: positive, negative and neutral. Figure \ref{fig:property-connotation} presents connotation selection box that is present next to the property text editor. 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\linewidth]{property-connotation}
@@ -305,7 +305,7 @@ BMI is only one formula out of hundreds of techniques used by doctors. It is not
 
 \subsubsection{RECIST 1.1}
 During the design of the proposed systems several radiologists who specialize in oncological medicine reporting suggested that a method called  Response Evaluation Criteria In Solid Tumors (RECIST 1.1) is of special importance to them. This method is used to assess whether tumors in cancer patients improve, stay the same, or worsen during treatment \cite{wiki-recist}. As there are hundreds of similar methods used by radiologists, it would be impossible to implement them in the proposed system all at once, so it was decided to use RECIST 1.1 as a proof of the concept of calculators that can be used in structured reports.
-A radiologist, while creating a report, can measure size of lesions and write down the results of measurement in the report. Proposed program should recognize that the numerical value represents a measurement (as shown in figure \ref{fig:recist-parsing}) and should suggest whether it should be included in the calculation of RECIST 1.1 or not (as shown in figure \ref{fig:recist-config}).
+A radiologist, while creating a report, can measure size of lesions and write down the results of measurement in the report. Proposed program should recognize that the numerical value represents a measurement (as shown in figure \ref{fig:recist-parsing}) and should suggest whether it should be included in the calculation of RECIST 1.1 or not (as shown in figure \ref{fig:recist-config}). Measurements are parsed with respect to a convention: a numerical value must be followed by a unit (in case of RECIST 1.1 the unit is millimeter -- mm), a previous measurement is surrounded with square brackets: '[' and ']'.
 
 \begin{figure}
 	\centering
@@ -326,9 +326,9 @@ A radiologist, while creating a report, can measure size of lesions and write do
 
 \section{Reporting quality improvements}
 \subsection{Standardized nomenclature}
-There exist several attempts to standardize the language doctors use to describe precisely medical imagery. Templates created for the proposed structured reporting system can be created with the help of terminologists who specialize in systematized nomenclatures like SNOMED and LOINC to create reports what can lead to improved reporting quality as a radiologist does not have to explore huge volumes of precise textual definitions of terms used. 
+There exist several attempts to standardize the language doctors use to describe precisely medical imagery. Templates created for the proposed structured reporting system can be created with the help of terminologists who specialize in systematized nomenclatures contained in SNOMED and LOINC to create reports what can lead to improved reporting quality as a radiologist does not have to explore huge volumes of precise textual definitions of terms used. 
 \subsection{No repetitions}
-Templates can be interpreted as TODO-lists containing tasks which have to be done while describing medical imagery, so a radiologist can be sure that nothing was omitted or no item appears twice in the report as a result of a mistake.
+Templates can be interpreted as TODO-lists containing tasks which have to be done while describing medical imagery, so a radiologist can be sure that nothing was omitted or no item appears twice in the report as a result of a mistake. Each organ that has been described is marked as complete, so the user can describe them in order.
 \subsection{Reports have ordered list of elements}
 Reports created using the proposed system can be represented as trees, nested lists of items, so it is easy to spot relationships between properties and organs and also differences between two reports describing one patient.
 \subsection{Highlighting the most important pieces of information}
@@ -470,7 +470,7 @@ One useful feature is grouping reports by title. This is useful when user has th
 
 \section{Compare reports}
 This feature strongly depends on the mechanisms included in the Report creator. It copies meta-data of an existing report and creates a new report using it. Content of the old report is presented to the radiologist as a reference and it is also copied as a basis of a new report. When the doctor makes some changes to the contents of the report, only the new version is modified. This allows for fast creation of a report that has only small portion of fragments modified when compared to the previous one.
-TODO: describe changes propagation
+Changes propagation functionality described in \ref{changes-propagation} is particularly useful when comparing two reports, as user can easily spot  differences between the reports and include their observations as conclusions.
 
 Figure \ref{fig:compare-report} presents interface that makes if easier for the radiologist to compare two reports.
 
@@ -492,13 +492,34 @@ After generating the report using the proposed system, it is the radiologist's d
 
 On the other hand, the proposed system was designed in a way that, at least theoretically, makes it easy to create communication channels that can be used to integrate this system with existing RIS systems. This could be achieved by using Razor templating to generate messages that would be HL7-compliant. 
 
+\section{Responsive design}
+The system can be used on any operating system as its execution environment is provided by the web browser. For well-crafted templates, almost all of report contents can be generated by clicking check-boxes. If the interaction model is this simple, it can be convenient to generate the report on touch devices like tablets or smartphones. However, this adds the complexity to the user interface design, as human fingers are not as accurate as mouse pointer. This problem was solved by designing responsive user interface for the program with help of Bootstrap 3 library. User interface is treated as a grid that has cells. Cells have size that depends on the size of the viewport. This allows to define how the user interface changes (reflow functionality) as the size of the devices gets smaller. There are several modifications applied to the user interface when the program is executed on small and medium-sized devices:
+\begin{itemize}
+\item Check-boxes are bigger, so it is easier to tap them using finger.
+\item Tables have smaller number of columns in order to fit the screen. 
+\item Navigation bar at the top of the page is replaced with a button that expands all menu items on a click. 
+\item Modal windows are occupying the whole screen, so more content can be shown to the user.
+\item Lists that usually are represented as a grid, are enjambed vertically one item per line, so it is easier to tap them using finger.
+\item Font sizes are modified with respect to the Bootstrap's typography recommendations. \cite{bootstrap-typography}.
+\end{itemize} 
 \section{Utility modules}
-The system was designed as a solution that could be used remotely without personal help of the creator. Because of this, several modules that would make it easier to start working with the program were implemented. 
+The system was designed as a solution that could be used remotely without personal help of the creator. Because of this, several modules that would make it easier to start working with the program were implemented. Modules are implemented as separate controllers and the separation is made visible to the user using distinct routes in the web address.
 \subsection{Technical support module}
-This part of the program is used to communicate between radiologists and people responsible for correct operation of the system. 
+This part of the program is used to communicate between radiologists and people responsible for correct operation of the system. IT staff can be informed about any problems that occured while using the system. Each issue is represented as a separate topic. In a topic the user and IT staff can exchange messages asynchronously. Topics are split into categories, e.g. mobile devices issues, reporting problems, template problems, linguistic suggestions and also have state, e.g. new, processing, closed. State is a way to signal whether the problem was fixed or not. User that created the topic is notified via email when any change to is made by the staff.
+\subsection{Announcements}
+When a new feature is implemented, active users can be notified by an announcement that is visible to them after they log in. 
+\subsection{Administrator dashboard}
+Administrator dashboard aggregates most useful actions that can be executed in order to get to know how the system is being used. There are subpages used to check what is reporting rate of a user, how many reports have been created, what are the weekly most active users. 
+Moreover, administrators can see all private templates. This allows to copy best parts of user-defined templates and paste them into the public template repository. This way all users can benefit from knowledge of an individual radiologist.
+\subsection{User account}
+This subpage is used to change user password, change email, private data, register a new user, log in to the program. 
+\subsection{Interactive guide}
+When the system is used for the first time on a machine, the user is asked to complete a tutorial how to use the system. The tutorial is in a form of an interactive guide that is embedded in the report creator module. It consists of steps that are describing functionality of the program and may require some interaction, e.g. clicking on a button. Section of the program that is currently examined is highlighted, so the user can focus on it. Interactive guide can be closed at any time, so it does not annoy the user.
+
+
 
 \section{Deployment strategy}
-
+Deployment of the program is performed with the use of Microsoft Azure's App Services and is initiated after a commit is made.  Firstly the program is built, when there are no compilation errors, it is packaged and deployed to the IIS server. This allows for quick and hassle-free propagation of changes made to the codebase. An error at any stage of the pipeline is signaled either by the Visual Studio IDE, or Microsoft Azure via email.
 Figure \ref{fig:continuous-deployment} presents the sequence of actions and set of subjects that are required to deploy the application.
 \begin{figure}
 	\centering
@@ -561,8 +582,6 @@ Currently the program has no users that do not speak Polish, so there was no spe
 User that has the web browser language preference to English should see report templates in English, report items and meta-data entries should also be rendered in English. This should work analogically for any other language supported.
 
 
-
-
 \chapter{Validation}
 
 \section{Time savings}
@@ -596,7 +615,7 @@ The main objective of the thesis was to increase overall productivity of radiolo
 	\item Proposing a modified work-flow that maximizes time spent on using field knowledge.
 	\item Designing and implementing a system that backs the modified work-flow and minimizes risk of making a mistake by providing predefined sets contextual suggestions to the doctor.
 \end{itemize}
-In order to gain satisfactory level of understanding of the problem, observations of real-world working environments were necessary. Although it is a time consuming task, it allowed for tailoring the software to the end-user needs. Moreover, it required patience from the radiologists who were cooperating, as many questions were asked and several prototypes of the solutions were presented. 
+In order to gain satisfactory level of understanding of the problem, observations of real-world working environments were necessary. Although it is a time consuming task, it allowed for tailoring the software to the end-user needs. Moreover, it required patience from the radiologists who were cooperating, as many questions were asked and several prototypes of the solutions were presented. The final solution to the problem was not implemented on the first try -- several prototypes were presented and user feedback was collected. The evolutionary approach to software development allowed for better understanding the domain of the problem and observe how users learn to use new pieces of software.
 
 \subsection{Knowledge engineering  vs. template approach}
 Existing solutions to the problem are not very well described in the literature. Productivity of radiologists is often treated as an emergent property of a system that has knowledge base as their back-end. It has been observed that it does not have to be always true. Tools for knowledge structurization can be very complex as they are not focusing on minimizing time spent to encode knowledge but on completeness of the resulting knowledge graphs. 
@@ -604,7 +623,8 @@ Eventually, a solution that achieves the primary goal was formed by separating t
 \subsection{StructuRad – similar idea} 
 One similar solution has been found after the design and implementation of the proposed system – StructuRad. The program used to operate in Midway Hospital. It was a .NET application and its development started in 1996 \cite{structurad}. Unfortunately, only an overview presentation and two screenshots of the program can be found on the Internet, as the company was  acquired by another entity. What can be inferred from the available materials are the similarities in the productivity-first approach. The radiologists used to create reports based on predefined templates by selecting check-boxes next to suitable phrases. The report was also represented as a tree that would then reorganize nodes in order to create text that is linguistically correct. American style of creating reports has some differences caused by the fact that very often reports are dictated, that allowed the software to create reports with different information granularity and not worry about details of the language grammar.
 
-Ideas implemented in this structured reporting system are very simple from the theoretical point of view. In fact, template-based text generation existed for years and can be found in most of the programs developed hitherto. However, even such simple methods, supported with well-thought user experience design can give satisfying results. 
+\subsection{Simplicity of the template approach}
+Ideas implemented in this structured reporting system are very simple from the theoretical point of view. In fact, template-based text generation existed for years and can be found in most of the programs developed hitherto. Template approach gives users the predictability of the resulting text, what increases their confidence while using the program. However, even such simple methods, supported with well-thought user experience design can give satisfying results. This is another example of one of the principles governing our world that the complexity can emerge from very simple rules \cite{s-wolfram}. 
 Although the software is not designed for wide spectrum of types of users, several dozens of radiologists from different working environments have used the software as their main tool to create radiological reports. 
 
 \subsection{Balace between structure and customizability}
@@ -640,15 +660,15 @@ On the other hand, representatives from public health-care units were not open f
 
 
 \section{Possible further extensions}
-One should look at the proposed system as a battle-tested idea that can be used to create bigger system focused on optimizing work-flow of not only radiologists but also other medical specializations. There are several paths that can be taken to make the reports created using the system more specific and language holistic and decrease the report turnaround time. Some ideas, as well as may they sound from Computer Scientist's point of view, would require radical changes in the way doctors work. Revolution in reporting is not very likely to happen as there are many existing systems on the market that are being used continuously. Radical change to the reporting philosophy would make them irrelevant as they would not be able to store complex data of different shapes like trees or graphs in comparison to the normalized relations in relational databases that do not make it easy to store information encoded in these structures \cite{coelko-trees}. 
+One should look at the proposed system as a battle-tested idea that can be used to create bigger system focused on optimizing work-flow of not only radiologists but also other medical specializations. There are several paths that can be taken to make the reports created using the system more specific and language holistic and decrease the report turnaround time. Some ideas, as well as may they sound from Computer Scientist's point of view, would require radical changes in the way doctors work. Revolution in reporting is not very likely to happen as there are many existing systems on the market that are being used continuously. Radical change to the reporting philosophy would make them irrelevant as they would not be able to store complex data of different shapes like trees or graphs in comparison to the relations native to relational databases that do not make it easy to store information encoded in these structures \cite{coelko-trees}. 
 
 \subsection{Complex ontologies support}
 One could generalize the ontology that is backing the system or use existing, well-designed ones like SNOMED CT. This approach would allow for better interoperability with other systems as publicly available ontologies leave no space for ambiguity and provide global identifiers that can be used to infer exact meaning from text phrases. One could try to map free text to the SNOMED CT ontology and ask the radiologist for more information in case of need for additional data to get rid of ambiguities. This, however, would make the solution not applicable to Polish market as the ontology does not support Polish language. 
 
-\subsection{Recurrent neural networks}
-In the future, one could think about a way to generalize the reporting ontology or implement a mechanism to create custom ontologies to provide tools that would allow to encode a hierarchy of an arbitrary depth. After obtaining a well-formed tree representing relations between causes and effects, one could experiment with applying recurrent neural networks (RNNs) to automatically generate report's text from structured data source \cite{recurrent-neural-networks}. This approach is already used at Google  to generate natural language phrases from structured data, e.g. user-friendly weather forecast descriptions based on numerical data \cite{recurrent-neural-networks-google}.
+\subsection{Recurrent neural networks and natural language generation methods}
+In the future, one could think about a way to generalize the reporting ontology or implement a mechanism to create custom ontologies to provide tools that would allow to encode a hierarchy of an arbitrary depth. After obtaining a well-formed tree representing relations between causes and effects, one could experiment with applying recurrent neural networks (RNNs) to automatically generate report's text from structured data source \cite{recurrent-neural-networks}. This approach is already used at Google  to generate natural language phrases from structured data, e.g. user-friendly weather forecast descriptions based on numerical data \cite{recurrent-neural-networks-google}. This approach is getting more and more popular as computer systems capture enormous amounts of data that must be then presented to the human user in a way that can be easily understood.
 \subsection{Linguistic engine}
-Another direction for improvements would be a natural language processing mechanism that would learn typical co-occurrences of report items and would ask the radiologist whether an unusual report content is caused by a mistake made while creating the report or by a truly unusual pathology. 
+Another direction for improvements would be a natural language processing mechanism that would learn typical co-occurrences of report items and would ask the radiologist whether an unusual report content is caused by a mistake made while creating the report or by a truly unusual pathology. As there is no natural language agnostic solution, a separate linguistic engine would have to be used for each supported language. 
 
 
 %-----------Koniec części zasadniczej-----------
@@ -678,6 +698,7 @@ https://en.wikipedia.org/wiki/Response\_Evaluation\_Criteria\_in\_Solid\_Tumors
 \bibitem{risk-management} https://www.ncbi.nlm.nih.gov/pubmed/3497558
 \bibitem{angular-digest} https://www.sitepoint.com/understanding-angulars-apply-digest/
 \bibitem{microsoft-json-suppoert} https://blogs.msdn.microsoft.com/jocapc/2015/05/16/json-support-in-sql-server-2016/
+\bibitem{bootstrap-typography} https://getbootstrap.com/docs/3.3/css/\#type
 \bibitem{recurrent-neural-networks}
 http://www2.fiit.stuba.sk/~kvasnicka/NeuralNetworks/
 \bibitem{structurad}
@@ -685,6 +706,8 @@ http://www.structuredreporting.com/structurad-presentation.pdf
 \bibitem{nfz} https://www.polskieradio.pl/42/4393/Artykul/1535315,Prywatna-sluzba-zdrowia-jest-w-Polsce-niezbedna-A-sektor-niepubliczny-ochrony-zdrowia-ma-szanse-na-blyskawiczny-rozwoj
 \bibitem{inefficient}
 http://www.news.com.au/lifestyle/health/inefficient-public-hospitals-wasting-1-billion-finds-grattan-institute-report/news-story/7aed1d890868572790cdc2a2a04c7868
+\bibitem{s-wolfram}
+S. Wolfram, A New Kind of Science, Wolfram Media, 2002.
 \bibitem{private-better}
 https://www.klinikiwpolsce.pl/aktualnosci/prywatna\_sluzba\_zdrowia\_\_czy\_to\_sie\_oplaca/
 \bibitem{coelko-trees}J. Celko, Joe Celko's SQL for Smarties (Third edition), Morgan Kaufmann, San Francisco 2005.
