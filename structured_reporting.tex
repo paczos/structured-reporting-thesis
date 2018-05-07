@@ -23,6 +23,7 @@
 \newcommand*{\norm}[1]{\left\Vert{#1}\right\Vert}
 \newcommand*{\abs}[1]{\left\vert{#1}\right\vert}
 \newcommand*{\om}{\omega}
+\addto{\captionsbritish}{\renewcommand{\abstractname}{Summary}}
 
 
 
@@ -46,7 +47,7 @@ Institute of Computer Science
 
 \includegraphics{bachelor}
 \begin{center}
-	In the field of study Computer Science  \\
+	In the field of study Computer Science \\
 
 	and specialization Computer Systems and Networks \\
 \end{center}
@@ -90,14 +91,17 @@ WARSAW 2018
 \hyphenation{Syl-ves-ter-a}
 \begin{otherlanguage}{british}
 \begin{abstract}
-Structured radiological reporting system.
-
 Design and implementation of a system that can be used by radiologists to create structured radiological reports. The system uses sets of standardized, frequently used phrases to: describe state of patient's body captured by other medical diagnostics methods, provide set of tools that minimize risk of mistake and increase productivity. 
+\\
+Keywords: structured reporting, radiology, health informatics, ontologies, interoperability, SNOMED CT, HL7.
 \end{abstract}
 \end{otherlanguage}
 \begin{otherlanguage}{polish}
 \begin{abstract}
-streszczenie po polsku
+	Projekt oraz implementacja systemu wspomagającego tworzenie strukturalnych opisów radiologicznych. Oprogramowanie ma celu zwiększenie produktywności lekarza i zmniejszenie ryzyka popełnienia błędu poprzez sugerowanie zbiorów standardowych, najczęściej występujących fraz opisującyh dokładnie stan pacjenta.
+\\
+Słowa kluczowe: strukturalne opisy radiologiczne, radiologia, informatyka w medycynie, ontologie, interoperacyjność, SNOMED CT, HL7.
+
 \end{abstract}
 \end{otherlanguage}
 
@@ -115,7 +119,7 @@ streszczenie po polsku
 \section{The need for medical diagnostics}
 Everyday millions of physicians treat injuries and illnesses of different kids. Before a doctor can plan an individual treatment for a patient, they have to diagnose which organs are in pathological states \cite{bls}. This sometimes can be achieved by simply glancing at the body, however, there are many illnesses that require specialized set of tools and methods in order to observe which parts of patient's body are in an unwanted state. Through years of research, many different techniques were established and a separate specialization emerged -- radiology. Radiologists focus mainly on analyzing and interpreting diagnostic imagery and as a result of their work they create a document called radiological report which contains description of what can be observed in the image of patient body. Reports may contain description of state of particular organs, measurements (e.g. radius, volume, concentration of certain substances in the blood), comparison of medical condition of a patient observed at different times and description of overall state of the patient. \\
 \section{Existing solutions}
-Currently, the research is focused on finding new ways of diagnosing diseases by  the use of more advanced equipment or brilliant algorithms that try to automate image analysis \cite{ai}. \\
+Currently, the research is focused on finding new ways of diagnosing diseases by the use of more advanced equipment or brilliant algorithms that try to automate image analysis \cite{ai}. \\
 On the other hand, there exist initiatives that try to improve quality of the radiological reports themselves. There are groups consisting of both computer scientists and physicians that try to standardize reports, prepare checklists that require doctors to describe patients' state in particular order and create a set of phrases that will be understood in the same way by all physicians \cite{snomed}. A lot of work has been done to provide both common medical nomenclature for medical conditions and theoretical framework to describe relations between causes and effects of patients' condition. As there are more and more methods used to diagnose, the amount of information captured increases, so the reporting methodology has to be kept up to date with the state of art. This is why a very specific field -- Structural Reporting (SR) emerged. The basic idea is to provide a way to create radiological reports that conveys as much semantics as possible in a way that is easy to understand. One can find great ideas implemented in such standards as SNOMED SR \cite{sr} and also HL7 version 3 Clinical Document Architecture (HL7 V3 CDA). By using these standards, one can encode relations between organs and diseases (causality) in a very regular format. After encoding structure in the report, one can use algorithms to e.g. highlight what changed since last visit, look for diseases that were diagnosed in the specified time range etc. This is very difficult to achieve when reports are stored in plain text. Structural reporting focuses mainly on encoding meaning -- the visual representation of resulting reports is a separate matter that is treated as an implementation detail \cite{sr}.
 In spite of the existence of these standards, it is almost impossible to find software that implements structural reporting techniques. One of the most important reasons is the fact that in order to understand benefits of SR, one has to acquire certain level of understanding of the typical work-flow of a radiologist. As there is huge demand for software that is much easier to understand (e.g. RIS and HIS software), most of the effort is made to implement simpler concepts.
 
@@ -144,7 +148,7 @@ After receiving diagnostic imagery, a radiologist uses special software called V
 \subsubsection{Viewer software provides expected functionality}
 Viewer software has a very stable position on the market and is perfectly tailored to the needs of a radiologist. It often uses advanced techniques of computer graphics to present patient's body as accurately as possible.
 \subsubsection{PACS systems provide centralized place for storing images}
-They implement functionalities that allow for archiving medical imagery. Lifetime of medical images is controlled by the government and these systems must take this into account. PACS also make it easy to distribute images not only withing local networks but also to any doctor who has the remote access granted.  
+They implement functionalities that allow for archiving medical imagery. Lifetime of medical images is controlled by the government and these systems must take this into account. PACS also make it easy to distribute images not only withing local networks but also to any doctor who has the remote access granted.
 \subsubsection{RIS systems make it easy to exchange data between physicians}
 There is no need need for the radiologist to deliver the radiological report to the other physician personally as it is done automatically. Also, RIS systems provide good means of presenting medical records from different medical specializations allowing for interdisciplinary diagnostics. 
 \subsection{The bad parts}
@@ -176,7 +180,7 @@ The system that is proposed in this thesis focuses entirely on the part of the t
 \subsection{Contextual suggestions}
 Several hundreds of anonymized radiological reports have been analyzed and it was observed that a lot of time could be saved, if a radiologist would at any time select text fragments from a predefined set of possibilities that are appropriate to the current context. This approach can be similar to the way Integrated Development Environment (IDE) for statically typed languages (e.g. Visual Studio supporting C\#) are suggesting what the programmer can type based on the namespace, class, scope they currently edit.
 
-In the case of programming languages, the problem is defined in a stricter way as languages are formally defined using grammars \cite{csharp-spec}. Radiological reports, however, are written using  natural language, so there always exist some exceptions. Ideally, a radiologist would always use phrases that are well-defined in the standards, but the the act of scanning long list of possibilities by a radiologist could take a lot of time making it less appealing to the practitioners.
+In the case of programming languages, the problem is defined in a stricter way as languages are formally defined using grammars \cite{csharp-spec}. Radiological reports, however, are written using natural language, so there always exist some exceptions. Ideally, a radiologist would always use phrases that are well-defined in the standards, but the the act of scanning long list of possibilities by a radiologist could take a lot of time making it less appealing to the practitioners.
 
 
 \section{Assumptions}
@@ -219,7 +223,7 @@ Figure \ref{fig:report-semantic} shows how report structures are related by sema
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{report-tree.pdf}
-    \caption{Typical structure of a radiological report created  using the proposed system\protect\footnotemark} 
+    \caption{Typical structure of a radiological report created using the proposed system\protect\footnotemark} 
     \label{fig:report-tree}
 \end{figure}
 \footnotetext{For simplicity, only names of nodes are presented (associated meta-data were omitted)}
@@ -304,7 +308,7 @@ After calculating this index, a doctor has to look through tables to check wheth
 BMI is only one formula out of hundreds of techniques used by doctors. It is not integrated, however, into the proposed system as it was decided that it is not used frequently by end-users.
 
 \subsubsection{RECIST 1.1}
-During the design of the proposed systems several radiologists who specialize in oncological medicine reporting suggested that a method called  Response Evaluation Criteria In Solid Tumors (RECIST 1.1) is of special importance to them. This method is used to assess whether tumors in cancer patients improve, stay the same, or worsen during treatment \cite{wiki-recist}. As there are hundreds of similar methods used by radiologists, it would be impossible to implement them in the proposed system all at once, so it was decided to use RECIST 1.1 as a proof of the concept of calculators that can be used in structured reports.
+During the design of the proposed systems several radiologists who specialize in oncological medicine reporting suggested that a method called Response Evaluation Criteria In Solid Tumors (RECIST 1.1) is of special importance to them. This method is used to assess whether tumors in cancer patients improve, stay the same, or worsen during treatment \cite{wiki-recist}. As there are hundreds of similar methods used by radiologists, it would be impossible to implement them in the proposed system all at once, so it was decided to use RECIST 1.1 as a proof of the concept of calculators that can be used in structured reports.
 A radiologist, while creating a report, can measure size of lesions and write down the results of measurement in the report. Proposed program should recognize that the numerical value represents a measurement (as shown in figure \ref{fig:recist-parsing}) and should suggest whether it should be included in the calculation of RECIST 1.1 or not (as shown in figure \ref{fig:recist-config}). Measurements are parsed with respect to a convention: a numerical value must be followed by a unit (in case of RECIST 1.1 the unit is millimeter -- mm), a previous measurement is surrounded with square brackets: '[' and ']'.
 
 \begin{figure}
@@ -354,7 +358,7 @@ Having a previous report, a radiologist can create another one that will be an u
 
 
 \chapter{Implementation}
-The proposed system was implemented as a web application. It is split into two parts: front-end and back-end.  
+The proposed system was implemented as a web application. It is split into two parts: front-end and back-end.
 \section{Technological stack}
 
 \subsection{Back-end}
@@ -470,7 +474,7 @@ One useful feature is grouping reports by title. This is useful when user has th
 
 \section{Compare reports}
 This feature strongly depends on the mechanisms included in the Report creator. It copies meta-data of an existing report and creates a new report using it. Content of the old report is presented to the radiologist as a reference and it is also copied as a basis of a new report. When the doctor makes some changes to the contents of the report, only the new version is modified. This allows for fast creation of a report that has only small portion of fragments modified when compared to the previous one.
-Changes propagation functionality described in \ref{changes-propagation} is particularly useful when comparing two reports, as user can easily spot  differences between the reports and include their observations as conclusions.
+Changes propagation functionality described in \ref{changes-propagation} is particularly useful when comparing two reports, as user can easily spot differences between the reports and include their observations as conclusions.
 
 Figure \ref{fig:compare-report} presents interface that makes if easier for the radiologist to compare two reports.
 
@@ -519,7 +523,7 @@ When the system is used for the first time on a machine, the user is asked to co
 
 
 \section{Deployment strategy}
-Deployment of the program is performed with the use of Microsoft Azure's App Services and is initiated after a commit is made.  Firstly the program is built, when there are no compilation errors, it is packaged and deployed to the IIS server. This allows for quick and hassle-free propagation of changes made to the codebase. An error at any stage of the pipeline is signaled either by the Visual Studio IDE, or Microsoft Azure via email.
+Deployment of the program is performed with the use of Microsoft Azure's App Services and is initiated after a commit is made. Firstly, the program is built, when there are no compilation errors, it is packaged and deployed to the IIS server. This allows for quick and hassle-free propagation of changes made to the code-base. An error at any stage of the pipeline is signaled either by the Visual Studio IDE, or Microsoft Azure via email.
 Figure \ref{fig:continuous-deployment} presents the sequence of actions and set of subjects that are required to deploy the application.
 \begin{figure}
 	\centering
@@ -534,7 +538,7 @@ Most of the testing and verification was performed as user-acceptance testing as
 The tests were split into several classes that are described in the following sections. 
 
 \section{Entity ownership tests}
-Any piece of software that is  used to support health care requires special measures to be taken to create a product that ensures that patients' privacy is respected and no information is shown to a third party. Entity ownership tests are used in the system to verify mechanisms that filter data, so they see only data that is public or related to their patients. 
+Any piece of software that is used to support health care requires special measures to be taken to create a product that ensures that patients' privacy is respected and no information is shown to a third party. Entity ownership tests are used in the system to verify mechanisms that filter data, so they see only data that is public or related to their patients. 
 
 \subsection{User sees only their reports}\label{report-owner}
 When user navigates to the Report history subpage, they should only see reports created by them. Moreover, manual manipulation of web browser address should also forbid accessing reports that belong to other users -- HTTP error 403 (forbidden) is thrown.
@@ -585,10 +589,10 @@ User that has the web browser language preference to English should see report t
 \chapter{Validation}
 
 \section{Time savings}
-The easiest way to validate the proposed productivity improvements is to measure the difference in report turnaround time. Prior to using the software, a group of radiologists was observed to measure the time it takes to create a report. The time was measured for each of the most popular examinations e.g, Abdomen Ultrasonography, Brain Computed Tomography, etc. for reports that were created using traditional methods. Then, the radiologist was allowed to use the software for several months, create their own templates. After some time for adjustments and getting accustomed to the proposed work-flow, the time to create a report was measured one again. The biggest time savings were observed for patients that were healthy or their symptoms were frequently observed. However, significant increase in productivity was also measured for reports containing unusual and complex observations. Overall, doctors who used the program with battle-tested templates and figured out what the strengths of the solution are, benefited from using the system by decreasing report turnaround time to a third of the time required to create a report without the use of the  proposed system. 
+The easiest way to validate the proposed productivity improvements is to measure the difference in report turnaround time. Prior to using the software, a group of radiologists was observed to measure the time it takes to create a report. The time was measured for each of the most popular examinations e.g, Abdomen Ultrasonography, Brain Computed Tomography, etc. for reports that were created using traditional methods. Then, the radiologist was allowed to use the software for several months, create their own templates. After some time for adjustments and getting accustomed to the proposed work-flow, the time to create a report was measured one again. The biggest time savings were observed for patients that were healthy or their symptoms were frequently observed. However, significant increase in productivity was also measured for reports containing unusual and complex observations. Overall, doctors who used the program with battle-tested templates and figured out what the strengths of the solution are, benefited from using the system by decreasing report turnaround time to a third of the time required to create a report without the use of the proposed system. 
 
 \section{User satisfaction surveys}
-Over the time of first few months after the release of the software to the  users, several surveys were conducted. The users were asked open-ended questions such as: "What is the most important feature that you would like to use everyday?", "What is your overall experience you have when you are interacting with the program?", with addition to scale questions like "How likely would you recommend the software to your colleague? 1 – very unlikely, 5 – very likely", "Using the software as my main text-editing tool makes me more productive. 1 – strongly disagree, 5 – strongly agree".
+Over the time of first few months after the release of the software to the users, several surveys were conducted. The users were asked open-ended questions such as: "What is the most important feature that you would like to use everyday?", "What is your overall experience you have when you are interacting with the program?", with addition to scale questions like "How likely would you recommend the software to your colleague? 1 – very unlikely, 5 – very likely", "Using the software as my main text-editing tool makes me more productive. 1 – strongly disagree, 5 – strongly agree".
 
 It could be observed that users who initially assigned good marks to user experience, were keener to suggest further improvements. Moreover, quick reactions to the suggestions, tended to result in better marks in the subsequent surveys. On the other hand, users that were not interested in using additional tools to be more productive, were very difficult to encourage to try using the software for a longer period of time. The best results were achieved when a director of radiology observed benefits of using the program and taught their team how to use the system.
 
@@ -599,7 +603,7 @@ Structured reporting system is being used by several independent teleradiologist
 The system is deployed to Microsoft Azure IIS server and is globally accessible, which makes the updates easier to install and new users do not face problems with execution policies. However, it is forbidden to enter as report meta-data any piece of information that could be used to identify the user because of privacy policies in the European Union. 
 
 \section{Hospital}
-Proposed system was used in hospital in Wieliszew by a group of radiologists who specialize in oncological reporting. Reports created there were lengthy, as this specialization requires very often comparisons between many points in time to asses reaction to chemotherapy. The workflow was organized in a way that a radiologist had a group of patients they are assigned to, so it was easier to remember the treatment history of a patient. Radiologists who worked in Wieliszew provided precious feedback and many of their suggestions were included in the system. Several extensions were developed to make state comparison easier, e.g., grouping reports by title, so the radiologists can see history of a single patient easily. 
+Proposed system was used in hospital in Wieliszew by a group of radiologists who specialize in oncological reporting. Reports created there were lengthy, as this specialization requires very often comparisons between many points in time to asses reaction to chemotherapy. The work-flow was organized in a way that a radiologist had a group of patients they are assigned to, so it was easier to remember the treatment history of a patient. Radiologists who worked in Wieliszew provided precious feedback and many of their suggestions were included in the system. Several extensions were developed to make state comparison easier, e.g., grouping reports by title, so the radiologists can see history of a single patient easily. 
 Report templates were shared between radiologists, so each new user could start getting to know the software without the tedious step of creating their own templates. Changes to templates were propagated to all users automatically, so the team could discuss what the best phrasing of symptoms are. A lot of effort has already been made to create standardized terminology by the nosologists who worked on LOINC and SNOMED, but unfortunately these systems have no translations for Polish language, so they were not applicable to this working environment. Instead of using existing controlled vocabularies, templates were based on reporting history of the most experienced members of the team.
 
 \section{Network of clinics}
@@ -617,14 +621,14 @@ The main objective of the thesis was to increase overall productivity of radiolo
 \end{itemize}
 In order to gain satisfactory level of understanding of the problem, observations of real-world working environments were necessary. Although it is a time consuming task, it allowed for tailoring the software to the end-user needs. Moreover, it required patience from the radiologists who were cooperating, as many questions were asked and several prototypes of the solutions were presented. The final solution to the problem was not implemented on the first try -- several prototypes were presented and user feedback was collected. The evolutionary approach to software development allowed for better understanding the domain of the problem and observe how users learn to use new pieces of software.
 
-\subsection{Knowledge engineering  vs. template approach}
+\subsection{Knowledge engineering vs. template approach}
 Existing solutions to the problem are not very well described in the literature. Productivity of radiologists is often treated as an emergent property of a system that has knowledge base as their back-end. It has been observed that it does not have to be always true. Tools for knowledge structurization can be very complex as they are not focusing on minimizing time spent to encode knowledge but on completeness of the resulting knowledge graphs. 
 Eventually, a solution that achieves the primary goal was formed by separating the creation of knowledge base (template creation) from the usage of the knowledge (report creation). Due to limited workforce, knowledge engineering functionalities are very limited, however, it makes the software more accessible to the radiologists as there is no steep learning curve. The report creation part of the program was optimized to use the stored knowledge in a way that only the currently important pieces of information are shown to the user.
 \subsection{StructuRad – similar idea} 
 One similar solution has been found after the design and implementation of the proposed system – StructuRad. The program used to operate in Midway Hospital. It was a .NET application and its development started in 1996 \cite{structurad}. Unfortunately, only an overview presentation and two screenshots of the program can be found on the Internet, as the company was  acquired by another entity. What can be inferred from the available materials are the similarities in the productivity-first approach. The radiologists used to create reports based on predefined templates by selecting check-boxes next to suitable phrases. The report was also represented as a tree that would then reorganize nodes in order to create text that is linguistically correct. American style of creating reports has some differences caused by the fact that very often reports are dictated, that allowed the software to create reports with different information granularity and not worry about details of the language grammar.
 
 \subsection{Simplicity of the template approach}
-Ideas implemented in this structured reporting system are very simple from the theoretical point of view. In fact, template-based text generation existed for years and can be found in most of the programs developed hitherto. Template approach gives users the predictability of the resulting text, what increases their confidence while using the program. However, even such simple methods, supported with well-thought user experience design can give satisfying results. This is another example of one of the principles governing our world that the complexity can emerge from very simple rules \cite{s-wolfram}. 
+Ideas implemented in this structured reporting system are very simple from the theoretical point of view. In fact, template-based text generation existed for years and can be found in most of the programs developed hitherto \cite{nlg-templates}. Template approach gives users the predictability of the resulting text, what increases their confidence while using the program. However, even such simple methods, supported with well-thought user experience design can give satisfying results. This is another example of one of the principles governing our world that the complexity can emerge from very simple rules \cite{s-wolfram}. 
 Although the software is not designed for wide spectrum of types of users, several dozens of radiologists from different working environments have used the software as their main tool to create radiological reports. 
 
 \subsection{Balace between structure and customizability}
@@ -635,7 +639,6 @@ In a perfectly structured world, any phrase used in the report could be explaine
 The system has been used by nearly a hundred radiologists in Poland. The opinions about the program are indicating that everyday users like the overall user-experience and they are more productive while using the software. 
 By generating nearly 20 000 reports using the program, radiologists and their employers saved a lot of time what allowed to treat more patients in the same period of time.
 The system was among the best 30 innovative ideas at Microsoft Imagine Cup 2015 in Poland by jury consisting of representatives from the world of business. 
-
 
 \subsection{Adaptation of medical innovations in Poland}
 It has been observed that, at least in Poland, even huge productivity improvements may not be encouraging enough to introduce new type software to the health-care at big scale. This observation may be considered as counter-intuitive as the very mission of doctors is to help as many patients as possible. One can try to point out the reasons of this state of the medical market. 	
@@ -674,45 +677,51 @@ Another direction for improvements would be a natural language processing mechan
 %-----------Koniec części zasadniczej-----------
 
 \begin{thebibliography}{11}
-\bibitem{bls} https://www.bls.gov/ooh/healthcare/physicians-and-surgeons.htm, [08.10.2017]
-\bibitem{ai} Artificial Intelligence: Threat or Boon to Radiologists?, Recht, Michael et al, Journal of the American College of Radiology, Volume 14 , Issue 11 , 1476 - 1480.
-\bibitem{snomed} T. Benson, Principles of health interoperability HL7 and SNOMED,  Springer-Verlag, London, 2010.
-\bibitem{sr} DICOM Structured Reporting, D. A. Clunie, 1st Edition, 2000, .
-\bibitem{hl7cda} http://www.hl7.org/Special/committees/structure/index.cfm 
-\bibitem{techonologist} https://www.asrt.org/main/careers/careers-in-radiologic-technology/who-are-radiologic-technologists
-\bibitem{workflow} https://radiologystories.com/2013/10/31/the-typical-radiologist-work-day/
-\bibitem{viewer}
-http://www.osirix-viewer.com/osirix/overview/
+\bibitem{bls} Occupational outlook handbook: Physicians and Surgeons, available at: https://www.bls.gov/ooh/healthcare/physicians-and-surgeons.htm, [08.10.2017]
+\bibitem{ai} Recht, et al, Artificial Intelligence: Threat or Boon to Radiologists?,, Journal of the American College of Radiology, Volume 14 , Issue 11.
+\bibitem{snomed} Benson, Principles of health interoperability HL7 and SNOMED,  Springer-Verlag, London, 2010.
+\bibitem{sr} Clunie, DICOM Structured Reporting, 1st Edition, 2000.
+\bibitem{hl7cda} HL7 Structured Documents group subpage, available at:\\ http://www.hl7.org/Special/committees/structure/index.cfm  [10.10.2017]
+\bibitem{techonologist} Careers in radiologic technology, available at: https://www.asrt.org/main/careers/careers-in-radiologic-technology/who-are-radiologic-technologists [13.11.2017]
+\bibitem{workflow}
+Bhavinj, The Typical Radiologist Work-Day, available at: \\ https://radiologystories.com/2013/10/31/the-typical-radiologist-work-day/ [10.10.2017]
+\bibitem{viewer} Osirix software product page, available at:\\
+http://www.osirix-viewer.com/osirix/overview/ [15.10.2017]
 \bibitem{speech-impact}
-S. Langer, Impact of Speech Recognition on Radiologist Productivity.
-\bibitem{speech-africa} J. du Toit, R. Hattingh and R. Pitcher, The accuracy of radiology speech recognition
+Langer, Impact of Speech Recognition on Radiologist Productivity.
+\bibitem{speech-africa} Toit  et al, The accuracy of radiology speech recognition.
 reports in a multilingual South African teaching hospital.
-\bibitem{csharp-spec}
-https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/lexical-structure
-\bibitem{ich} http://emedicine.medscape.com/article/1163977-overview
+\bibitem{csharp-spec} C\# language formal grammar definitions, available at:\\
+https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/lexical-structure [02.10.2017]
+\bibitem{ich} Liebeskind, Intracranial Hemorrhage, available at: \\ http://emedicine.medscape.com/article/1163977-overview [03.10.2017]
 \bibitem{static-lang}
-    S. Hanenberg, et. al., An empirical study on the impact of static typing on software maintainability.
-\bibitem {forking} https://help.github.com/articles/fork-a-repo/
+    Hanenberg, et. al., An empirical study on the impact of static typing on software maintainability.
+\bibitem {forking} Forking a repo using GIT version control system, available at: \\ https://help.github.com/articles/fork-a-repo/ [10.10.2017]
 \bibitem{wiki-recist} 
-https://en.wikipedia.org/wiki/Response\_Evaluation\_Criteria\_in\_Solid\_Tumors
-\bibitem{risk-management} https://www.ncbi.nlm.nih.gov/pubmed/3497558
-\bibitem{angular-digest} https://www.sitepoint.com/understanding-angulars-apply-digest/
-\bibitem{microsoft-json-suppoert} https://blogs.msdn.microsoft.com/jocapc/2015/05/16/json-support-in-sql-server-2016/
-\bibitem{bootstrap-typography} https://getbootstrap.com/docs/3.3/css/\#type
-\bibitem{recurrent-neural-networks}
-http://www2.fiit.stuba.sk/~kvasnicka/NeuralNetworks/
+RECIST 1.1 definition, available at:\\ https://en.wikipedia.org/wiki/Response\_Evaluation\_Criteria\_in\_Solid\_Tumors [07.10.2017]
+\bibitem{risk-management} Smith, Risk management for the radiologist, available at:\\ https://www.ncbi.nlm.nih.gov/pubmed/3497558 [29.10.2017]
+\bibitem{angular-digest} Panda, Understanding Angular’s \$apply() and \$digest(), available at:\\ https://www.sitepoint.com/understanding-angulars-apply-digest/ [17.10.2017]
+\bibitem{microsoft-json-suppoert} Popovic, JSON support in SQL Server 2016, available at: \\
+https://blogs.msdn.microsoft.com/jocapc/2015/05/16/json-support-in-sql-server-2016/ [14.10.2017]
+\bibitem{bootstrap-typography} Bootstrap Framework documentation, available at: https://getbootstrap.com/docs/3.3/css/\#type [15.01.2018]
+\bibitem{recurrent-neural-networks} Kvasnička, 
+How to Process Structured 
+Data by Neural Networks?, available at: \\http://www2.fiit.stuba.sk/~kvasnicka/NeuralNetworks/6.prednaska/Kvasnicka\_RNN\_exten\_transp.pdf [17.03.2018]
 \bibitem{structurad}
-http://www.structuredreporting.com/structurad-presentation.pdf
-\bibitem{nfz} https://www.polskieradio.pl/42/4393/Artykul/1535315,Prywatna-sluzba-zdrowia-jest-w-Polsce-niezbedna-A-sektor-niepubliczny-ochrony-zdrowia-ma-szanse-na-blyskawiczny-rozwoj
+Zucherman, StructuRad Presentation
+Reporting Tool Overview, available at: \\http://www.structuredreporting.com/structurad-presentation.pdf [10.04.2018]
+\bibitem{nfz} Zadrożna et al, Private sector is crucial for Polish health-care system, available [in Polish] at :\\ https://www.polskieradio.pl/42/4393/Artykul/1535315,Prywatna-sluzba-zdrowia-jest-w-Polsce-niezbedna-A-sektor-niepubliczny-ochrony-zdrowia-ma-szanse-na-blyskawiczny-rozwoj [10.04.2018]
 \bibitem{inefficient}
-http://www.news.com.au/lifestyle/health/inefficient-public-hospitals-wasting-1-billion-finds-grattan-institute-report/news-story/7aed1d890868572790cdc2a2a04c7868
+ Dunlevy, Inefficient public hospitals wasting \$1 billion, finds Grattan Institute report, available at: \\ http://www.news.com.au/lifestyle/health/inefficient-public-hospitals-wasting-1-billion-finds-grattan-institute-report/news-story/7aed1d890868572790cdc2a2a04c7868
+\bibitem{nlg-templates} Reiter, NLG vs. Templates, available at: \\
+https://arxiv.org/pdf/cmp-lg/9504013.pdf [10.03.2018]
 \bibitem{s-wolfram}
 S. Wolfram, A New Kind of Science, Wolfram Media, 2002.
 \bibitem{private-better}
-https://www.klinikiwpolsce.pl/aktualnosci/prywatna\_sluzba\_zdrowia\_\_czy\_to\_sie\_oplaca/
+Ladrowski, Private health-care in Poland -- can it even be profitable?, available [in Polish] at: \\\ https://www.klinikiwpolsce.pl/aktualnosci/prywatna\_sluzba\_zdrowia\_\_czy\_to\_sie\_oplaca/ [03.03.2018]
 \bibitem{coelko-trees}J. Celko, Joe Celko's SQL for Smarties (Third edition), Morgan Kaufmann, San Francisco 2005.
-\bibitem{recurrent-neural-networks-google} NLG at Google Research [video]
- https://www.youtube.com/watch?v=MNvT5JekDpg
+\bibitem{recurrent-neural-networks-google} NLG at Google Research, available at:
+ https://www.youtube.com/watch?v=MNvT5JekDpg [video] [10.04.2018]
 \end{thebibliography}
 
 
