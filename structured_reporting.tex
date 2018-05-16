@@ -17,6 +17,18 @@
 \usepackage{helvet}
 \usepackage{textcomp}
 \usepackage{afterpage}
+\usepackage{listings}
+\usepackage{xcolor}
+\lstdefinestyle{sharpc}{
+	language=[Sharp]C, 		
+	belowcaptionskip=1\baselineskip,
+	breaklines=true,
+	frame=L,
+	xleftmargin=\parindent,
+	showstringspaces=false,
+	basicstyle=\footnotesize\ttfamily,
+	rulecolor=\color{blue!80!black}
+}
 %\usepackage{hyperref}
 \theoremstyle{definition}
 \usepackage{perpage} %the perpage package
@@ -370,7 +382,7 @@ Having a previous report, a radiologist can create another one that will be an u
 The proposed system was implemented as a web application. It is split into two parts: front-end and back-end. Diagram \ref{fig:architecture-diagram} presents conceptual overview of the main components of the system and how they interact.
 \begin{figure}
 	\centering
-	\includegraphics[width=0.7\linewidth]{architecture}
+	\includegraphics[width=0.7\linewidth, trim={0 0cm 0cm 0cm},clip]{architecture}
 	\caption{System architecture and communication paths
 		\label{fig:architecture-diagram}
 	}
@@ -389,11 +401,63 @@ The ASP.NET application is created using MVC pattern (Model-View-Controller) tha
 Entity Framework is a set of libraries that is used to create high-level abstract model using C\# that are then converted to sets of relations and attributes in the underlying DBMS. It can also be used to transform LINQ constructions to SQL queries taking into the account vendor-specific features of many DBMS.
 The approach of first creating C\# classes that represent Model and then automatically converting it to the database relations and attributes (scaffolding) is called Code First Approach. It can be especially useful when the schema of database changes very often. When changes are introduced to the code representing Model, Entity Framework can be used create a migration  -- set of transformations for DB schema that after applying to the DB will keep code and schema synchronized. 
 
+Listing \ref{get-user-data} is used to retrieve number of reports (with of creation of last 30 reports) generated in the last week for all users. What is useful in this approach that all the code of application logic can be written in a single language (in this case C\#). This allows for applying tooling from this language to solve problems related to relational data management. After a more thorough analysis of the LINQ syntax, one can see elements of relational ways of thinking present in this mechanism. In the proposed system all database queries are generated using LINQ.
+
+\begin{lstlisting}[style=sharpc,caption=C\# code that is converted by Entity Framework to SQL sent to SQL Server \label{get-user-data}]
+var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+var prevWeek = DateTime.Now.AddDays(-7);
+var usersWithAggregatedInformation = manager.Users.Select(m =>
+	new 
+	{
+		Id = m.Id,
+		IsConfirmed = m.EmailConfirmed,
+		Mail = m.Email,
+		ReportsCount = m.Reports.Count,
+		ReportsTimes = m.Reports
+			.OrderByDescending(n => n.DateCreated)
+			.Take(30)
+			.Select(n => n.DateCreated),
+		WeeklyReportsCount = m.Reports.Where(n => n.DateCreated> prevWeek).Count()
+})
+.OrderByDescending(o => o.WeeklyReportsCount)
+.ToList();
+
+\end{lstlisting}
+
 \subsection{Database}
 MSSQl server is used as a DBMS because it is a battle-tested, well-documented solution that can be easily paired with ASP.NET and Entity Framework's code generation methods are best optimized for this particular DBMS. 
 
 \subsection{Front-end}
 Not all interactions with the application result in HTTP requests sent to the server, many of them are about shaping data that has already been received from the server. In order to make use of this fact main part of the application -- tabs: New Report and Templates were developed as a Single Page Applications (SPA) in order to minimize the time that user has to wait between actions they take. Technologies used in these parts are JavaScript and AngularJS framework. 
+\subsubsection{Razor views}
+The remaining front-end subpages are generated using view engine present in ASP.NET called Razor. These views are responsible for interactions like logging in , registration (backed with ASP.NET identity mechanism), listing reports, searching for particular report etc. They are generated on the server side and sent to the user as HTML and rendered by the browser. Listing \ref{register-view} presents the most important part of Razor view code for logging in form. 
+
+\begin{lstlisting}[style=sharpc,caption=Razor view code filled with C\# embeddings that is later converted to pure HTML code with properly translated strings\label{register-view}]
+@model LoginViewModel
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "col-lg-12 form-horizontal", role = "form" }))
+{   @Html.AntiForgeryToken()
+	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+	<div class="form-group login">
+		@Html.LabelFor(m => m.Email, new { @class = "control-label", id = "label_email" })
+		<div id="email_login">
+			@Html.TextBoxFor(m => m.Email, new { @class = "form-control", @type = "email" })
+			<div id="danger">
+				@Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+			</div>
+		</div>
+	</div>
+	<div class="form-group login">
+		@Html.LabelFor(m => m.Password, new { @class = "control-label", id = "label_password" })
+		<div id="password_login">
+			@Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+			<div id="danger" class="">
+				@Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+			</div>
+		</div>
+    </div>
+<input type="submit" value="@UP_Medic.Resources.Account.Login.LogMeIn" class="btn btn-default" id="button_login" />
+}
+\end{lstlisting}
 
 \subsubsection{JavaScript}
 It is a very popular scripting language that can be executed in any popular web browser. Version of the language used in this project is ECMAScript 5.1 compliant. 
@@ -401,23 +465,31 @@ It is a very popular scripting language that can be executed in any popular web 
 AngularJS is a JavaScript framework that helps with building MVC SPA aplications. It has several mechanisms like two-way-binding that reduce size of the code needed to implement Create, Read, Update, Delete (CRUD) functionality.
 
 
-\subsubsection{Razor views}
-The remaining front-end subpages are generated using view engine present in ASP.NET called Razor. These views are responsible for interactions like logging in , registration (backed with ASP.NET identity mechanism), listing reports, searching for particular report etc. They are generated on the server side and sent to the user as HTML and rendered by the browser.
- 
+
 
 
 \section{Internationalization and localization}
-The application was designed to be accessible by radiologists from many countries, so support for many languages is one of its core functionalities. The application automatically detects user preferred language by looking into user browser settings. Each of the most popular Internet browsers allows users to specify list of preferred languages used by web-pages. The presented solution scans this list and chooses first language it supports, if there are no languages in the list that are supported, English language is presented to the user by default. Figure \ref{fig:language-preferences} shows how this list can be manipulated in one of most popular web browsers.
-\begin{figure}
-    \centering
-    \includegraphics[width=0.6\linewidth]{language-preferences}
-    \caption{Language preferences list present in Firefox 54\label{fig:language-preferences}}
-\end{figure}
+The application was designed to be accessible by radiologists from many countries, so support for many languages is one of its core functionalities. The application automatically detects user preferred language by looking into user browser settings. Each of the most popular Internet browsers allows users to specify list of preferred languages used by web-pages. The presented solution scans this list and chooses first language it supports, if there are no languages in the list that are supported, English language is presented to the user by default.
 
 At the back-end there are dictionaries for each supported languages that contain mapping $name \to value$. 
 In Razor views names are used to specify where particular piece of text should be placed. During HTML generation, the application resolves user language and refers to proper resource file. Figure \ref{fig:language-dictionary} presents contents of a dictionary for ReportWizard for Polish language. Adding support for another language is simply providing values for existing names in the dictionary.
 
-For SPA parts of the program the situation is slightly different as DOM elements representing most of their content are generated at the user side with the help of AngularJS. In order to have single source of truth about translations, it was decided to serialize contents of dictionaries to JSON format, and send it to the user with page template. At the front-end the translation dictionary entries are deserialized and made available to JavaScript functions. This solution makes it faster to edit and version translations as they are kept in a single place. One of drawbacks can be the performance of this solution, but it was measured that for number of dictionary entries used in this application, the decrease in performance is negligible.
+For SPA parts of the program the situation is slightly different as DOM elements representing most of their content are generated at the user side with the help of AngularJS. In order to have single source of truth about translations, it was decided to serialize contents of dictionaries to JSON format, and send it to the user with page template. At the front-end the translation dictionary entries are deserialized and made available to JavaScript functions. This solution makes it faster to edit and version translations as they are kept in a single place. One of drawbacks can be the performance of this solution, but it was measured that for number of dictionary entries used in this application, the decrease in performance is negligible. The code that is responsible for serialization of resource files is presented in listing \ref{translate-spa}.
+\pagebreak
+\begin{lstlisting}[style=sharpc,caption=Method Translanslation(string lang) serializes all values in a dictionary for a given language and returns a string containing data encoded using JSON format \label{translate-spa}]
+public string Translation(string lang)
+{
+	var resourceObject = new JObject();
+	var rm = new ResourceManager(typeof(Resources.ReportWizard.Index));
+	var resourceSet = rm.GetResourceSet(new CultureInfo(lang), true, true);
+	IDictionaryEnumerator enumerator = resourceSet.GetEnumerator();
+	while (enumerator.MoveNext())
+	{
+		resourceObject.Add(enumerator.Key.ToString(), enumerator.Value.ToString());
+	}
+	return resourceObject.ToString(Formatting.None);
+}
+\end{lstlisting}
  
 \begin{figure}
     \centering
@@ -426,6 +498,7 @@ For SPA parts of the program the situation is slightly different as DOM elements
 \end{figure}
 \section{Templates}
 Templates can be defined by the user at the examination level. Users can create, edit or remove them. In order to keep things simple and less error-prone, they are treated as immutable in the database. If user edits a template, the previous version of the template is deleted and template version with edits is inserted into database. The only thing that is not changed in this process is its primary key. This makes reasoning about database queries much easier and has satisfactory performance for templates used by most radiologists. Thanks to the use of database transactions, one can be sure that removing contents of an existing template and inserting contents of a template with modifications is performed atomically.
+
 
 \subsection{Feeding front-end with data from database}\label{templates-immutable}
 After browser finishes loading static files (scripts, fonts, etc.), an additional HTTP request is created to download report templates attached to the current account. Server handles the request by querying database, instantiating model classes that correspond to the data received from database. Finally, server serializes reports data to the JSON format and sends it to the front-end. When front-end receives JSON data, a success callback is invoked and sets the data as current view model. 
@@ -444,7 +517,7 @@ Report creator is the most optimized part of the application. It is the place wh
 \footnotetext[3]{Initially only a list of names of available templates is presented to the user. Contents of the template are downloaded after clicking on the pill representing a template}
 \begin{figure}
 	\centering
-	\includegraphics[width=\linewidth]{examination-list}
+	\includegraphics[width=0.9\linewidth]{examination-list}
 	\caption{A window demonstrating list of examinations to the user\protect\footnotemark[3]
 		\label{fig:examination-list}
 	}
@@ -462,11 +535,13 @@ As templates contain no sensitive information, they can be stored in localStorag
 As user navigates through the levels of the report structure, the program signifies this by opening modal windows one on top of another. This results in the following behavior: when user makes decisions that have the biggest impact on the shape of the report -- edits report meta-data, selects examinations that will be used -- the program is at the 1 st level of depth, no modals are present.
 When user decides to include an examination, a modal is opened hiding all information that is not necessary at the moment and the user is shown list of organs with preview of the report (As shown in figure \ref{fig:organ-list}).
 \begin{figure}
-	\centering
+	\begin{center}
+
 	\includegraphics[width=\linewidth]{organs-modal}
 	\caption{List of organs defined in a CT Brain examination template
 		\label{fig:organ-list}
 	}
+	\end{center}
 \end{figure}
 Work-flow is designed to favor selecting Examinations/Organs/Properties from predefined sets. It was measured that with suggested use of the templates on average 72\% of report's content can be generated from template contents. As most of the content can be added to the report by simply clicking on a check-boxes, a lot of thought went into designing interaction model that allows radiologists to look at sequence of suggested elements and make a binary decision 'yes' or 'no' whether an element should be included in the report or not. 
 
@@ -497,8 +572,6 @@ This feature strongly depends on the mechanisms included in the Report creator. 
 Changes propagation functionality described in \ref{changes-propagation} is particularly useful when comparing two reports, as user can easily spot differences between the reports and include their observations as conclusions.
 
 Figure \ref{fig:compare-report} presents user interface that makes it easy for the radiologist to compare two reports.
-
-
 
 \begin{figure}
 	\centering
@@ -536,6 +609,23 @@ When a new feature is implemented, active users can be notified by an announceme
 \subsection{Administrator dashboard}
 Administrator dashboard aggregates most useful actions that can be executed in order to get to know how the system is being used. There are subpages used to check what is reporting rate of a user, how many reports have been created, what are the weekly most active users. 
 Moreover, administrators can see all private templates. This allows to copy best parts of user-defined templates and copy them to the public template repository. This way all users can benefit from knowledge of an individual radiologist.
+
+\subsection{Make a public copy of a template}
+This functionality creates a separate instance of a template that has all data used for reporting copied. The user of newly created instance is set to $null$ as this represents a template that is public. Traditionally, one should create a copy constructor for class Examination and then recursively copy all elements of the tree by creating copy constructors for all nodes. The approach taken here is different and very simple – existing template is serialized into JSON and then deserialized back to a C\# object. This way all nodes at all levels are copied and detached from their original examination instance. The deserialized object it attached to the database and saved as a publicly available template.
+\begin{lstlisting}[style=sharpc, caption=Code used to make a public copy of a template \label{make-copy-template}]
+var exam = db.Examinations.Find(id);
+
+var serializedJson = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(exam, Formatting.Indented,
+new JsonSerializerSettings
+{
+ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+}));
+var deserializedExam = (Examination)await Task.Factory.StartNew(() => JsonConvert.DeserializeObject(serializedJson, typeof(Examination)));
+deserializedExam.User = null;
+
+db.Examinations.Add(deserializedExam);
+db.SaveChanges();
+\end{lstlisting}
 \subsection{User account}
 This subpage is used to change user password, change email, private data, register a new user, log in to the program. 
 \subsection{Interactive guide}
@@ -695,8 +785,6 @@ The system has been used by a number of radiologists in Poland. The opinions abo
 By generating more than a thousand reports using this program, radiologists and their employers saved a lot of time what allowed to treat more patients in the same period of time.
 
 \begin{comment}
-
-
 \subsection{Adaptation of medical innovations in Poland}
 It has been observed that, at least in Poland, even huge productivity improvements may not be encouraging enough to introduce new type software to the health-care at big scale. This observation may be considered as counter-intuitive as the very mission of doctors is to help as many patients as possible. One can try to point out the reasons of this state of the medical market. 	
 In theory Polish public health-care system is designed to be free for all. The word 'free' in this context is actually a misuse because in order to have medical insurance in Poland one has to pay relatively high (with respect to the minimal salary) medical insurance fee. Over the years many attempts were made to impose the medical insurance fee on every person in  productive age, by forcefully including this fee in almost all types of employment agreements, making it resemble more a classic method of taxation than a voluntary service agreement. Due to this, most of the money on the health-care market is governed by the state giving it a monopoly to decide how money is spent, not bothering about competition. As almost everyone is already paying for public health-care, only 10\% of population has private health insurance. This makes it difficult for private companies to compete with an involuntary public system \cite{nfz}. However, a lot of progress has been made in the recent years, as more and more people become aware of the inefficiencies connected with the administration of public money \cite{inefficient}. As it is nearly impossible for private companies to compete with public system using prices, they want to be regarded as subjects promising better quality of the treatment, better personnel, being hassle-free in comparison to their public competitor \cite{private-better}. 
