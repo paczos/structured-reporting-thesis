@@ -17,6 +17,7 @@
 \usepackage{helvet}
 \usepackage{textcomp}
 \usepackage{afterpage}
+%\usepackage{hyperref}
 \theoremstyle{definition}
 \usepackage{perpage} %the perpage package
 \MakePerPage{footnote} %the perpage package command
@@ -440,11 +441,11 @@ On page load all templates that are owned by the user are downloaded. Any modifi
 
 \subsection{Data loaded lazily}
 Report creator is the most optimized part of the application. It is the place where user spends most of their time and it has to respond to any action immediately. It is not easy to predict which examinations will be used in a particular report, so all of available examinations must be ready to be loaded. At the page load, only list of available examinations' titles (user-owned and public examinations) is loaded from the server. When the user clicks on examination's title, the rest of template's content is loaded via HTTP call and ready to be modified and included in the report. Figure \ref{fig:examination-list} shows the initial screen of a template editor with titles of templates listed.
-\footnotetext{Initially only a list of names of available templates is presented to the user. Contents of the template are downloaded after clicking on the pill representing a template}
+\footnotetext[3]{Initially only a list of names of available templates is presented to the user. Contents of the template are downloaded after clicking on the pill representing a template}
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{examination-list}
-	\caption{A window demonstrating list of examinations to the user\protect\footnotemark
+	\caption{A window demonstrating list of examinations to the user\protect\footnotemark[3]
 		\label{fig:examination-list}
 	}
 \end{figure}
@@ -604,8 +605,19 @@ Currently the program has no users that do not speak Polish, so there was no spe
 User that has the web browser language preference to English should see report templates in English, report items and meta-data entries should also be rendered in English. This should work analogically for any other language supported.
 
 
-\chapter{Some examples of system outputs and validation}
+\chapter{Some examples of system output data and validation}
 \section{Reports created using the proposed system}
+In order to asses the usefulness of the proposed system, one can take a look at the reports created using it. Quality of the resulting reports depends strongly on the level of detail encoded in templates created by the administrator or the user. Presented examples are based on real reports created the proposed system. All pieces of information that could be used to identify patients were removed or replaced with fake ones.
+
+\subsection{Basic report}
+The first example is shown in figure \ref{fig:rendered-report-eng}. It is report created in English, using template that was created using nomenclature and elements from several templates available for free at radreport.org. There is no connotation encoding, the number of properties defined for each organ is very small. Each type of entity (examination, organ, property) is presented using different formatting.
+
+\subsection{Standard report of a healthy patient}
+Another example is presented in figure \ref{fig:rendered-report-pl}. This report was created based on template in Polish language. As this thesis focuses mostly on the shape of data that is processed using the system, meaning of particular phrases does not matter. Template that was used for this report had several organs with properties having "include if organ healthy" attribute set to true. This allowed the radiologist to create the final report clicking simply on a button "mark as healthy" for each organ. This saved a lot of text editing actions and most of the time was spent on analyzing diagnostic imagery.
+
+\subsection{Report describing complex pathological state}
+The lengthiest example is presented in figure \ref{fig:rendered-report-pl-bad}. Is is a report that describes state of an oncological patients. Two examinations were performed and described in a single document in order to keep related data close to each other. Some organs were healthy (all their properties have positive connotation), but there were organs that had all three types of connotation. This indicates that some parameters of those organs were in bad condition, informing about presence of pathologies of different kinds. The doctor that is about to read this report can focus their attention on properties that are in red as they are the most important to the report findings. Even if combinations of presence of different properties could be unique, most of the content of the report was generated without manually editing properties. There are, however, some properties that contain measurements data -- they must have been edited manually.
+
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth, trim={0 20cm 0cm 2.5cm},clip]{rendered-report-eng}
@@ -628,7 +640,7 @@ User that has the web browser language preference to English should see report t
 		\label{fig:rendered-report-pl-bad}
 	}
 \end{figure}
-TODO
+
 
 \section{Validation}
 \subsection{Time savings}
@@ -681,7 +693,7 @@ In a perfectly structured world, any phrase used in the report could be explaine
 \subsection{Achievements of this thesis}
 The system has been used by a number of radiologists in Poland. The opinions about the program are indicating that everyday users like the overall user-experience and they are more productive while using the software. This program was used not only by independent indivudual teleradiologists, but also by radiologists from hospital in Wieliszew and a network of clinics and Łódź.
 By generating more than a thousand reports using this program, radiologists and their employers saved a lot of time what allowed to treat more patients in the same period of time.
-The system was among the best 30 innovative ideas at Microsoft Imagine Cup 2015 in Poland by jury consisting of representatives from the world of business. 
+
 \begin{comment}
 
 
@@ -711,7 +723,7 @@ On the other hand, representatives from public health-care units were not open f
 One should look at the proposed system as a battle-tested idea that can be used to create bigger system focused on optimizing work-flow of not only radiologists but also other medical specializations. There are several paths that can be taken to make the reports created using the system more specific and language-agnostic and decrease the report turnaround time. Some ideas, as well as may they sound to a Computer Scientist, would require radical changes to the way doctors work currently. Revolution in reporting is not very likely to happen as there are many existing systems on the market that are being used continuously. Radical change to the reporting philosophy would make them irrelevant as they would not be able to store complex data of different shapes like trees or graphs in comparison to the relations native to relational databases that do not make it easy to store information encoded in these structures \cite{coelko-trees}. 
 
 \subsection{Complex ontologies support}
-One could generalize the ontology that is backing the system or use existing, well-designed ones like SNOMED CT. This approach would allow for better interoperability with other systems as publicly available ontologies leave no space for ambiguity and provide global identifiers that can be used to infer exact meaning from text phrases. One could try to map free text to the SNOMED CT ontology and ask the radiologist for more information in case of need for additional data to get rid of ambiguities. This, however, would make the solution not applicable to Polish market as the ontology does not support Polish language. 
+One could generalize the ontology that is backing the system or use existing, well-designed ones like SNOMED CT. This approach would allow for better interoperability with other systems as publicly available ontologies leave no space for ambiguity and provide global identifiers that can be used to infer exact meaning from text phrases. One could try to map free text to the SNOMED CT ontology and ask the radiologist for more information in case of need for additional data to get rid of ambiguities. This, however, would make the solution not applicable to Polish market as this ontology does not support Polish language. 
 
 \subsection{Recurrent neural networks and natural language generation methods}
 In the future, one could think about a way to generalize the reporting ontology or implement a mechanism to create custom ontologies to provide tools that would allow to encode a hierarchy of an arbitrary depth. After obtaining a well-formed tree representing relations between causes and effects, one could experiment with applying recurrent neural networks (RNNs) to automatically generate report's text from structured data source \cite{recurrent-neural-networks}. This approach is already used at Google to generate natural language phrases from structured data, e.g. user-friendly weather forecast descriptions based on numerical data \cite{recurrent-neural-networks-google}. This approach is getting more and more popular as computer systems capture enormous amounts of data that must be then presented to the human user in a way that can be easily understood.
@@ -722,12 +734,12 @@ Another direction for improvements would be a natural language processing mechan
 %-----------Koniec części zasadniczej-----------
 
 \begin{thebibliography}{11}
-\bibitem{bls} Occupational outlook handbook: Physicians and Surgeons, available at: https://www.bls.gov/ooh/healthcare/physicians-and-surgeons.htm, [08.10.2017]
+\bibitem{bls} Occupational outlook handbook: Physicians and Surgeons, available at:\\ https://www.bls.gov/ooh/healthcare/physicians-and-surgeons.htm, [08.10.2017]
 \bibitem{ai} Recht, et al, Artificial Intelligence: Threat or boon to Radiologists?,, Journal of the American College of Radiology, Volume 14 , Issue 11.
 \bibitem{snomed} Benson, Principles of health interoperability HL7 and SNOMED,  Springer-Verlag, London, 2010.
 \bibitem{sr} Clunie, DICOM Structured Reporting, 1st Edition, 2000.
 \bibitem{hl7cda} HL7 Structured Documents group subpage, available at:\\ http://www.hl7.org/Special/committees/structure/index.cfm  [10.10.2017]
-\bibitem{techonologist} Careers in radiologic technology, available at: https://www.asrt.org/main/careers/careers-in-radiologic-technology/who-are-radiologic-technologists [13.11.2017]
+\bibitem{techonologist} Careers in radiologic technology, available at:\\ https://www.asrt.org/main/careers/careers-in-radiologic-technology/who-are-radiologic-technologists [13.11.2017]
 \bibitem{workflow}
 Bhavinj, The Typical Radiologist Work-Day, available at: \\ https://radiologystories.com/2013/10/31/the-typical-radiologist-work-day/ [10.10.2017]
 \bibitem{viewer} Osirix software product page, available at:\\
