@@ -130,15 +130,17 @@ Słowa kluczowe: strukturalne opisy radiologiczne, radiologia, informatyka w med
 
 \chapter{Introduction}
 \section{The need for medical diagnostics}
-Everyday millions of physicians treat injuries and illnesses of different kids. Before a doctor can plan an individual treatment for a patient, they have to diagnose which organs are in pathological states \cite{bls}. This sometimes can be achieved by simply glancing at the body, however, there are many illnesses that require specialized set of tools and methods in order to observe which parts of patient's body are in an unwanted state. Through years of research, many different techniques were established and a separate specialization emerged -- radiology. Radiologists focus mainly on analyzing and interpreting diagnostic imagery and as a result of their work they create a document called radiological report which contains description of what can be observed in the image of patient body. Reports may contain description of state of particular organs, measurements (e.g. radius, volume, concentration of certain substances in the blood), comparison of medical condition of a patient observed at different times and description of overall state of the patient.
+Everyday millions of physicians treat injuries and illnesses of different kids. Before a doctor can plan an individual treatment for a patient, they have to diagnose which organs are in pathological states \cite{bls}. This sometimes can be achieved by simply glancing at the body, however, there are many illnesses that require specialized set of tools and methods in order to observe which parts of patient's body are in an unwanted state. Through years of research, many different techniques were developed and a separate specialization emerged -- radiology. Radiologists focus mainly on analyzing and interpreting diagnostic imagery and as a result of their work they create a document called radiological report which contains description of what can be observed in the image of patient body. Reports may contain description of state of particular organs, measurements (e.g. radius, volume, concentration of certain substances), comparison of medical condition of a patient observed at different times and description of overall state of the patient.
+
 \section{Structured Reporting}
 Currently, the research is mostly focused on finding new ways of diagnosing diseases by the use of more advanced equipment or brilliant algorithms that try to automate image analysis \cite{ai}. 
 
-On the other hand, there exist initiatives that try to improve quality of the radiological reports themselves. There are groups consisting of both computer scientists and physicians that try to standardize reports, prepare checklists that require doctors to describe patients' state in particular order and create a set of phrases that will be understood in the same way by all physicians \cite{snomed}. A lot of work has been done to provide both common medical nomenclature for medical conditions and theoretical framework to describe relations between causes and effects of patients' condition. As there are more and more methods used to diagnose, the amount of information captured increases, so the reporting methodology has to be kept up to date with the state of art. This is why a very specific field -- Structured Reporting (SR) emerged. The basic idea is to provide a way to create radiological reports that conveys as much semantics as possible in a way that is easy to understand. One can find great ideas implemented in such standards as SNOMED SR \cite{sr} and also HL7 version 3 Clinical Document Architecture (HL7 V3 CDA). By using these standards, one can encode relations between organs and diseases (causality) in a very regular format. After encoding structure in the report, one can use text-processing algorithms to e.g. highlight what changed since last visit, look for diseases that were diagnosed in the specified time range etc. This is very difficult to achieve when reports are stored in plain text. Structured reporting focuses mainly on encoding meaning -- the visual representation of resulting reports is a separate matter that is treated as an implementation detail \cite{sr}.
-In spite of the existence of these standards, it is almost impossible to find software that implements structured reporting techniques. One of the most important reasons is the fact that in order to understand benefits of SR, one has to acquire certain level of understanding of the typical work-flow of a radiologist. As there is huge demand for software that is much easier to understand (e.g. RIS and HIS software), most of the effort is made to implement simpler concepts.
+On the other hand, there exist initiatives that try to improve quality of the radiological reports themselves. There are groups consisting of both computer scientists and physicians that try to standardize reports, prepare checklists that require doctors to describe patients' state in particular order and create a set of phrases that will be understood in the same way by all physicians \cite{snomed}. A lot of work has been done to develop both common medical nomenclature for medical conditions and theoretical framework for describing relations between causes and effects of patients' condition. As there are more and more methods used to diagnose, the amount of data captured increases, so the reporting methodology has to be kept up to date with the imaging techniques. This is why a very specific field -- Structured Reporting (SR) emerged. The basic idea is to provide a way to create radiological reports that conveys as much semantics as possible in a way that is easy to understand. One can find great ideas implemented in such standards as SNOMED SR \cite{sr} and also HL7 version 3 Clinical Document Architecture (HL7 V3 CDA). By using these standards, one can encode relations between organs and diseases (causality) in a very regular format. After encoding structure in the report, one can use text-processing algorithms to e.g. highlight what changed since last visit, look for diseases that were diagnosed in the specified time range etc. This is very difficult to achieve when reports are stored in plain text. Structured reporting focuses mainly on encoding meaning -- the visual representation of resulting reports is a separate matter that is treated as an implementation detail \cite{sr}.
+In spite of the existence of these standards, it is almost impossible to find a piece of software that implements structured reporting techniques. One of the most important reasons is the fact that in order to understand benefits of SR, one has to acquire certain level of understanding of the typical work-flow of a radiologist. As there is a huge demand for software that is much easier to understand (e.g. RIS and HIS software), most of the effort is made to implement simpler concepts.
 
 \section{Typical work-flow of a radiologist in Poland}
-In order to find places where optimization of productivity could be applied, one has to get to know how a radiologist works and what are activities that waste significant amounts of time. \\
+In order to find places where optimization of productivity could be applied, one has to get to know what a typical work-flow of a radiologist looks like and what are activities that waste significant amounts of time. 
+
 In a medium-sized clinic, medical imagery is captured by a radiologic technologist who then uploads the data to the Picture Archiving and Communication System (PACS) and attaches identification information to the images. Next to the PACS system in most cases exists Radiology Information System (RIS) that is used by radiological staff to keep track of patients treated in the clinic. These systems are used to distribute imagery to the team of radiologists.
 
 Imagery can be distributed in one of the following manners:
@@ -148,12 +150,12 @@ Imagery can be distributed in one of the following manners:
     \item Certain types of medical examinations are always assigned to a radiologist that is specialized in describing them.
 \end{itemize}
 
-After receiving diagnostic imagery, a radiologist uses special software called Viewer\cite{viewer} to navigate through images, make measurements by using visual tools like virtual ruler and examine what is the state of patient's body. Figure \ref{fig:osirix} shows an example of the Viewer software. In parallel to this, the doctor uses text editor and describes what he or she sees in the images. Some RIS systems are equipped with a simple text editors that allow doctors to write the report inside the system without using external editors. 
+After receiving diagnostic imagery, a radiologist uses special software called Viewer\cite{viewer} to navigate through images, make measurements by using visual tools like virtual ruler and examine what is the state of patient's body. Figure \ref{fig:osirix} shows an example of the Viewer software. Simultaneously, the doctor uses a text editor and describes what he or she sees in the images. Some RIS systems are equipped with a simple text editors that allow doctors to write the report inside the system without using external software. 
 
 \begin{figure}
     \centering
     \includegraphics[width=0.9\linewidth]{osirix}
-    \caption{OsiriX is one of the most popular image viewers used by the radiologists}
+    \caption{OsiriX is one of the most popular Viewers used by the radiologists}
     \label{fig:osirix}
 \end{figure}
 
@@ -167,13 +169,13 @@ They implement functionalities that allow for archiving medical imagery. Lifetim
 There is no need need for the radiologist to deliver the radiological report to the other physician personally as it is done automatically. Also, RIS systems provide good means of presenting medical records from different medical specializations allowing for interdisciplinary diagnostics. 
 \subsection{The bad parts}
 \subsubsection{Focus on text rather than semantics}
-It is expected that the radiologist will produce a consistent, ordered report by means of text editors. Some RIS systems provide basic text formatting functionality like italicization, underlining but they are limited to the textual presentation of the report. There are no dedicated tools to encode relations in this representation.
+It is expected that the radiologist will produce a consistent, well-structured report by means of text editors. Some RIS systems provide basic text formatting functionality like italicization, underlining but they are limited to the textual presentation of the report. There are no dedicated tools to encode relations in this representation.
 \subsubsection{Each radiologist has their own style of writing}
-Usually there are no structural expectations about the resulting report. Each radiologist can have their own style of writing, order of organs observation, text formatting. This leads to the waste of time as people who read the report have to make some effort to infer the meaning from plaintext. 
+Usually there are no structural expectations about the resulting report. Each radiologist can have their own style of writing, order of organs, style of stating observations, text formatting. This leads to the waste of time as people who read the report have to make some effort to infer the meaning from plaintext. 
 \subsubsection{Selective description}
 It is very frequent that radiologists include in the report only things that they consider bad for the patient. This makes the report more goal-oriented but it means that it is useless to get to know the overall state of patient body.
 \subsubsection{Copy-paste}
-Radiologists try to solve the problem of typing on their own by creating templates that contain certain pathologies listed and what they do is execution of the commonly called 'copy-paste' method to create report content. Sometimes they do not notice parts of copied text that are different from the actual state of the body, so the reports may contain observations that are false. 
+Radiologists try to solve the problem of typing on keyboard a lot of repeating phrases by creating templates that contain most frequent pathologies listed and what they do is execution of the commonly called 'copy-paste' method to create report content. Sometimes they do not notice parts of copied text that are different from the actual state of the body, so the reports may contain observations that are false. 
 
 \section{Other ways to create radiological reports}
 In many English-speaking countries the work-flow of a radiologist differs in the way the radiological report is generated. A radiologist may record their voice while describing the imagery vocally. The recordings are then transcribed using either speech recognition algorithms or manually by technologists. Having a good skill of typing by a radiologist is not required, only knowledge to interpret imagery is used. This approach, however, has some architectural disadvantages. More personnel are needed -- technologists, who transcribe the recorded voice \cite{speech-impact}. Also, it is difficult to make changes to what has been said. In some cases, a mistake can be made while transcribing the text \cite{speech-africa}.
@@ -192,7 +194,7 @@ A primary goal is to find a solution to the problem of not satisfactory producti
 \subsection{Area of interest}
 The system that is proposed in this thesis focuses entirely on the part of the typical radiological work-flow in which a radiologist focuses on the textual description of what can be seen in the diagnostic imagery.
 \subsection{Contextual suggestions}
-Several hundreds of anonymized radiological reports have been analyzed and it was observed that a lot of time could be saved, if a radiologist would at any time select text fragments from a predefined set of possibilities that are appropriate to the current context. This approach can be similar to the way Integrated Development Environment (IDE) for statically typed languages (e.g. Visual Studio supporting C\#) are suggesting what the programmer can type based on the namespace, class, scope they currently edit.
+Several hundreds of anonymized radiological reports were analyzed and it was observed that a lot of time could be saved, if a radiologist would at any time select text fragments from a predefined set of possibilities that are appropriate to the current context. This approach can be similar to the way Integrated Development Environment (IDE) for statically typed languages (e.g. Visual Studio supporting C\#) are suggesting what the programmer can type based on the namespace, class, scope they currently edit.
 
 In the case of programming languages, the problem is defined in a stricter way as languages are formally defined using grammars \cite{csharp-spec}. Radiological reports, however, are written using natural language, so there always exist some exceptions. Ideally, a radiologist would always use phrases that are well-defined in the standards, but the the act of scanning long list of possibilities by a radiologist could take a lot of time making it less appealing to the practitioners.
 
@@ -202,8 +204,8 @@ After observation of actions taken by radiologists while working in environments
 \begin{itemize}
 	\item Radiologists prefer using mouse to keyboard.
 	\item The user interface of the program should be simple.
-	\item Reports must be rendered in a way that allows for copying using clipboard as radiologists developed custom ways to save drafts of reports.
-	\item The system should allow for exporting reports into formatted text and pdf.
+	\item Reports must be rendered in a way that allows for copying using clipboard as radiologists developed custom ways to store drafts of reports.
+	\item The system should allow for exporting reports as formatted text and PDF.
 	\item Text formatting should be based on semantics that is encoded by a radiologist.
 	\item The system should favor reports that describe the whole state of body, not only organs in bad condition.
 	\item The system should allow to automatically include in the report segments of text that are (almost) always used (sometimes due to some legal regulations).
@@ -211,9 +213,10 @@ After observation of actions taken by radiologists while working in environments
 \end{itemize}
 \section{Goals}
 \begin{itemize}
-	\item Minimize the time radiologist uses keyboard.
+	\item Minimize the time radiologists use keyboard.
 	\item Split report into structural parts that allow to express description of patient's state.
-	\item Any fragment of template text should be editable. 
+	\item Allow radiologists to design templates of the reports that can be used when creating a report.
+	\item Any fragment of template text should be customizable at the time of creating a report. 
 	\item Maximize number of reports that can be generated by a radiologist in a unit of time.
 	\item At any time allow to include custom phrases that are not defined in the template.
 \end{itemize}
@@ -229,20 +232,26 @@ In order to provide context for the radiologist at any given moment, it is propo
 Figure \ref{fig:report-semantic} shows how report structures are related by semantic relations.
 \begin{figure}
     \centering
-    \includegraphics{report-semantic.pdf}
+    \includegraphics[width=0.25\linewidth]{report-semantic.pdf}
     \caption{Simple ontology representing entities and relationships between them encoded in reports generated using the proposed system
     \label{fig:report-semantic}}
 \end{figure}
 
 \begin{figure}
-    \centering
+	\begin{minipage}{\textwidth}
+\begin{center}
     \includegraphics[width=\linewidth]{report-tree.pdf}
     \caption{Typical structure of a radiological report created using the proposed system\protect\footnotemark[1]} 
     \label{fig:report-tree}
+    \end{center}
+    \footnotetext[1]{For simplicity, only names of nodes are presented (associated meta-data entries were omitted)}
+\end{minipage}
 \end{figure}
 
 
 By using this ontology, a radiologist can create a report that is similar in structure to a tree (as it is presented in figure \ref{fig:report-tree}). At any given moment, the doctor modifies the tree at a single level, which allows for suggesting what are the items that can be included. The idea was taken from statically typed languages which, thanks to their strictness, allow for coding with smaller number of mistakes at the lexical level \cite{static-lang}. This ontology was derived after analysis of large set of real-world radiological reports. It mirrors the way a radiologist thinks while creating a report. Because of this, it should be easier to understand the idea behind the proposed system by practitioners.
+
+Names for ontological structures shown in Figure \ref{fig:report-semantic} were chosen so it is easier for radiologists to imagine what they describe, however, they can be used not strictly (e.g. in a CT scan it is possible that a radiologist adds an organ that contains details about intracranial hemorrhage which is a kind of bleeding within the skull \cite{ich} but not an organ in its very meaning). This is one of the known weak-points of the proposed ontology.
 
 \section{Work-flow of a radiologist who uses the proposed system}
 In figure \ref{fig:report-workflow} a typical work-flow of a radiologist is represented in the form of a flowchart. 
@@ -250,8 +259,7 @@ In figure \ref{fig:report-workflow} a typical work-flow of a radiologist is repr
 	\centering
 	\includegraphics[width=0.9\linewidth]{report-workflow.pdf}
 	\caption{Work-flow of a radiologist who uses the proposed system to create contents of a radiological report
-		\label{fig:report-workflow}
-	}
+		\label{fig:report-workflow}	}
 \end{figure}
 
 \subsection{Connotation}
@@ -265,7 +273,7 @@ Besides having text, each property can have a semantical attribute called connot
 \end{figure}
 
 \subsection{Meta-data}
-Report may also contain some meta-data which can be used to identify the patient whose body is described in it. Shape of these pieces of information strongly depends on the RIS system used in a clinic. Text segments present in meta-data have no special influence on the semantics of report so it has no detailed description in this work. Figure \ref{fig:report-metadata} presents user interface used to input commonly used meta-data.
+Report may also contain some meta-data which can be used to identify the patient whose body is described in it. Shape of these pieces of information strongly depends on the RIS system used in a clinic. Text segments present in meta-data have no special influence on the semantics of report so it has no detailed description in this work. Figure \ref{fig:report-metadata} presents user interface used to input commonly used meta-data entries.
 \begin{figure}
 	\centering
 	\includegraphics[width=0.6\linewidth]{report-metadata}
@@ -273,12 +281,10 @@ Report may also contain some meta-data which can be used to identify the patient
     \label{fig:report-metadata}
 	}
 \end{figure}
-\footnotetext[1]{For simplicity, only names of nodes are presented (associated meta-data were omitted)}
 
-Names for ontological structures shown in Figure \ref{fig:report-semantic} were chosen so it is easier for radiologists to imagine what they describe, however, they can be used not strictly (e.g. in a CT scan it is possible that a radiologist adds an organ that contains details about intracranial hemorrhage which is a kind of bleeding within the skull \cite{ich} but not an organ in its very meaning). This is one of the known weak-points of the proposed ontology.
 
 \section{Examination template}
-Examination template (or simply a 'template') consists of an ordered list of all organs that could be described when creating a report. It also has some portion of meta-data used for filtering like category, discipline. Templates use the same ontology as the reports as templates can be imagined as reports with all properties, organs included. 
+Examination template (or simply a 'template') consists of an ordered list of all organs that could be described when creating a report. It also has some portion of meta-data used for filtering like discipline (e.g. radiology), category (e.g. Computed Tomography). Templates use the same ontology as the reports because templates can be imagined as reports with all properties, organs included. 
 
 \begin{figure}
     \centering
@@ -354,7 +360,7 @@ There exist several attempts to standardize the language doctors use to describe
 \subsection{No repetitions}
 Templates can be interpreted as TODO-lists containing tasks which have to be done while describing medical imagery, so a radiologist can be sure that nothing was omitted or no item appears twice in the report as a result of a mistake. Each organ that has been described is marked as complete, so the user can describe them in order.
 \subsection{Reports have ordered list of elements}
-Reports created using the proposed system can be represented as trees, nested lists of items, so it is easy to spot relationships between properties and organs and also differences between two reports describing one patient.
+Reports created using the proposed system can be represented as trees, nested lists of items, so it is easy to spot relationships between properties and organs and also differences between two reports describing the same patient.
 \subsection{Highlighting the most important pieces of information}
 The most important pieces of information can be highlighted using proper value of connotation. When one of properties of an organ should be interpreted as a main cause of health problems it is marked as a pathology. When the report is then rendered as a document, this property can have e.g. different font color, some text-decoration element or different background color (Figure \ref{property-connotation-rendered}).
 
@@ -399,9 +405,9 @@ The ASP.NET application is created using MVC pattern (Model-View-Controller) tha
 
 \subsubsection{Entity Framework}
 Entity Framework is a set of libraries that is used to create high-level abstract model using C\# that are then converted to sets of relations and attributes in the underlying DBMS. It can also be used to transform LINQ constructions to SQL queries taking into the account vendor-specific features of many DBMS.
-The approach of first creating C\# classes that represent Model and then automatically converting it to the database relations and attributes (scaffolding) is called Code First Approach. It can be especially useful when the schema of database changes very often. When changes are introduced to the code representing Model, Entity Framework can be used create a migration -- set of transformations for DB schema that after applying to the DB will keep code and schema synchronized. 
+The approach of first creating C\# classes that represent Model and then automatically converting it to the database relations and attributes (during a process named scaffolding) is called Code First Approach. It can be especially useful when the schema of database changes very often. When changes are introduced to the code representing Model, Entity Framework can be used create a migration -- set of transformations for DB schema that after applying to the DB will keep code and schema synchronized. 
 
-Listing \ref{get-user-data} is used to retrieve number of reports (with date of creation of last 30 reports) generated in the last week for all users. What is useful in this approach that all the code of application logic can be written in a single language (in this case C\#). This allows for applying tooling from this language to solve problems related to relational data management. After a more thorough analysis of the LINQ syntax, one can see elements of relational way of thinking present in this mechanism. In the proposed system all database queries are generated using LINQ.
+Code presented in Listing \ref{get-user-data} is used to retrieve number of reports (with date of creation of last 30 reports) generated in the last week for all users. What is useful in this approach that all the code of application logic can be written in a single language (in this case C\#). This allows for applying tooling from this language to solve problems related to relational data management. After a more thorough analysis of the LINQ syntax, one can see elements of relational way of thinking present in this mechanism. In the proposed system all database queries are generated using LINQ.
 
 \begin{lstlisting}[style=sharpc,caption=C\# code that is converted by Entity Framework to SQL sent to SQL Server \label{get-user-data}]
 var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
@@ -504,7 +510,7 @@ Templates can be defined by the user at the examination level. Users can create,
 After browser finishes loading static files (scripts, fonts, etc.), an additional HTTP request is created to download report templates attached to the current account. Server handles the request by querying database, instantiating model classes that correspond to the data received from database. Finally, server serializes reports data to the JSON format and sends it to the front-end. When front-end receives JSON data, a success callback is invoked and sets the data as current view model. 
 From now on a user can edit any existing template: add properties, organs, remove them, change connotations, reorder elements. Thanks to the two-way-binding mechanism, user interface can be directly connected with references to the fields of an object so the developer can focus on the visual representation of the editor. In order to make editor more robust, length of text contained in it is measured on each onChange event and its height is adjusted, so all its contents are visible to the user.
 \subsection{New Examination}
-User can create new template by clicking on New examination button. Then they are asked to input title of new examination. One of requested features was the ability to copy contents of existing examinations what is similar to forking in git. In order to achieve this, when modal window with new examination's title is opened, front-end loads from server list of user-owned examinations concatenated with list of publicly-available examinations. The latter allows users to quickly customize templates prepared by the administrator.
+User can create new template by clicking on New examination button. Then they are asked to input title of new examination. One of the requested features was the ability to copy contents of existing examinations what is similar to forking in git version control system. In order to achieve this, when modal window with new examination's title is opened, front-end loads from server list of user-owned examinations concatenated with list of publicly-available examinations. The latter allows users to quickly customize templates prepared by the administrator.
 
 \subsection{Edit examinations}
 On page load all templates that are owned by the user are downloaded. Any modification can be applied: renaming, reordering of elements, setting connotation, etc. When user clicks Save button, actions related to the immutability of templates described in section \ref{templates-immutable} are performed.
@@ -513,8 +519,8 @@ On page load all templates that are owned by the user are downloaded. Any modifi
 \section{Report creator}
 
 \subsection{Data loaded lazily}
-Report creator is the most optimized part of the application. It is the place where user spends most of their time and it has to respond to any action immediately. It is not easy to predict which examinations will be used in a particular report, so all of available examinations must be ready to be loaded. At the page load, only list of available examinations' titles (user-owned and public examinations) is loaded from the server. When the user clicks on examination's title, the rest of template's content is loaded via HTTP call and ready to be modified and included in the report. Figure \ref{fig:examination-list} shows the initial screen of a template editor with titles of templates listed.
-\footnotetext[3]{Initially only a list of names of available templates is presented to the user. Contents of the template are downloaded after clicking on the pill representing a template}
+Report creator is the most heavily optimized part of the application. It is the place where user spends majority of their time and it has to respond to any action immediately. It is not easy to predict which examinations will be used in a particular report, so all of available examinations must be ready to be loaded. At the page load, only list of available examinations' titles (user-owned and public examinations) is loaded from the server. When the user clicks on examination's title, the rest of template's content is loaded via HTTP call and ready to be modified and included in the report. Figure \ref{fig:examination-list} shows the initial screen of a template editor with titles of templates listed.
+
 \begin{figure}
 	\centering
 	\includegraphics[width=0.9\linewidth]{examination-list}
@@ -531,6 +537,7 @@ When radiologists are specialized in a particular field, they have subset of exa
 \subsubsection{Cache invalidation}
 As templates contain no sensitive information, they can be stored in localStorage without restrictions regarding synchronization of cache invalidation with session expiry time. However, the invalidation has to happen when user updates an examination in the Templates tab. In order to keep things simple, the whole cache gets purged anytime user navigates to the Templates tab. 
 
+\footnotetext[3]{Initially, only a list of names of available templates is presented to the user. Contents of the template are downloaded after clicking on the pill representing a template}
 \subsection{Editing functionality}
 As user navigates through the levels of the report structure, the program signifies this by opening modal windows one on top of another. This results in the following behavior: when user makes decisions that have the biggest impact on the shape of the report -- edits report meta-data, selects examinations that will be used -- the program is at the 1 st level of depth, no modals are present.
 When user decides to include an examination, a modal is opened hiding all information that is not necessary at the moment and the user is shown list of organs with preview of the report (As shown in figure \ref{fig:organ-list}).
@@ -558,7 +565,7 @@ It is crucial for the user to always be aware of the impact of edits they make t
 
 \subsection{Changes propagation}\label{changes-propagation}
 Connotation it attached to each property, however, it is also useful to see its effect on the organ. This way, it is easier to see which organs are in pathological condition, which examinations contain unhealthy organs. Status of an organ is calculated by accumulating connotation of all its properties: if one or more properties have negative connotations, the whole organ is marked as in unwanted condition. On the other hand, the organ is marked as healthy if all properties have neutral or positive connotation.
-The same holds for examinations, but states of all its organs are taken into account. Propagation of the effects of connotation is done when an organ is closed. Then the accumulated connotation is calculated at the organ and examination level.
+The same holds for examinations, but states of all its organs are taken into account. Propagation of the effects of connotation is done when an organ modal window is closed. Then the accumulated connotation is calculated at the examination level.
 
 \subsection{Storing a report in the database}
 This is a very important decision from the architectural perspective. Format of the saved report can impact the performance of retrieving saved report, interoperability with other systems, etc. The format of stored report could be a topic for a very broad discussion. In order to maintain the simplicity of the whole project, it was decided to store JSON representing the report in the database. Many of the DMBS have special functionalities that are based on ideas used in NoSQL databases, especially document databases to allow for storing JSON objects, validating and querying them as if they ware part of the relational data. This makes it easy to store data that can have numerous optional fields. Unfortunately, MSSQL Server does not support storing JSON objects natively (Microsoft calls their limited way of supporting this format as \textit{built-in JSON support} \cite{microsoft-json-support}), however, it is possible to store JSON string representation in a column of type NVARCHAR and then validate it on SQL INSERT by the use of ISJSON function.
@@ -596,7 +603,7 @@ The system can be used on any operating system as its execution environment is p
 \item Tables have smaller number of columns in order to fit the screen. 
 \item Navigation bar at the top of the page is replaced with a button that expands all menu items on a click. 
 \item Modal windows are occupying the whole screen, so more content can be shown to the user.
-\item Lists that usually are represented as a grid, are enjambed vertically one item per line, so it is easier to tap them using finger.
+\item Lists that usually are represented as a grid are enjambed vertically one item per line, so it is easier to tap them using finger.
 \item Font sizes are modified with respect to the Bootstrap's typography recommendations. \cite{bootstrap-typography}.
 \end{itemize} 
 The system could be used on mobile devices in situations when a radiologist is not only responsible for report but also for the technical execution of the examination. After capturing the imagery, the doctor would use tablet to generate the report, present it to the patient and send to the RIS.
@@ -808,7 +815,7 @@ On the other hand, representatives from public health-care units were not open f
 
 
 \section{Possible further extensions}
-One should look at the proposed system as a battle-tested idea that can be used to create bigger system focused on optimizing work-flow of not only radiologists but also other medical specializations. There are several paths that can be taken to make the reports created using the system more specific and language-agnostic and decrease the report turnaround time. Some ideas, as well as may they sound to a Computer Scientist, would require radical changes to the way doctors work currently. Revolution in reporting is not very likely to happen as there are many existing systems on the market that are being used continuously. Radical change to the reporting philosophy would make them irrelevant as they would not be able to store complex data of different shapes like trees or graphs in comparison to the relations native to relational databases that do not make it easy to store information encoded in these structures \cite{coelko-trees}. 
+One should look at the proposed system as a battle-tested idea that can be used to create bigger system focused on optimizing work-flow of not only radiologists but also other medical specializations. There are several paths that can be taken to make the reports created using the system more specific and language-agnostic and decrease the report turnaround time. Some ideas, as well as may they sound to a Computer Scientist, would require radical changes to the way doctors work currently. Revolution in reporting is not very likely to happen as there are many existing systems on the market that are being used continuously. One should rather expect gradual evolution of standards. Radical change to the reporting philosophy would make them irrelevant as they would not be able to store complex data of different shapes like trees or graphs in comparison to the relations native to relational databases that do not make it easy to store information encoded in these structures \cite{coelko-trees}. 
 
 \subsection{Complex ontologies support}
 One could generalize the ontology that is backing the system or use existing, well-designed ones like SNOMED CT. This approach would allow for better interoperability with other systems as publicly available ontologies leave no space for ambiguity and provide global identifiers that can be used to infer exact meaning from text phrases. One could try to map free text to the SNOMED CT ontology and ask the radiologist for more information in case of need for additional data to get rid of ambiguities. This, however, would make the solution not applicable to Polish market as this ontology does not support Polish language. 
@@ -857,7 +864,7 @@ Zucherman, StructuRad Presentation
 Reporting Tool Overview, available at: \\http://www.structuredreporting.com/structurad-presentation.pdf [10.04.2018]
 \bibitem{nfz} Zadrożna et al, Private sector is crucial for Polish health-care system, available [in Polish] at :\\ https://www.polskieradio.pl/42/4393/Artykul/1535315,Prywatna-sluzba-zdrowia-jest-w-Polsce-niezbedna-A-sektor-niepubliczny-ochrony-zdrowia-ma-szanse-na-blyskawiczny-rozwoj [10.04.2018]
 \bibitem{inefficient}
- Dunlevy, Inefficient public hospitals wasting \$1 billion, finds Grattan Institute report, available at: \\ http://www.news.com.au/lifestyle/health/inefficient-public-hospitals-wasting-1-billion-finds-grattan-institute-report/news-story/7aed1d890868572790cdc2a2a04c7868
+ Dunlevy, Inefficient public hospitals wasting \$1 billion, finds Grattan Institute report, available at: \\ http://www.news.com.au/lifestyle/health/inefficient-public-hospitals-wasting-1-billion-finds-grattan-institute-report/news-story/7aed1d890868572790cdc2a2a04c7868 [10.03.2018]
 \bibitem{nlg-templates} Reiter, NLG vs. Templates, available at: \\
 https://arxiv.org/pdf/cmp-lg/9504013.pdf [10.03.2018]
 \bibitem{s-wolfram}
