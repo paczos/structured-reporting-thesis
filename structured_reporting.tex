@@ -19,8 +19,19 @@
 \usepackage{afterpage}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{fancyhdr} %footer settings
 \lstdefinestyle{sharpc}{
 	language=[Sharp]C, 		
+	belowcaptionskip=1\baselineskip,
+	breaklines=true,
+	frame=L,
+	xleftmargin=\parindent,
+	showstringspaces=false,
+	basicstyle=\footnotesize\ttfamily,
+	rulecolor=\color{blue!80!black}
+}
+\lstdefinestyle{html}{
+	language=HTML, 		
 	belowcaptionskip=1\baselineskip,
 	breaklines=true,
 	frame=L,
@@ -39,14 +50,23 @@
 \addto{\captionsbritish}{\renewcommand{\abstractname}{Summary}}
 \renewcommand\thempfootnote{\arabic{mpfootnote}} %so it will show numbers instead of symbols
 
+\fancyhf{} % Start with clearing everything in the header and footer
+\fancyfoot[LO, RE]{\thepage}%
+
+\fancypagestyle{plain}{%
+	\renewcommand{\headrulewidth}{0pt}%
+	\fancyhf{}%
+	\fancyfoot[LO, RE]{\thepage}%
+
+}
+
+
 
 \author{Paweł Paczuski}
 \title{Structured radiological reporting system}
 
 \begin{document}
 \fontfamily{phv}\selectfont
-
-
 % Zażółć gęślą jaźń.
 \begin{titlepage}
 \pagestyle{empty}
@@ -98,31 +118,33 @@ WARSAW 2018
 
 \thispagestyle{empty}
 \newpage
-\pagestyle{headings}
 \setcounter{page}{1}
 \hyphenation{Syl-ves-tra}
 \hyphenation{Syl-ves-ter-a}
 \begin{otherlanguage}{british}
 \begin{abstract}
 Design and implementation of a system that can be used by radiologists to create structured radiological reports is discussed. The system uses sets of standardized, frequently used phrases to: describe state of patient's body captured by other medical diagnostics methods, provide set of tools that minimize risk of mistake and increase productivity. 
-\\
+\\ \\
 Keywords: structured reporting, radiology, health informatics, ontologies, interoperability, SNOMED CT, HL7.
 \end{abstract}
 \end{otherlanguage}
 \begin{otherlanguage}{polish}
 \begin{abstract}
 	Rozważono projekt oraz implementację systemu wspomagającego tworzenie strukturalnych opisów radiologicznych. Oprogramowanie ma na celu zwiększenie produktywności lekarza i zmniejszenie ryzyka popełnienia błędu poprzez sugerowanie zbiorów standardowych, najczęściej występujących fraz opisujących stan pacjenta.
-\\
+\\ \\
 Słowa kluczowe: strukturalne opisy radiologiczne, radiologia, informatyka w medycynie, ontologie, interoperacyjność, SNOMED CT, HL7.
 
 \end{abstract}
 \end{otherlanguage}
 
 %-----------Początek części zasadniczej-----------
+\pagestyle{fancy}
+\renewcommand\headrule{}
 \tableofcontents
 \clearpage
 
-
+\fancyhead[L]{\leftmark}
+\pagestyle{fancy}
 
 
 
@@ -155,8 +177,9 @@ After receiving diagnostic imagery, a radiologist uses special software called V
 \begin{figure}
     \centering
     \includegraphics[width=0.9\linewidth]{osirix}
-    \caption{OsiriX is one of the most popular Viewers used by the radiologists}
+    \caption{OsiriX is one of the most popular Viewers used by the radiologists\hspace{\textwidth}Source: www.osirix-viewer.com}
     \label{fig:osirix}
+
 \end{figure}
 
 \section{Discussion about presented work-flow}
@@ -244,7 +267,7 @@ Figure \ref{fig:report-semantic} shows how report structures are related by sema
     \caption{Typical structure of a radiological report created using the proposed system\protect\footnotemark[1]} 
     \label{fig:report-tree}
     \end{center}
-    \footnotetext[1]{For simplicity, only names of nodes are presented (associated meta-data entries were omitted)}
+    \footnotetext[1]{For simplicity, only names of nodes are presented (associated meta-data entries were omitted).}
 \end{minipage}
 \end{figure}
 
@@ -308,7 +331,7 @@ Examination template (or simply a 'template') consists of an ordered list of all
     \includegraphics{template-property-list}
     \caption{GUI used to edit properties of an organ\protect\footnotemark[2] \label{fig:template-property-list}}
     	\end{center}
-    \footnotetext[2]{User can predefine connotation and tell the program that this property can be automatically included if the organ is marked as healthy}
+    \footnotetext[2]{User can predefine connotation and signify that this property can be automatically included if the organ is marked as healthy.}
     \end{minipage}
 \end{figure}
 
@@ -438,7 +461,7 @@ Not all interactions with the application result in HTTP requests sent to the se
 \subsubsection{Razor views}
 The remaining front-end subpages are generated using view engine present in ASP.NET called Razor. These views are responsible for interactions like logging in, registration (backed with ASP.NET identity mechanism), listing reports, searching for particular report etc. They are generated on the server side and sent to the user as HTML and rendered by the browser. Listing \ref{register-view} presents the most important part of Razor view code for log in form. 
 
-\begin{lstlisting}[style=sharpc,caption=Razor view code filled with C\# embeddings that is later converted to pure HTML code with properly translated strings\label{register-view}]
+\begin{lstlisting}[style=html,caption=Razor view code filled with C\# embeddings that is later converted to pure HTML code with properly translated strings\label{register-view}]
 @model LoginViewModel
 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "col-lg-12 form-horizontal", role = "form" }))
 {   @Html.AntiForgeryToken()
@@ -537,7 +560,7 @@ When radiologists are specialized in a particular field, they have subset of exa
 \subsubsection{Cache invalidation}
 As templates contain no sensitive information, they can be stored in localStorage without restrictions regarding synchronization of cache invalidation with session expiry time. However, the invalidation has to happen when user updates an examination in the Templates tab. In order to keep things simple, the whole cache gets purged anytime user navigates to the Templates tab. 
 
-\footnotetext[3]{Initially, only a list of names of available templates is presented to the user. Contents of the template are downloaded after clicking on the pill representing a template}
+\footnotetext[3]{Initially, only a list of names of available templates is presented to the user. Contents of the template are downloaded after clicking on the pill representing a template.}
 \subsection{Editing functionality}
 As user navigates through the levels of the report structure, the program signifies this by opening modal windows one on top of another. This results in the following behavior: when user makes decisions that have the biggest impact on the shape of the report -- edits report meta-data, selects examinations that will be used -- the program is at the 1 st level of depth, no modals are present.
 When user decides to include an examination, a modal is opened hiding all information that is not necessary at the moment and the user is shown list of organs with preview of the report (As shown in figure \ref{fig:organ-list}).
@@ -862,15 +885,19 @@ Data by Neural Networks?, available at: \\http://www2.fiit.stuba.sk/~kvasnicka/N
 \bibitem{structurad}
 Zucherman, StructuRad Presentation
 Reporting Tool Overview, available at: \\http://www.structuredreporting.com/structurad-presentation.pdf [10.04.2018]
+\begin{comment}%removed because of hiding Adaptation of medical innovations in Poland
 \bibitem{nfz} Zadrożna et al, Private sector is crucial for Polish health-care system, available [in Polish] at :\\ https://www.polskieradio.pl/42/4393/Artykul/1535315,Prywatna-sluzba-zdrowia-jest-w-Polsce-niezbedna-A-sektor-niepubliczny-ochrony-zdrowia-ma-szanse-na-blyskawiczny-rozwoj [10.04.2018]
+\end{comment}
+\begin{comment}%removed because of hiding Adaptation of medical innovations in Poland
 \bibitem{inefficient}
  Dunlevy, Inefficient public hospitals wasting \$1 billion, finds Grattan Institute report, available at: \\ http://www.news.com.au/lifestyle/health/inefficient-public-hospitals-wasting-1-billion-finds-grattan-institute-report/news-story/7aed1d890868572790cdc2a2a04c7868 [10.03.2018]
+ \end{comment}
 \bibitem{nlg-templates} Reiter, NLG vs. Templates, available at: \\
 https://arxiv.org/pdf/cmp-lg/9504013.pdf [10.03.2018]
 \bibitem{s-wolfram}
 Wolfram, A New Kind of Science, Wolfram Media, 2002.
-\bibitem{private-better}
-Ladrowski, Private health-care in Poland -- can it even be profitable?, available [in Polish] at: \\\ https://www.klinikiwpolsce.pl/aktualnosci/prywatna\_sluzba\_zdrowia\_\_czy\_to\_sie\_oplaca/ [03.03.2018]
+%\bibitem{private-better}
+%Ladrowski, Private health-care in Poland -- can it even be profitable?, available [in Polish] at: \\\ https://www.klinikiwpolsce.pl/aktualnosci/prywatna\_sluzba\_zdrowia\_\_czy\_to\_sie\_oplaca/ [03.03.2018]
 \bibitem{coelko-trees}Celko, Joe Celko's SQL for Smarties (Third edition), Morgan Kaufmann, San Francisco 2005.
 \bibitem{recurrent-neural-networks-google} NLG at Google Research, available at:
  https://www.youtube.com/watch?v=MNvT5JekDpg [video] [10.04.2018]
