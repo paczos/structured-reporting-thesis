@@ -1,0 +1,123 @@
+\babel@toc {british}{}
+\babel@toc {british}{}
+\babel@toc {british}{}
+\babel@toc {polish}{}
+\babel@toc {british}{}
+\contentsline {chapter}{\numberline {1}Introduction}{5}
+\contentsline {section}{\numberline {1.1}The need for medical diagnostics}{5}
+\contentsline {section}{\numberline {1.2}Structured Reporting}{5}
+\contentsline {section}{\numberline {1.3}Typical work-flow of a radiologist in Poland}{6}
+\contentsline {section}{\numberline {1.4}Discussion about presented work-flow}{6}
+\contentsline {subsection}{\numberline {1.4.1}The good parts}{6}
+\contentsline {subsubsection}{Viewer software provides expected functionality}{6}
+\contentsline {subsubsection}{PACS systems provide centralized place for storing images}{7}
+\contentsline {subsubsection}{RIS systems make it easy to exchange data between physicians}{7}
+\contentsline {subsection}{\numberline {1.4.2}The bad parts}{7}
+\contentsline {subsubsection}{Focus on text rather than semantics}{7}
+\contentsline {subsubsection}{Each radiologist has their own style of writing}{8}
+\contentsline {subsubsection}{Selective description}{8}
+\contentsline {subsubsection}{Copy-paste}{8}
+\contentsline {section}{\numberline {1.5}Other ways to create radiological reports}{8}
+\contentsline {section}{\numberline {1.6}Problem definition}{8}
+\contentsline {section}{\numberline {1.7}Incentives for the thesis}{8}
+\contentsline {chapter}{\numberline {2}Description of the proposed solution}{10}
+\contentsline {section}{\numberline {2.1}General idea}{10}
+\contentsline {subsection}{\numberline {2.1.1}Area of interest}{10}
+\contentsline {subsection}{\numberline {2.1.2}Contextual suggestions}{10}
+\contentsline {section}{\numberline {2.2}Assumptions}{10}
+\contentsline {section}{\numberline {2.3}Goals}{11}
+\contentsline {section}{\numberline {2.4}Proposed reporting ontology based on ideas from DICOM SR and HL7 CDA}{11}
+\contentsline {section}{\numberline {2.5}Work-flow of a radiologist who uses the proposed system}{13}
+\contentsline {subsection}{\numberline {2.5.1}Connotation}{13}
+\contentsline {subsection}{\numberline {2.5.2}Meta-data}{13}
+\contentsline {section}{\numberline {2.6}Examination template}{13}
+\contentsline {section}{\numberline {2.7}Productivity improvements}{18}
+\contentsline {subsection}{\numberline {2.7.1}Using templates}{18}
+\contentsline {subsection}{\numberline {2.7.2}Mark organ as healthy}{18}
+\contentsline {subsection}{\numberline {2.7.3}Calculators}{18}
+\contentsline {subsubsection}{RECIST 1.1}{18}
+\contentsline {section}{\numberline {2.8}Reporting quality improvements}{19}
+\contentsline {subsection}{\numberline {2.8.1}Standardized nomenclature}{19}
+\contentsline {subsection}{\numberline {2.8.2}No repetitions}{19}
+\contentsline {subsection}{\numberline {2.8.3}Reports have ordered list of elements}{19}
+\contentsline {subsection}{\numberline {2.8.4}Highlighting the most important pieces of information}{19}
+\contentsline {subsection}{\numberline {2.8.5}Shift from difference reporting to the current state reporting}{21}
+\contentsline {subsection}{\numberline {2.8.6}Update of the report}{21}
+\contentsline {chapter}{\numberline {3}Implementation}{22}
+\contentsline {section}{\numberline {3.1}Architecture of the proposed solution}{22}
+\contentsline {section}{\numberline {3.2}Technological stack}{22}
+\contentsline {subsection}{\numberline {3.2.1}Back-end}{22}
+\contentsline {subsubsection}{C\#}{22}
+\contentsline {subsubsection}{ASP.NET}{22}
+\contentsline {subsubsection}{Entity Framework}{24}
+\contentsline {subsection}{\numberline {3.2.2}Database}{24}
+\contentsline {subsection}{\numberline {3.2.3}Front-end}{25}
+\contentsline {subsubsection}{Razor views}{25}
+\contentsline {subsubsection}{JavaScript}{26}
+\contentsline {subsubsection}{AngularJS}{26}
+\contentsline {section}{\numberline {3.3}Internationalization and localization}{26}
+\contentsline {section}{\numberline {3.4}Templates}{27}
+\contentsline {subsection}{\numberline {3.4.1}Feeding front-end with data from database}{28}
+\contentsline {subsection}{\numberline {3.4.2}New Examination}{28}
+\contentsline {subsection}{\numberline {3.4.3}Edit examinations}{28}
+\contentsline {section}{\numberline {3.5}Report creator}{28}
+\contentsline {subsection}{\numberline {3.5.1}Data loaded lazily}{28}
+\contentsline {subsection}{\numberline {3.5.2}Caching at the user side}{28}
+\contentsline {subsubsection}{Cache invalidation}{29}
+\contentsline {subsection}{\numberline {3.5.3}Editing functionality}{29}
+\contentsline {subsection}{\numberline {3.5.4}Predefined but modifiable}{31}
+\contentsline {subsection}{\numberline {3.5.5}Live preview}{31}
+\contentsline {subsection}{\numberline {3.5.6}Changes propagation}{31}
+\contentsline {subsection}{\numberline {3.5.7}Storing a report in the database}{31}
+\contentsline {section}{\numberline {3.6}Report history}{32}
+\contentsline {section}{\numberline {3.7}Compare reports}{32}
+\contentsline {section}{\numberline {3.8}Integration with existing systems}{32}
+\contentsline {section}{\numberline {3.9}Responsive design}{34}
+\contentsline {section}{\numberline {3.10}Utility modules}{34}
+\contentsline {subsection}{\numberline {3.10.1}Technical support module}{35}
+\contentsline {subsection}{\numberline {3.10.2}Announcements}{35}
+\contentsline {subsection}{\numberline {3.10.3}Administrator dashboard}{35}
+\contentsline {subsection}{\numberline {3.10.4}Make a public copy of a template}{35}
+\contentsline {subsection}{\numberline {3.10.5}User account}{36}
+\contentsline {subsection}{\numberline {3.10.6}Interactive guide}{36}
+\contentsline {section}{\numberline {3.11}Deployment strategy}{36}
+\contentsline {chapter}{\numberline {4}Testing and verification}{38}
+\contentsline {section}{\numberline {4.1}Entity ownership tests}{38}
+\contentsline {subsection}{\numberline {4.1.1}User sees only their reports}{38}
+\contentsline {subsection}{\numberline {4.1.2}Users can edit only their reports}{38}
+\contentsline {subsection}{\numberline {4.1.3}Users can access contents of public and custom templates}{38}
+\contentsline {section}{\numberline {4.2}Database consistency tests}{38}
+\contentsline {subsection}{\numberline {4.2.1}Cascade removal}{39}
+\contentsline {subsection}{\numberline {4.2.2}Code First schema generation}{39}
+\contentsline {subsection}{\numberline {4.2.3}Validate JSON}{39}
+\contentsline {section}{\numberline {4.3}Report structure tests}{39}
+\contentsline {subsection}{\numberline {4.3.1}Validate JSON representation of the report}{39}
+\contentsline {subsection}{\numberline {4.3.2}Report rendering}{39}
+\contentsline {section}{\numberline {4.4}Report editor functionality}{39}
+\contentsline {subsection}{\numberline {4.4.1}Live preview refresh rate}{40}
+\contentsline {subsection}{\numberline {4.4.2}Tree changes propagation}{40}
+\contentsline {section}{\numberline {4.5}Internationalization tests}{40}
+\contentsline {subsection}{\numberline {4.5.1}Language specific templates}{40}
+\contentsline {chapter}{\numberline {5}Some examples of system output data and validation}{41}
+\contentsline {section}{\numberline {5.1}Reports created using the proposed system}{41}
+\contentsline {subsection}{\numberline {5.1.1}Basic report}{41}
+\contentsline {subsection}{\numberline {5.1.2}Standard report of a healthy patient}{41}
+\contentsline {subsection}{\numberline {5.1.3}Report describing complex pathological state}{41}
+\contentsline {section}{\numberline {5.2}Validation}{42}
+\contentsline {subsection}{\numberline {5.2.1}Time savings}{42}
+\contentsline {subsection}{\numberline {5.2.2}User satisfaction surveys}{44}
+\contentsline {subsection}{\numberline {5.2.3}Users from several working environments}{44}
+\contentsline {subsubsection}{Teleradiologists}{44}
+\contentsline {subsubsection}{Hospital}{45}
+\contentsline {subsubsection}{Network of clinics}{45}
+\contentsline {chapter}{\numberline {6}Conclusion and ideas for the future}{46}
+\contentsline {section}{\numberline {6.1}Realization of the thesis objectives}{46}
+\contentsline {subsection}{\numberline {6.1.1}Knowledge engineering vs. template approach}{46}
+\contentsline {subsection}{\numberline {6.1.2}StructuRad \IeC {\textendash } similar idea}{47}
+\contentsline {subsection}{\numberline {6.1.3}Simplicity of the template approach}{47}
+\contentsline {subsection}{\numberline {6.1.4}Balance between structure and customizability}{47}
+\contentsline {subsection}{\numberline {6.1.5}Achievements of this thesis}{48}
+\contentsline {section}{\numberline {6.2}Possible further extensions}{48}
+\contentsline {subsection}{\numberline {6.2.1}Complex ontologies support}{48}
+\contentsline {subsection}{\numberline {6.2.2}Recurrent neural networks and natural language generation methods}{48}
+\contentsline {subsection}{\numberline {6.2.3}Linguistic engine}{49}

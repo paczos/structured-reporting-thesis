@@ -1,0 +1,99 @@
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.1.1}{The need for medical diagnostics}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Structured Reporting}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{Typical work-flow of a radiologist in Poland}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.4}{Discussion about presented work-flow}{chapter.1}% 5
+\BOOKMARK [2][-]{subsection.1.4.1}{The good parts}{section.1.4}% 6
+\BOOKMARK [2][-]{subsection.1.4.2}{The bad parts}{section.1.4}% 7
+\BOOKMARK [1][-]{section.1.5}{Other ways to create radiological reports}{chapter.1}% 8
+\BOOKMARK [1][-]{section.1.6}{Problem definition}{chapter.1}% 9
+\BOOKMARK [1][-]{section.1.7}{Incentives for the thesis}{chapter.1}% 10
+\BOOKMARK [0][-]{chapter.2}{Description of the proposed solution}{}% 11
+\BOOKMARK [1][-]{section.2.1}{General idea}{chapter.2}% 12
+\BOOKMARK [2][-]{subsection.2.1.1}{Area of interest}{section.2.1}% 13
+\BOOKMARK [2][-]{subsection.2.1.2}{Contextual suggestions}{section.2.1}% 14
+\BOOKMARK [1][-]{section.2.2}{Assumptions}{chapter.2}% 15
+\BOOKMARK [1][-]{section.2.3}{Goals}{chapter.2}% 16
+\BOOKMARK [1][-]{section.2.4}{Proposed reporting ontology based on ideas from DICOM SR and HL7 CDA}{chapter.2}% 17
+\BOOKMARK [1][-]{section.2.5}{Work-flow of a radiologist who uses the proposed system}{chapter.2}% 18
+\BOOKMARK [2][-]{subsection.2.5.1}{Connotation}{section.2.5}% 19
+\BOOKMARK [2][-]{subsection.2.5.2}{Meta-data}{section.2.5}% 20
+\BOOKMARK [1][-]{section.2.6}{Examination template}{chapter.2}% 21
+\BOOKMARK [1][-]{section.2.7}{Productivity improvements}{chapter.2}% 22
+\BOOKMARK [2][-]{subsection.2.7.1}{Using templates}{section.2.7}% 23
+\BOOKMARK [2][-]{subsection.2.7.2}{Mark organ as healthy}{section.2.7}% 24
+\BOOKMARK [2][-]{subsection.2.7.3}{Calculators}{section.2.7}% 25
+\BOOKMARK [1][-]{section.2.8}{Reporting quality improvements}{chapter.2}% 26
+\BOOKMARK [2][-]{subsection.2.8.1}{Standardized nomenclature}{section.2.8}% 27
+\BOOKMARK [2][-]{subsection.2.8.2}{No repetitions}{section.2.8}% 28
+\BOOKMARK [2][-]{subsection.2.8.3}{Reports have ordered list of elements}{section.2.8}% 29
+\BOOKMARK [2][-]{subsection.2.8.4}{Highlighting the most important pieces of information}{section.2.8}% 30
+\BOOKMARK [2][-]{subsection.2.8.5}{Shift from difference reporting to the current state reporting}{section.2.8}% 31
+\BOOKMARK [2][-]{subsection.2.8.6}{Update of the report}{section.2.8}% 32
+\BOOKMARK [0][-]{chapter.3}{Implementation}{}% 33
+\BOOKMARK [1][-]{section.3.1}{Architecture of the proposed solution}{chapter.3}% 34
+\BOOKMARK [1][-]{section.3.2}{Technological stack}{chapter.3}% 35
+\BOOKMARK [2][-]{subsection.3.2.1}{Back-end}{section.3.2}% 36
+\BOOKMARK [2][-]{subsection.3.2.2}{Database}{section.3.2}% 37
+\BOOKMARK [2][-]{subsection.3.2.3}{Front-end}{section.3.2}% 38
+\BOOKMARK [1][-]{section.3.3}{Internationalization and localization}{chapter.3}% 39
+\BOOKMARK [1][-]{section.3.4}{Templates}{chapter.3}% 40
+\BOOKMARK [2][-]{subsection.3.4.1}{Feeding front-end with data from database}{section.3.4}% 41
+\BOOKMARK [2][-]{subsection.3.4.2}{New Examination}{section.3.4}% 42
+\BOOKMARK [2][-]{subsection.3.4.3}{Edit examinations}{section.3.4}% 43
+\BOOKMARK [1][-]{section.3.5}{Report creator}{chapter.3}% 44
+\BOOKMARK [2][-]{subsection.3.5.1}{Data loaded lazily}{section.3.5}% 45
+\BOOKMARK [2][-]{subsection.3.5.2}{Caching at the user side}{section.3.5}% 46
+\BOOKMARK [2][-]{subsection.3.5.3}{Editing functionality}{section.3.5}% 47
+\BOOKMARK [2][-]{subsection.3.5.4}{Predefined but modifiable}{section.3.5}% 48
+\BOOKMARK [2][-]{subsection.3.5.5}{Live preview}{section.3.5}% 49
+\BOOKMARK [2][-]{subsection.3.5.6}{Changes propagation}{section.3.5}% 50
+\BOOKMARK [2][-]{subsection.3.5.7}{Storing a report in the database}{section.3.5}% 51
+\BOOKMARK [1][-]{section.3.6}{Report history}{chapter.3}% 52
+\BOOKMARK [1][-]{section.3.7}{Compare reports}{chapter.3}% 53
+\BOOKMARK [1][-]{section.3.8}{Integration with existing systems}{chapter.3}% 54
+\BOOKMARK [1][-]{section.3.9}{Responsive design}{chapter.3}% 55
+\BOOKMARK [1][-]{section.3.10}{Utility modules}{chapter.3}% 56
+\BOOKMARK [2][-]{subsection.3.10.1}{Technical support module}{section.3.10}% 57
+\BOOKMARK [2][-]{subsection.3.10.2}{Announcements}{section.3.10}% 58
+\BOOKMARK [2][-]{subsection.3.10.3}{Administrator dashboard}{section.3.10}% 59
+\BOOKMARK [2][-]{subsection.3.10.4}{User account}{section.3.10}% 60
+\BOOKMARK [2][-]{subsection.3.10.5}{Interactive guide}{section.3.10}% 61
+\BOOKMARK [1][-]{section.3.11}{Deployment strategy}{chapter.3}% 62
+\BOOKMARK [0][-]{chapter.4}{Testing and verification}{}% 63
+\BOOKMARK [1][-]{section.4.1}{Entity ownership tests}{chapter.4}% 64
+\BOOKMARK [2][-]{subsection.4.1.1}{User sees only their reports}{section.4.1}% 65
+\BOOKMARK [2][-]{subsection.4.1.2}{Users can edit only their reports}{section.4.1}% 66
+\BOOKMARK [2][-]{subsection.4.1.3}{Users can access contents of public and custom templates}{section.4.1}% 67
+\BOOKMARK [1][-]{section.4.2}{Database consistency tests}{chapter.4}% 68
+\BOOKMARK [2][-]{subsection.4.2.1}{Cascade removal}{section.4.2}% 69
+\BOOKMARK [2][-]{subsection.4.2.2}{Code First schema generation}{section.4.2}% 70
+\BOOKMARK [2][-]{subsection.4.2.3}{Validate JSON}{section.4.2}% 71
+\BOOKMARK [1][-]{section.4.3}{Report structure tests}{chapter.4}% 72
+\BOOKMARK [2][-]{subsection.4.3.1}{Validate JSON representation of the report}{section.4.3}% 73
+\BOOKMARK [2][-]{subsection.4.3.2}{Report rendering}{section.4.3}% 74
+\BOOKMARK [1][-]{section.4.4}{Report editor functionality}{chapter.4}% 75
+\BOOKMARK [2][-]{subsection.4.4.1}{Live preview refresh rate}{section.4.4}% 76
+\BOOKMARK [2][-]{subsection.4.4.2}{Tree changes propagation}{section.4.4}% 77
+\BOOKMARK [1][-]{section.4.5}{Internationalization tests}{chapter.4}% 78
+\BOOKMARK [2][-]{subsection.4.5.1}{Language specific templates}{section.4.5}% 79
+\BOOKMARK [0][-]{chapter.5}{Some examples of system output data and validation}{}% 80
+\BOOKMARK [1][-]{section.5.1}{Reports created using the proposed system}{chapter.5}% 81
+\BOOKMARK [2][-]{subsection.5.1.1}{Basic report}{section.5.1}% 82
+\BOOKMARK [2][-]{subsection.5.1.2}{Standard report of a healthy patient}{section.5.1}% 83
+\BOOKMARK [2][-]{subsection.5.1.3}{Report describing complex pathological state}{section.5.1}% 84
+\BOOKMARK [1][-]{section.5.2}{Validation}{chapter.5}% 85
+\BOOKMARK [2][-]{subsection.5.2.1}{Time savings}{section.5.2}% 86
+\BOOKMARK [2][-]{subsection.5.2.2}{User satisfaction surveys}{section.5.2}% 87
+\BOOKMARK [2][-]{subsection.5.2.3}{Users from several working environments}{section.5.2}% 88
+\BOOKMARK [0][-]{chapter.6}{Conclusion and ideas for the future}{}% 89
+\BOOKMARK [1][-]{section.6.1}{Realization of the thesis objectives}{chapter.6}% 90
+\BOOKMARK [2][-]{subsection.6.1.1}{Knowledge engineering vs. template approach}{section.6.1}% 91
+\BOOKMARK [2][-]{subsection.6.1.2}{StructuRad \205 similar idea}{section.6.1}% 92
+\BOOKMARK [2][-]{subsection.6.1.3}{Simplicity of the template approach}{section.6.1}% 93
+\BOOKMARK [2][-]{subsection.6.1.4}{Balance between structure and customizability}{section.6.1}% 94
+\BOOKMARK [2][-]{subsection.6.1.5}{Achievements of this thesis}{section.6.1}% 95
+\BOOKMARK [1][-]{section.6.2}{Possible further extensions}{chapter.6}% 96
+\BOOKMARK [2][-]{subsection.6.2.1}{Complex ontologies support}{section.6.2}% 97
+\BOOKMARK [2][-]{subsection.6.2.2}{Recurrent neural networks and natural language generation methods}{section.6.2}% 98
+\BOOKMARK [2][-]{subsection.6.2.3}{Linguistic engine}{section.6.2}% 99
