@@ -1,0 +1,33 @@
+\babel@toc {british}{}
+\babel@toc {british}{}
+\babel@toc {british}{}
+\babel@toc {polish}{}
+\babel@toc {british}{}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces OsiriX is one of the most popular Viewers used by the radiologists\hspace {\textwidth }Source: www.osirix-viewer.com}}{7}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Simple ontology representing entities and relationships between them encoded in reports generated using the proposed system }}{12}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Typical structure of a radiological report created using the proposed system\footnotemark [1]}}{12}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Work-flow of a radiologist who uses the proposed system to create contents of a radiological report }}{14}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Connotation can have one of three values: positive, negative and neutral }}{15}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Report meta-data allow user to specify general information about new report }}{15}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces List of templates that can be edited by the user}}{16}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces GUI used to edit template meta-data }}{16}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces GUI used to edit organs }}{17}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces GUI used to edit properties of an organ\footnotemark [2] }}{17}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Measurements data are automatically parsed when user types text into the property textbox }}{19}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Just before confirming the completeness of the report the user is asked to decide which measurements should be included into RECIST 1.1 calculation }}{20}
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Exemplary representation of connotation in the rendered version of the report: positive connotation is represented as green background of the text, negative --- red, neutral --- transparent }}{20}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces System architecture and communication paths }}{23}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Dictionary for Report creator for Polish language}}{27}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces A window demonstrating list of examinations to the user\footnotemark [3] }}{29}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces List of organs defined in a CT Brain examination template }}{30}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Compare reports mode presents simultaneously contents of the currently edited report and the old one }}{33}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Continuous deployment setup makes it faster to distribute new builds to the production servers }}{37}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Report with two examinations based on templates available at www.radreport.org }}{42}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Exemplary report of a healthy patient based on a template created by user working in Polish language }}{42}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Exemplary report (with two examinations and connotations marked) of an unhealthy patient based on a template created by user working in Polish language }}{43}
+\addvspace {10\p@ }

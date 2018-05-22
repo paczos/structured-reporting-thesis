@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.5.8)  22 MAY 2018 10:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.5.8)  22 MAY 2018 14:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -725,6 +725,9 @@ s
 \f@nch@O@olf=\skip55
 \f@nch@O@orf=\skip56
 )
+(/usr/share/texlive/texmf-dist/tex/latex/tools/indentfirst.sty
+Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
+)
 (/usr/share/texlive/texmf-dist/tex/latex/bigfoot/perpage.sty
 Package: perpage 2014/10/25 2.0 Reset/sort counters per page
 \c@abspage=\count108
@@ -738,26 +741,26 @@ Package csquotes Info: Redefining alias 'default' -> 'british'.
 (./structured_reporting.aux)
 \openout1 = `structured_reporting.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 68.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 68.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 69.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 69.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 68.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 69.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
@@ -862,27 +865,27 @@ e
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \c@lstlisting=\count116
-LaTeX Font Info:    Try loading font information for T1+phv on input line 69.
+LaTeX Font Info:    Try loading font information for T1+phv on input line 70.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
 <title.jpg, id=1, 483.7272pt x 105.5142pt>
 File: title.jpg Graphic file (type jpg)
 <use title.jpg>
-Package pdftex.def Info: title.jpg  used on input line 75.
+Package pdftex.def Info: title.jpg  used on input line 76.
 (pdftex.def)             Requested size: 483.72601pt x 105.51395pt.
 
-Overfull \hbox (11.69478pt too wide) in paragraph at lines 74--76
+Overfull \hbox (11.69478pt too wide) in paragraph at lines 75--77
 [] 
  []
 
 <bachelor.jpg, id=2, 483.7272pt x 65.5248pt>
 File: bachelor.jpg Graphic file (type jpg)
 <use bachelor.jpg>
-Package pdftex.def Info: bachelor.jpg  used on input line 81.
+Package pdftex.def Info: bachelor.jpg  used on input line 82.
 (pdftex.def)             Requested size: 483.72601pt x 65.52463pt.
 
-Overfull \hbox (29.3196pt too wide) in paragraph at lines 81--82
+Overfull \hbox (29.3196pt too wide) in paragraph at lines 82--83
 [][] 
  []
 
@@ -891,26 +894,26 @@ Overfull \hbox (29.3196pt too wide) in paragraph at lines 81--82
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./title.jpg> <./bachelor.j
 pg>] [2]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 125.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 127.
 
-Underfull \hbox (badness 10000) in paragraph at lines 126--129
+Underfull \hbox (badness 10000) in paragraph at lines 128--133
 
  []
 
 
-Overfull \hbox (10.12425pt too wide) in paragraph at lines 126--129
+Overfull \hbox (10.12425pt too wide) in paragraph at lines 128--133
 \T1/ptm/m/n/12 Keywords: struc-tured re-port-ing, ra-di-ol-ogy, health in-for-m
 at-ics, on-tolo-gies, in-ter-op-er-abil-ity, SNOMED
  []
 
 [1]
-Underfull \hbox (badness 10000) in paragraph at lines 133--136
+Underfull \hbox (badness 10000) in paragraph at lines 137--142
 
  []
 
 [1]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 143.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 149.
  (./structured_reporting.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <12> on input line 7.
@@ -931,12 +934,12 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
  [4]
 Chapter 1.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 154.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 160.
 [5
 
 
 ]
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 170.
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 176.
 
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
@@ -944,16 +947,16 @@ File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 <osirix.png, id=33, 1027.84pt x 578.16pt>
 File: osirix.png Graphic file (type png)
 <use osirix.png>
-Package pdftex.def Info: osirix.png  used on input line 179.
+Package pdftex.def Info: osirix.png  used on input line 185.
 (pdftex.def)             Requested size: 424.82523pt x 238.9615pt.
 
-Underfull \hbox (badness 5578) in paragraph at lines 180--180
+Underfull \hbox (badness 5578) in paragraph at lines 186--186
 []\T1/ptm/m/n/12 Figure 1.1: OsiriX is one of the most pop-u-lar View-ers used 
 by the ra-di-ol-o-gists
  []
 
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 186.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 192.
 [6] [7 <./osirix.png (PNG copy)>] [8] [9]
 Chapter 2.
 [10
@@ -962,56 +965,56 @@ Chapter 2.
 <report-semantic.pdf, id=50, 159.59625pt x 412.54124pt>
 File: report-semantic.pdf Graphic file (type pdf)
 <use report-semantic.pdf>
-Package pdftex.def Info: report-semantic.pdf  used on input line 258.
+Package pdftex.def Info: report-semantic.pdf  used on input line 264.
 (pdftex.def)             Requested size: 118.0078pt x 305.04283pt.
 <report-tree.pdf, id=51, 961.5925pt x 427.5975pt>
 File: report-tree.pdf Graphic file (type pdf)
 <use report-tree.pdf>
-Package pdftex.def Info: report-tree.pdf  used on input line 266.
+Package pdftex.def Info: report-tree.pdf  used on input line 272.
 (pdftex.def)             Requested size: 472.03123pt x 209.90303pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 270.
+(Font)              <7> on input line 276.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 270.
+(Font)              <5> on input line 276.
  [11] [12 <./report-semantic.pdf> <./report-tree.pdf>]
 <report-workflow.pdf, id=196, 627.34375pt x 916.42375pt>
 File: report-workflow.pdf Graphic file (type pdf)
 <use report-workflow.pdf>
-Package pdftex.def Info: report-workflow.pdf  used on input line 283.
+Package pdftex.def Info: report-workflow.pdf  used on input line 289.
 (pdftex.def)             Requested size: 424.82523pt x 620.60094pt.
 
 
-LaTeX Warning: Float too large for page by 9.49261pt on input line 286.
+LaTeX Warning: Float too large for page by 9.49261pt on input line 292.
 
 <property-connotation.png, id=197, 859.21pt x 367.3725pt>
 File: property-connotation.png Graphic file (type png)
 <use property-connotation.png>
-Package pdftex.def Info: property-connotation.png  used on input line 292.
+Package pdftex.def Info: property-connotation.png  used on input line 298.
 (pdftex.def)             Requested size: 377.62642pt x 161.46501pt.
 <report-metadata.png, id=199, 238.8925pt x 197.23688pt>
 File: report-metadata.png Graphic file (type png)
 <use report-metadata.png>
-Package pdftex.def Info: report-metadata.png  used on input line 302.
+Package pdftex.def Info: report-metadata.png  used on input line 308.
 (pdftex.def)             Requested size: 283.22162pt x 233.85101pt.
 <templates-list.png, id=200, 590.70688pt x 226.8475pt>
 File: templates-list.png Graphic file (type png)
 <use templates-list.png>
-Package pdftex.def Info: templates-list.png  used on input line 314.
+Package pdftex.def Info: templates-list.png  used on input line 320.
 (pdftex.def)             Requested size: 424.82523pt x 163.1466pt.
 <template-metadata.png, id=201, 239.89626pt x 199.74625pt>
 File: template-metadata.png Graphic file (type png)
 <use template-metadata.png>
-Package pdftex.def Info: template-metadata.png  used on input line 319.
+Package pdftex.def Info: template-metadata.png  used on input line 325.
 (pdftex.def)             Requested size: 239.89566pt x 199.74576pt.
 <template-organs-list.png, id=202, 213.79875pt x 209.78375pt>
 File: template-organs-list.png Graphic file (type png)
 <use template-organs-list.png>
-Package pdftex.def Info: template-organs-list.png  used on input line 324.
+Package pdftex.def Info: template-organs-list.png  used on input line 330.
 (pdftex.def)             Requested size: 213.79822pt x 209.78322pt.
 <template-property-list.png, id=203, 280.04625pt x 291.0875pt>
 File: template-property-list.png Graphic file (type png)
 <use template-property-list.png>
-Package pdftex.def Info: template-property-list.png  used on input line 331.
+Package pdftex.def Info: template-property-list.png  used on input line 337.
 (pdftex.def)             Requested size: 280.04555pt x 291.08678pt.
 
 Underfull \vbox (badness 2073) has occurred while \output is active []
@@ -1023,19 +1026,19 @@ rgans-list.png> <./template-property-list.png>]
 <recist-parsing.png, id=242, 845.1575pt x 250.9375pt>
 File: recist-parsing.png Graphic file (type png)
 <use recist-parsing.png>
-Package pdftex.def Info: recist-parsing.png  used on input line 365.
+Package pdftex.def Info: recist-parsing.png  used on input line 371.
 (pdftex.def)             Requested size: 377.62642pt x 112.12439pt.
  [18]
 <recist-config.png, id=249, 1475.5125pt x 845.1575pt>
 File: recist-config.png Graphic file (type png)
 <use recist-config.png>
-Package pdftex.def Info: recist-config.png  used on input line 373.
+Package pdftex.def Info: recist-config.png  used on input line 379.
 (pdftex.def)             Requested size: 472.03123pt x 270.36565pt.
 <property-connotation-rendered.png, id=250, 325.215pt x 52.195pt>
 File: property-connotation-rendered.png Graphic file (type png)
 <use property-connotation-rendered.png>
 Package pdftex.def Info: property-connotation-rendered.png  used on input line 
-392.
+398.
 (pdftex.def)             Requested size: 141.61081pt x 22.72774pt.
  [19 <./recist-parsing.png>] [20 <./recist-config.png> <./property-connotation-
 rendered.png>] [21]
@@ -1043,7 +1046,7 @@ Chapter 3.
 <architecture.pdf, id=263, 389.455pt x 494.84875pt>
 File: architecture.pdf Graphic file (type pdf)
 <use architecture.pdf>
-Package pdftex.def Info: architecture.pdf  used on input line 414.
+Package pdftex.def Info: architecture.pdf  used on input line 420.
 (pdftex.def)             Requested size: 330.42041pt x 419.85326pt.
 [22
 
@@ -1051,13 +1054,13 @@ Package pdftex.def Info: architecture.pdf  used on input line 414.
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 435.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 441.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <10> not available
-(Font)              Font shape `T1/pcr/b/n' tried instead on input line 436.
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 442.
 
 Underfull \vbox (badness 3849) has occurred while \output is active []
 
@@ -1068,13 +1071,19 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 ) [25]
+Overfull \hbox (7.96588pt too wide) in paragraph at lines 506--508
+[]\T1/ptm/m/n/12 At the back-end there are dic-tio-nar-ies for each sup-ported 
+lan-guages that con-tain map-ping $\OML/cmm/m/it/12 name \OMS/cmsy/m/n/12 !
+ []
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [26]
 <language-dictionary.png, id=317, 436.12938pt x 166.12062pt>
 File: language-dictionary.png Graphic file (type png)
 <use language-dictionary.png>
-Package pdftex.def Info: language-dictionary.png  used on input line 525.
+Package pdftex.def Info: language-dictionary.png  used on input line 528.
 (pdftex.def)             Requested size: 472.03123pt x 179.79541pt.
 
 Underfull \vbox (badness 3668) has occurred while \output is active []
@@ -1083,25 +1092,25 @@ Underfull \vbox (badness 3668) has occurred while \output is active []
 <examination-list.png, id=322, 2374.8725pt x 1053.9375pt>
 File: examination-list.png Graphic file (type png)
 <use examination-list.png>
-Package pdftex.def Info: examination-list.png  used on input line 549.
+Package pdftex.def Info: examination-list.png  used on input line 552.
 (pdftex.def)             Requested size: 424.82523pt x 188.5266pt.
  [28]
 <organs-modal.png, id=327, 1907.125pt x 1425.325pt>
 File: organs-modal.png Graphic file (type png)
 <use organs-modal.png>
-Package pdftex.def Info: organs-modal.png  used on input line 570.
+Package pdftex.def Info: organs-modal.png  used on input line 573.
 (pdftex.def)             Requested size: 472.03123pt x 352.78534pt.
  [29 <./examination-list.png>] [30 <./organs-modal.png>] [31]
 <compare-reports.png, id=339, 1499.6025pt x 1019.81pt>
 File: compare-reports.png Graphic file (type png)
 <use compare-reports.png>
-Package pdftex.def Info: compare-reports.png  used on input line 608.
+Package pdftex.def Info: compare-reports.png  used on input line 611.
 (pdftex.def)             Requested size: 472.03123pt x 320.99287pt.
  [32] [33 <./compare-reports.png>] [34] [35]
 <continuous-deployment.pdf, id=356, 812.03375pt x 830.10126pt>
 File: continuous-deployment.pdf Graphic file (type pdf)
 <use continuous-deployment.pdf>
-Package pdftex.def Info: continuous-deployment.pdf  used on input line 669.
+Package pdftex.def Info: continuous-deployment.pdf  used on input line 672.
 (pdftex.def)             Requested size: 472.03123pt x 482.52304pt.
  [36] [37 <./continuous-deployment.pdf>]
 Chapter 4.
@@ -1115,41 +1124,31 @@ Chapter 5.
 <rendered-report-eng.pdf, id=447, 597.50786pt x 845.01837pt>
 File: rendered-report-eng.pdf Graphic file (type pdf)
 <use rendered-report-eng.pdf>
-Package pdftex.def Info: rendered-report-eng.pdf  used on input line 743.
+Package pdftex.def Info: rendered-report-eng.pdf  used on input line 746.
 (pdftex.def)             Requested size: 472.03123pt x 161.81815pt.
-
-Underfull \hbox (badness 8170) in paragraph at lines 744--744
-[]\T1/ptm/m/n/12 Figure 5.1: Re-port con-tain-ing two ex-am-i-na-tions based on
- tem-plates pub-lished at
- []
-
 <rendered-report-pl.pdf, id=449, 597.50786pt x 845.01837pt>
 File: rendered-report-pl.pdf Graphic file (type pdf)
 <use rendered-report-pl.pdf>
-Package pdftex.def Info: rendered-report-pl.pdf  used on input line 749.
+Package pdftex.def Info: rendered-report-pl.pdf  used on input line 752.
 (pdftex.def)             Requested size: 472.03123pt x 161.81815pt.
 <rendered-report-pl-bad.pdf, id=451, 597.50786pt x 845.01837pt>
 File: rendered-report-pl-bad.pdf Graphic file (type pdf)
 <use rendered-report-pl-bad.pdf>
-Package pdftex.def Info: rendered-report-pl-bad.pdf  used on input line 757.
+Package pdftex.def Info: rendered-report-pl-bad.pdf  used on input line 760.
 (pdftex.def)             Requested size: 472.03123pt x 454.03041pt.
-[42 <./rendered-report-eng.pdf> <./rendered-report-pl.pdf>] [43 <./rendered-rep
-ort-pl-bad.pdf>]
-Underfull \vbox (badness 1533) has occurred while \output is active []
-
- [44]
-[45]
+ [42 <./rendered-report-eng.pdf> <./rendered-report-pl.pdf>] [43 <./rendered-re
+port-pl-bad.pdf>] [44] [45]
 Chapter 6.
 [46
 
 ] [47] [48] [49]
-Underfull \hbox (badness 10000) in paragraph at lines 860--861
+Underfull \hbox (badness 10000) in paragraph at lines 863--864
 \T1/ptm/m/n/12 https://www.asrt.org/main/careers/careers-in-radiologic-technolo
 gy/who-are-radiologic-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 869--871
+Underfull \hbox (badness 10000) in paragraph at lines 872--874
 \T1/ptm/m/n/12 https://docs.microsoft.com/en-us/dotnet/csharp/language-referenc
 e/language-
  []
@@ -1157,46 +1156,58 @@ e/language-
 [50
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 879--881
+Underfull \hbox (badness 10000) in paragraph at lines 882--884
 \T1/ptm/m/n/12 https://blogs.msdn.microsoft.com/jocapc/2015/05/16/json-support-
 in-sql-server-2016/
  []
 
 
-Overfull \hbox (5.1382pt too wide) in paragraph at lines 881--882
+Overfull \hbox (5.1382pt too wide) in paragraph at lines 884--885
 []\T1/ptm/m/n/12 Bootstrap Frame-work doc-u-men-ta-tion, avail-able at: https:/
 /getbootstrap.com/docs/3.3/css/#type
  []
 
 
-Overfull \hbox (40.81473pt too wide) in paragraph at lines 882--885
+Overfull \hbox (40.81473pt too wide) in paragraph at lines 885--888
 \T1/ptm/m/n/12 http://www2.fiit.stuba.sk/ kvas-nick-a/Neu-ral-Net-works/6.predn
 aska/Kvasnicka_RNN_exten_transp.pdf
  []
 
-[51] (./structured_reporting.aux) ) 
+[51] (./structured_reporting.lof
+Overfull \hbox (424.21985pt too wide) in paragraph at lines 7--7
+ [][] []\T1/ptm/m/n/12 OsiriX is one of the most pop-u-lar View-ers used by the
+ ra-di-ol-o-gists Source: 
+ []
+
+)
+\tf@lof=\write4
+\openout4 = `structured_reporting.lof'.
+
+ [52
+
+] (./structured_reporting.aux) ) 
 Here is how much of TeX's memory you used:
- 7710 strings out of 494888
- 103998 string characters out of 6179867
- 335953 words of memory out of 5000000
- 10823 multiletter control sequences out of 15000+600000
+ 7719 strings out of 494888
+ 104243 string characters out of 6179867
+ 335997 words of memory out of 5000000
+ 10826 multiletter control sequences out of 15000+600000
  47882 words of font info for 62 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  41i,12n,58p,1747b,1837s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvi
-ps/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-mi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texlive/texmf
--dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/tim
-es/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on structured_reporting.pdf (54 pages, 1499366 bytes).
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/
+base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi1
+2.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/
+utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on structured_reporting.pdf (55 pages, 1501592 bytes).
 PDF statistics:
- 585 PDF objects out of 1000 (max. 8388607)
- 368 compressed objects within 4 object streams
+ 589 PDF objects out of 1000 (max. 8388607)
+ 371 compressed objects within 4 object streams
  0 named destinations out of 1000 (max. 500000)
  145 words of extra memory for PDF output out of 10000 (max. 10000000)
 

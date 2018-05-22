@@ -108,7 +108,7 @@
 \contentsline {subsection}{\numberline {5.2.2}User satisfaction surveys}{44}
 \contentsline {subsection}{\numberline {5.2.3}Users from several working environments}{44}
 \contentsline {subsubsection}{Teleradiologists}{44}
-\contentsline {subsubsection}{Hospital}{45}
+\contentsline {subsubsection}{Hospital}{44}
 \contentsline {subsubsection}{Network of clinics}{45}
 \contentsline {chapter}{\numberline {6}Conclusion and ideas for the future}{46}
 \contentsline {section}{\numberline {6.1}Realization of the thesis objectives}{46}

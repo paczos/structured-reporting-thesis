@@ -20,6 +20,7 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{fancyhdr} %footer settings
+\usepackage{indentfirst}
 \lstdefinestyle{sharpc}{
 	language=[Sharp]C, 		
 	belowcaptionskip=1\baselineskip,
@@ -122,7 +123,10 @@ WARSAW 2018
 \hyphenation{Syl-ves-tra}
 \hyphenation{Syl-ves-ter-a}
 \begin{otherlanguage}{british}
-\begin{abstract}
+
+\begin{abstract}	
+Structured radiological reporting system
+\\
 Design and implementation of a system that can be used by radiologists to create structured radiological reports is discussed. The system uses sets of standardized, frequently used phrases to: describe state of patient's body captured by other medical diagnostics methods, provide set of tools that minimize risk of mistake and increase productivity. 
 \\ \\
 Keywords: structured reporting, radiology, health informatics, ontologies, interoperability, SNOMED CT, HL7.
@@ -130,6 +134,8 @@ Keywords: structured reporting, radiology, health informatics, ontologies, inter
 \end{otherlanguage}
 \begin{otherlanguage}{polish}
 \begin{abstract}
+	System do tworzenia strukturalnych opisów radiologicznych
+	\\
 	Rozważono projekt oraz implementację systemu wspomagającego tworzenie strukturalnych opisów radiologicznych. Oprogramowanie ma na celu zwiększenie produktywności lekarza i zmniejszenie ryzyka popełnienia błędu poprzez sugerowanie zbiorów standardowych, najczęściej występujących fraz opisujących stan pacjenta.
 \\ \\
 Słowa kluczowe: strukturalne opisy radiologiczne, radiologia, informatyka w medycynie, ontologie, interoperacyjność, SNOMED CT, HL7.
@@ -145,7 +151,7 @@ Słowa kluczowe: strukturalne opisy radiologiczne, radiologia, informatyka w med
 
 \fancyhead[L]{\leftmark}
 \pagestyle{fancy}
-
+\setlength{\parindent}{0.5cm}
 
 
 
@@ -490,12 +496,9 @@ The remaining front-end subpages are generated using view engine present in ASP.
 
 \subsubsection{JavaScript}
 It is a very popular scripting language that can be executed in any popular web browser. Version of the language used in this project is ECMAScript 5.1 compliant. 
+
 \subsubsection{AngularJS}
 AngularJS is a JavaScript framework that helps with building MVC SPA aplications. It has several mechanisms like two-way-binding that reduce size of the code needed to implement Create, Read, Update, Delete (CRUD) functionality.
-
-
-
-
 
 \section{Internationalization and localization}
 The application was designed to be accessible by radiologists from many countries, so support for many languages is one of its core functionalities. The application automatically detects user preferred language by looking into user browser settings. Each of the most popular Internet browsers allows users to specify list of preferred languages used by web-pages. The presented solution scans this list and chooses first language it supports, if there are no languages in the list that are supported, English language is presented to the user by default.
@@ -741,7 +744,7 @@ The lengthiest example is presented in figure \ref{fig:rendered-report-pl-bad}. 
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth, trim={0 20cm 0cm 2.5cm},clip]{rendered-report-eng}
-	\caption{Report containing two examinations based on templates published at www.radreport.org	\label{fig:rendered-report-eng}}
+	\caption{Report with two examinations based on templates available at www.radreport.org	\label{fig:rendered-report-eng}}
 	
 \end{figure}
 \begin{figure}
@@ -902,6 +905,6 @@ Wolfram, A New Kind of Science, Wolfram Media, 2002.
 \bibitem{recurrent-neural-networks-google} NLG at Google Research, available at:
  https://www.youtube.com/watch?v=MNvT5JekDpg [video] [10.04.2018]
 \end{thebibliography}
-
+\listoffigures
 
 \end{document}
