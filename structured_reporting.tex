@@ -21,6 +21,7 @@
 \usepackage{xcolor}
 \usepackage{fancyhdr} %footer settings
 \usepackage{indentfirst}
+\usepackage{pdfpages}
 \lstdefinestyle{sharpc}{
 	language=[Sharp]C, 		
 	belowcaptionskip=1\baselineskip,
@@ -146,6 +147,7 @@ Słowa kluczowe: strukturalne opisy radiologiczne, radiologia, informatyka w med
 %-----------Początek części zasadniczej-----------
 \pagestyle{fancy}
 \renewcommand\headrule{}
+\includepdf[pages={1,2}]{author_statement}
 \tableofcontents
 \clearpage
 
