@@ -6,19 +6,14 @@
 \setbeamertemplate{itemize item}[square]
 \setbeamertemplate{itemize subitem}[circle]
 
-\author{Paweł Paczuski \\ \texttt{p.paczuski@stud.elka.pw.edu.pl}}
-\title{Structured reporting system}
-\date{06.04.2018}
+\author{Paweł Paczuski }
+\title{Structured radiological reporting system}
+\date{29.06.2018}
 \begin{document}
 \begin{frame}
 \titlepage
 \end{frame}
 
-\section*{Outline}
-\begin{frame}
-\frametitle{Outline}
-\tableofcontents
-\end{frame}
 
 \section{Introduction}
 \subsection{Problems of modern medicine}
@@ -28,37 +23,12 @@
 	\item increasing variety of diagnostic techniques and procedures
 	\item unsatisfiable demand for medical services
 	\item bureaucracy
-	\item huge volumes of data to process and store. \alert{Healthcare Informatics}
+	\item clinical data and reporting (store and exchange)
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{Healthcare Informatics vs Computer Science}
-\begin{tabu}{XX}
-	\rowfont{\bfseries\itshape\large} Computer Science & Healthcare Informatics\\
-	\hline
-	general field & information engineering applied to the health care \\ \hline
-	data structures, algorithms & flow of information\\ \hline
-	ways of persistently storing data        & ways of presenting data at proper time to proper person\\ \hline
-\end{tabu}
-\end{frame}
 
 \subsection{Standards}
-\begin{frame}
-\frametitle{Healthcare standards}
-\begin{itemize}
-	\item medical nomenclature SNOMED CT, LOINC
-	\item exchange protocols and formats HL7, DICOM
-\end{itemize}
-\begin{figure}
-	\centering
-	\includegraphics[width=0.7\linewidth]{../snomed}
-	\caption{Drug product example in SNOMED CT}
-	\label{fig:snomed}
-\end{figure}
-
-\end{frame}
-
 \subsection{Typical workflow of a radiologist}
 \begin{frame}
 \frametitle{Typical workflow of a radiologist}
@@ -71,7 +41,7 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{Areas of optimization}
+\frametitle{Areas where productivity optimizations could be applied}
 What can be improved:
 \begin{itemize}
 	\item radiologists are \alert{very BAD} at typing on keyboard
@@ -91,15 +61,15 @@ How:
 \section{Design and implementation of Structured reporting system}
 \subsection{Radiological report as a tree}
 
+
 \begin{frame}
-\frametitle{Modified workflow}
+\frametitle{Radiological report as a tree}
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\linewidth]{../report-workflow}
-	\label{fig:report-workflow}
+	\includegraphics[width=1\linewidth]{../report-tree}
+	\label{fig:report-tree}
 \end{figure}
 \end{frame}
-
 
 \begin{frame}
 \frametitle{Reporting ontology}
@@ -112,17 +82,10 @@ How:
 \end{frame}
 
 
-\begin{frame}
-\frametitle{Radiological report as a tree}
-\begin{figure}
-\centering
-\includegraphics[width=1\linewidth]{../report-tree}
-\label{fig:report-tree}
-\end{figure}
-\end{frame}
+
 
 \begin{frame}
-\frametitle{Textual representation}
+\frametitle{Textual representation (simple report)}
 \begin{figure}
 \centering
 \includegraphics[width=\linewidth]{../rendered-report}
@@ -130,9 +93,31 @@ How:
 \end{figure}
 \end{frame}
 
+
+\begin{frame}
+\frametitle{Textual representation (detailed report using Polish template)}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.68\linewidth]{../rendered-report-pl-bad}
+	\label{fig:rendered-report}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Modified workflow}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\linewidth]{../report-workflow}
+	\label{fig:report-workflow}
+\end{figure}
+\end{frame}
+
+
+
 \subsection{Technological stack}
 \begin{frame}
 \frametitle{Technological stack}
+Web application
 \begin{itemize}
 	\item backend 
 	\begin{itemize}
@@ -140,23 +125,23 @@ How:
 		\item ASP.NET
 		\item MS SQL 
 	\end{itemize}
-	\item frontend (hybrid approach)
+	\item frontend 
 	\begin{itemize}
 		\item AngularJS, ES5 
+		\item utility modules use ASP.NET + Razor Views
 	\end{itemize}
 \end{itemize}
-
 \end{frame}
 
-\subsection{User interface}
 \begin{frame}
-\frametitle{Report metadata}
+\frametitle{System architecture and communication}
 \begin{figure}
 	\centering
-	\includegraphics[width=0.6\linewidth]{../report-metadata}
-	\label{fig:report-metadata}
+	\includegraphics[width=0.6\linewidth]{../architecture}
+	\label{fig:rendered-report}
 \end{figure}
 \end{frame}
+
 
 \begin{frame}
 \frametitle{Report editor interface}
@@ -185,49 +170,10 @@ How:
 \end{figure}
 \end{frame}
 
-\begin{frame}
-\frametitle{Connotations}
-\begin{figure}
-	\centering
-	\includegraphics[width=1\linewidth]{../property-connotation}
-	\label{fig:property-connotation}
-\end{figure}
-\end{frame}
 
 
 \begin{frame}
-\frametitle{def. RECIST 1.1}
-\begin{figure}
-\begin{itemize}
-	\item response evaluation criteria in solid tumours
-	\item calculates changes in sizes of solid tumors
-	\item results based on several factors: change, nodes, selection of measurements
-	\end{itemize}
-\end{figure}
-\end{frame}
-
-\begin{frame}
-\frametitle{Parsing values for RECIST 1.1}
-\begin{figure}
-	\centering
-	\includegraphics[width=1\linewidth]{../recist-parsing}
-	\label{fig:recist-parsing}
-\end{figure}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Configuring RECIST 1.1}
-\begin{figure}
-	\centering
-	\includegraphics[width=1\linewidth]{../recist-config}
-	\label{fig:recist-config}
-\end{figure}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Generated report}
+\frametitle{Generated report with RECIST 1.1 measurements}
 \begin{figure}
 	\centering
 	\includegraphics[width=1\linewidth]{../report-copy-to-clipboard}
@@ -235,26 +181,16 @@ How:
 \end{figure}
 \end{frame}
 
-
-
-\begin{frame}
-\frametitle{Template editor}
-\begin{figure}
-	\centering
-	\includegraphics[width=1\linewidth]{../templates-list}
-	\label{fig:templates-list}
-\end{figure}
-
-\end{frame}
-\begin{frame}
-\begin{figure}
-	\centering
-	\includegraphics[width=0.5\linewidth]{../template-organs-list}
-	\label{fig:template-organ-list}
-\end{figure}
-\end{frame}
-
 \section {Validation}
+
+\begin{frame}
+\frametitle{Learning curve and productivity improvements}
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{productivity_improvements_chart}
+\end{figure}
+\end{frame}
+
 \begin{frame}
 \frametitle{Validation}
 Places where the software was used:
@@ -266,39 +202,13 @@ Places where the software was used:
 
 Conclusions:
 \begin{itemize}
-	\item Tens of thousands reports generated
-	\item Reports generated 3 times faster
-\end{itemize}
-\end{frame}
-
-\section {Plans for the future}
-\begin{frame}
-\frametitle{Plans for the future}
-\begin{itemize}
-	\item develop independent commercial version of the software based on some ideas from this system
-	\item support for more general ontologies
-	\item conform to standards, integrations with existing RIS systems
+	\item 25 battle-tested templates containing 180 organs
+	\item about 1300 reports 
+	\item Reports generated about 3 times faster
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Q\&A}
-\end{frame}
-\begin{frame}
-
-\frametitle{Bibliography}
-\begin{thebibliography}{11}
-	\bibitem{bls} https://www.bls.gov/ooh/healthcare/physicians-and-surgeons.htm, accessed 08.10.2017 13:30
-	\bibitem{ai} M. Recht, N. Bryan, Artificial Intelligence: Threat or Boon to Radiologists?
-	N1  - doi: 10.1016/j.jacr.2017.07.007
-	\bibitem{snomed} T. Benson, Principles of health interoperability HL7 and SNOMED.
-	\bibitem{sr} D. A. Clunie, DICOM Structured Reporting
-	\bibitem{hl7cda} http://www.hl7.org/Special/committees/structure/index.cfm 
-	\bibitem{csharp-spec}
-	https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/lexical-structure
-	\bibitem{static-lang}
-	S. Hanenberg, S. Kleinschmager, R. Robbes, É. Tanter, A. Stefik, An empirical study on the impact of static typing on software maintainability
-
-\end{thebibliography}
+\frametitle{Thanks for your attention}
 \end{frame}
 \end{document}
